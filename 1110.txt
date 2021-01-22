@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main(void)
+{
+	int N;
+	scanf("%d", &N);
+	int a, b, c;
+	int next = N;
+	int count = 0;
+
+	while (N != next || count==0)
+	{
+		a = next / 10;
+		b = next % 10;
+		c = (a + b) % 10;
+		next = (b * 10) + c;
+		count++;
+	}
+
+	printf("%d \n", count);
+	return 0;
+}

@@ -1,0 +1,44 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n, s;
+	static int[] arr;
+	static int count = 0;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		s = Integer.parseInt(st.nextToken());
+		arr = new int[n+1];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) 
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		for(int i=1; i<=n; i++) 
+			dfs(i, 0);
+		System.out.print(count);
+	}
+	
+	static void dfs(int start, int sum) {
+		sum += arr[start];
+		if(sum == s)
+			count++;
+		
+		if(start == n)
+			return;
+		
+		for(int i=start+1; i<=n; i++) {
+			dfs(i, sum);
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		
+	}
+}

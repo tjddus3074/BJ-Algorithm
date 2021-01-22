@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main() {
+	char dir[51][51];
+	//char rule[51];
+
+	//int flag[51] = { 0 };
+	int n;
+	scanf(" %d", &n);
+	for (int i = 0; i < n; i++) {
+		scanf(" %[^\n]", dir[i]);
+	}
+	if (n == 1) {
+		printf("%s\n", dir[0]);
+		return 0;
+	}
+	int longer = 0; // 길이
+	for (int i = 0; ; i++) {
+		if (dir[0][i] == '\0')
+			break;
+		else
+			longer++;
+	}
+	
+	char* rule = (char*)malloc(longer);
+	int* flag = (int*)malloc(sizeof(int) * longer);
+	memset(flag, 0, sizeof(int) * longer);
+
+	for (int i = 0; i < longer; i++) {
+		for (int j = 1; j < n; j++) {
+			if (dir[j - 1][i] != dir[j][i]) {
+				flag[i] = 1;
+				break;
+			}
+		}
+		if (flag[i] == 0)
+			rule[i] = dir[0][i];
+		else
+			rule[i] = '?';
+	}
+
+	for (int i = 0; i < longer; i++) {
+		printf("%c", rule[i]);
+	}
+	free(rule);
+	free(flag);
+}

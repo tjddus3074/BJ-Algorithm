@@ -1,0 +1,37 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	static String[] dx = {"000" ,"001", "010", "011", "100", "101", "110", "111"};
+	static String[] sdx = {"1", "10", "11", "100", "101", "110", "111"};
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		StringTokenizer st = new StringTokenizer(br.readLine());
+		String t = br.readLine();
+		if(t.equals("0")) {
+			System.out.println(0);
+			return;
+		}
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		char aa = t.charAt(0);
+		int b = aa - '0';
+		System.out.print(sdx[b-1]);
+
+		for(int i=1; i<t.length(); i++) {
+			char a = t.charAt(i);
+			int c = a - '0';
+			bw.write(dx[c]);
+		}
+		
+		bw.flush();
+		bw.close();
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,98 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	
+	static int[] dx = {0, -1, 0, 1, 0};
+	static int[] dy = {0, 0, 1, 0, -1};
+	static char map[][];
+	static char[] move;
+	static int dir = 3;
+	static int left_x = 50;
+	static int left_y = 50;
+	static int right_x = 50;
+	static int right_y = 50;
+
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		map = new char[101][101];
+		n = Integer.parseInt(br.readLine());
+		move = new char[n];
+		for(int i=0; i<101; i++) 
+			for(int j=0; j<101; j++) 
+				map[i][j] = '#';
+		
+		String t = br.readLine();
+		for(int i=0; i<n; i++)
+			move[i] = t.charAt(i);
+		
+		map[50][50] = '.';
+		int temp_x = 50;
+		int temp_y = 50;
+		for(int i=0; i<n; i++) {
+			char order = move[i];
+			if(order != 'F')
+				swap(order);
+			else {
+				temp_x += dx[dir];
+				temp_y += dy[dir];
+				map[temp_x][temp_y] = '.';
+			}
+		}
+		
+		for(int i=0; i<101; i++) {
+			for(int j=0; j<101; j++) {
+				if(map[i][j] == '.') {
+					if(left_x > i) 
+						left_x = i;
+					if(left_y > j)
+						left_y = j;
+					if(right_x <i)
+						right_x = i;
+					if(right_y < j)
+						right_y = j;
+				}
+			}
+		}
+		
+		for(int i=left_x; i<=right_x; i++) {
+			for(int j = left_y; j<=right_y; j++)
+				System.out.print(map[i][j]);
+			System.out.print("\n");
+		}
+	}
+	
+	static void swap(char order) {
+		if(order == 'R') {
+			dir += 1;
+			if(dir == 5) {
+				dir = 1;
+			}
+		}
+		else {
+			dir -= 1;
+			if(dir == 0) {
+				dir = 4;
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

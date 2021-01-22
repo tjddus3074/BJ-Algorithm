@@ -1,0 +1,31 @@
+int main(void) {
+	int a = 64;
+	int b[7] = { 64, 32, 16, 8, 4, 2, 1 };
+	int n; 
+	scanf("%d", &n);
+	int count = 0;
+	int sum = 0;
+	int i = 0;
+
+	for (int i = 0; i < 7; i++) {
+		if (n >= b[i]) {
+			sum += b[i];
+			count++;
+			break;
+		}
+	}
+
+
+	for (i = i + 1; i < 7; i++) {
+			if (sum + b[i] > n)
+				continue;
+			if (sum == n)
+				break;
+			if (sum + b[i] <= n) {
+				sum += b[i];
+				count++;
+			}
+		}
+
+	printf("%d", count);
+}

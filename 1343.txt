@@ -1,0 +1,84 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		String a = "AAAA";
+		String b = "BB";
+		String t = br.readLine();
+		String temp = "";
+		
+		int flag = 0;
+		int count = 0;
+		for(int i=0; i<t.length(); i++) {
+			char c = t.charAt(i);
+			if(c == '.') {
+				if(flag == 0)
+					temp += c;
+				else if(flag == 1) {
+					flag = 0;
+					if(count % 2 != 0) {
+						System.out.println(-1);
+						return;
+					}
+					
+					if (count / 4 > 0)
+						for (int j = 0; j < count / 4; j++)
+							temp += a;
+
+					count = count % 4;
+					for (int j = 0; j < count / 2; j++)
+						temp += b;
+					
+					count = 0;
+					temp += c;
+				}
+			}
+			else if(c == 'X') {
+				if(flag == 0) {
+					flag = 1;
+					count++;
+				}
+				else if(flag == 1)
+					count++;
+			}
+		}
+		
+		if(count != 0) {
+			if(count % 2 != 0) {
+				System.out.println(-1);
+				return;
+			}
+			
+			if (count / 4 > 0)
+				for (int j = 0; j < count / 4; j++)
+					temp += a;
+
+			count = count % 4;
+			for (int j = 0; j < count / 2; j++)
+				temp += b;
+		}
+		
+		System.out.print(temp);
+	}
+		
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

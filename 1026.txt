@@ -1,0 +1,126 @@
+#include <stdio.h>
+
+typedef struct aaa {
+	int a;
+	int b;
+	int sum;
+}P;
+
+P data[101];
+
+void mergesorta(int low, int mid, int high) {
+	int result[101];
+	int l = low;
+	int m = mid + 1;
+	int c = 0;
+	while (l <= mid && m <= high) {
+		if (data[l].a <= data[m].a) {
+			result[c] = data[m].a;
+			m++;
+			c++;
+		}
+		else {
+			result[c] = data[l].a;
+			l++;
+			c++;
+		}
+	}
+
+	while (l <= mid) {
+		result[c] = data[l].a;
+		l++;
+		c++;
+	}
+
+	while (m <= high) {
+		result[c] = data[m].a;
+		m++;
+		c++;
+	}
+
+	c--;
+	while (c >= 0) {
+		data[c + low].a = result[c];
+		c--;
+	}
+}
+
+void mergesortb(int low, int mid, int high) {
+	int result[101];
+	int l = low;
+	int m = mid + 1;
+	int c = 0;
+	while (l <= mid && m <= high) {
+		if (data[l].b <= data[m].b) {
+			result[c] = data[l].b;
+			l++;
+			c++;
+		}
+		else {
+			result[c] = data[m].b;
+			m++;
+			c++;
+		}
+	}
+
+	while (l <= mid) {
+		result[c] = data[l].b;
+		l++;
+		c++;
+	}
+
+	while (m <= high) {
+		result[c] = data[m].b;
+		m++;
+		c++;
+	}
+
+	c--;
+	while (c >= 0) {
+		data[c + low].b = result[c];
+		c--;
+	}
+}
+
+void mergea(int low, int high) {
+	int mid = (low + high) / 2;
+	if (low < high) {
+		mergea(low, mid);
+		mergea(mid + 1, high);
+		mergesorta(low, mid, high);
+	}
+	else
+		return;
+}
+
+void mergeb(int low, int high) {
+	int mid = (low + high) / 2;
+	if (low < high) {
+		mergeb(low, mid);
+		mergeb(mid + 1, high);
+		mergesortb(low, mid, high);
+	}
+	else
+		return;
+}
+
+int main() {
+	int n; scanf("%d", &n);
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &data[i].a);
+	}
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &data[i].b);
+	}
+
+	mergea(0, n - 1);
+	mergeb(0, n - 1);
+	int sum = 0;
+
+	for (int i = 0; i < n; i++) {
+		data[i].sum = data[i].a * data[i].b;
+		sum = sum + data[i].sum;
+	}
+	printf("%d", sum);
+}

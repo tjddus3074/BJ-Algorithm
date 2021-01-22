@@ -1,0 +1,61 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+//	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		int N, m, M, T, R;
+		st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		T = Integer.parseInt(st.nextToken());
+		R = Integer.parseInt(st.nextToken());
+		int count = 0;
+		int sum = 0;
+		int sim = m;
+		if(M-m < T) {
+			System.out.print(-1);
+			return;
+		}
+		while(true) {
+			if(sum == N)
+				break;
+			
+			if(sim+T <= M) {
+				sim = sim+T;
+				sum++;
+				count++;
+			}
+			else {
+				if(sim-R >= m)
+					sim = sim-R;
+				else
+					sim = m;
+				
+				count++;
+			}
+		}
+		
+		System.out.print(count);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

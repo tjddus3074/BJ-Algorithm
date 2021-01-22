@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+	int t; scanf(" %d", &t);
+
+	int d[31][31];
+	d[1][0] = 1;
+	d[1][1] = 1;
+	for (int i = 2; i <= 30; i++) {
+		d[i][0] = 1;
+		for (int j = 1; j <= i; j++) {
+			if (j > i - 1)
+				d[i][j] = 1;
+			else {
+				d[i][j] = d[i - 1][j - 1] + d[i - 1][j];
+			}
+		}
+	}
+
+	while (t != 0) {
+		int n, m;
+		scanf(" %d %d", &n, &m);
+
+		printf("%d\n", d[m][n]);
+		t--;
+	}
+}

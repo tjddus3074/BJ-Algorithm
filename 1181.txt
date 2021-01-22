@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct aaa {
+	char name[55];
+	int L;
+}P;
+int n;
+
+void merge(P* data, int low, int mid, int high) {
+
+	P result[20001];
+	int l = low;
+	int m = mid + 1;
+	int count = 0;
+
+	while (l <= mid && m <= high) {
+		if (data[l].L <= data[m].L) {
+			result[count] = data[l];
+			l++;
+			count++;
+		}
+		else {
+			result[count] = data[m];
+			m++;
+			count++;
+		}
+	}
+
+	while (l <= mid) {
+		result[count] = data[l];
+		l++;
+		count++;
+	}
+
+	while (m <= high) {
+		result[count] = data[m];
+		m++;
+		count++;
+	}
+
+	count--;
+	while (count >= 0) {
+		data[low + count] = result[count];
+		count--;
+	}
+}
+
+void mergesort(P* data, int low, int high) {
+
+	int mid = (low + high) / 2;
+
+	if (low < high) {
+		mergesort(data, low, mid);
+		mergesort(data, mid + 1, high);
+		merge(data, low, mid, high);
+	}
+	else
+		return;
+}
+
+void merge_two(P* data, int low, int mid, int high) {
+
+	P result[20001];
+	int l = low;
+	int m = mid + 1;
+	int count = 0;
+
+	while (l <= mid && m <= high) {
+		if (strcmp(data[l].name, data[m].name) <= 0) {
+			result[count] = data[l];
+			l++;
+			count++;
+		}
+		else {
+			result[count] = data[m];
+			m++;
+			count++;
+		}
+	}
+
+	while (l <= mid) {
+		result[count] = data[l];
+		l++;
+		count++;
+	}
+
+	while (m <= high) {
+		result[count] = data[m];
+		m++;
+		count++;
+	}
+
+	count--;
+	while (count >= 0) {
+		data[low + count] = result[count];
+		count--;
+	}
+}
+
+void mergesort_two(P* data, int low, int high) {
+
+	int mid = (low + high) / 2;
+
+	if (low < high) {
+		mergesort_two(data, low, mid);
+		mergesort_two(data, mid + 1, high);
+		merge_two(data, low, mid, high);
+	}
+	else
+		return;
+}
+
+void del(P* data, int i) {
+	for (int j = i; j < n; j++) {
+		data[j] = data[j + 1];
+	}
+	n--;
+}
+
+int main() {
+	scanf("%d", &n);
+	P* data = (P*)malloc(sizeof(P) * n);
+	for (int i = 0; i < n; i++) {
+		scanf("%s", &data[i].name);
+		data[i].L = strlen(data[i].name);
+	}
+
+	mergesort(data, 0, n - 1);		//문자 길이 순 정렬
+
+
+	int low = data[0].L;
+	int a = 0;
+	int high = 0;
+	int flag = 0;
+
+	for (int i = 1; i <= n; i++) {
+		if (data[i].L == low) {
+			high = i;
+			flag = 1;
+		}
+		else {
+			if (flag == 1) {
+				mergesort_two(data, a, high);
+				low = data[i].L;
+				a = i;
+				flag = 0;
+			}
+			else {
+				low = data[i].L;
+				a = i;
+			}
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			//if (data[i].L != data[j].L)
+			//	break;
+
+			if (strcmp(data[i].name, data[j].name) == 0) {
+				//del(data, j);
+				strcpy(data[j].name, "000");
+			}
+		}
+	}
+
+	char zero[5] = "000";
+	for (int i = 0; i < n; i++) {
+		if (strcmp(data[i].name, zero) == 0)
+			continue;
+		else {
+			printf("%s\n", data[i].name);
+		}
+	}
+	free(data);
+}

@@ -1,0 +1,53 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		Queue<Integer> q = new LinkedList<>();
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=1; i<=n; i++)
+			q.add(i);
+		
+		int count = 0;
+		
+		while(!q.isEmpty()) {
+			int temp = q.poll();
+			count++;
+			if(count!= k)
+				q.add(temp);
+			else if(count==k) {
+				list.add(temp);
+				count=0;
+			}
+		}
+		
+		System.out.print("<");
+		for(int i=0; i<list.size(); i++) {
+			if(i == list.size()-1)
+				System.out.print(list.get(i));
+			else
+				System.out.print(list.get(i) + ", ");
+		}
+		System.out.print(">");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

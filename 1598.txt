@@ -1,0 +1,33 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		n = n-1;
+		m = m-1;
+		int nx, ny, mx, my;
+		ny = n/4;
+		nx = n%4;
+		my = m/4;
+		mx = m%4;
+		
+		System.out.println(Math.abs(nx-mx) + Math.abs(ny-my));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

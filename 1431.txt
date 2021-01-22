@@ -1,0 +1,79 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node>{
+	String a;
+	int leng;
+	int sum;
+	
+	public Node(String a, int sum) {
+		this.a = a;
+		this.leng = a.length();
+		this.sum = sum;
+	}
+	
+	public int compareTo(Node o) {
+		if(o.leng == leng) {
+			if(o.sum == sum) {
+				String[] t = new String[2];
+				t[0] = a;
+				t[1] = o.a;
+				Arrays.sort(t);
+				if(t[0].contentEquals(a)) {
+					return -1;
+				}
+				else
+					return 1;
+			}
+			else
+				return sum - o.sum;
+		}
+		else
+			return leng - o.leng;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		PriorityQueue<Node> q = new PriorityQueue<>();
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			int sum = 0;
+			for(int j=0; j<t.length(); j++) {
+				char a = t.charAt(j);
+				if(a>='1' && a<='9')
+					sum += a - '0';
+			}
+			
+			q.add(new Node(t, sum));
+		}
+		
+		while(!q.isEmpty())
+			System.out.println(q.poll().a);
+	}
+
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

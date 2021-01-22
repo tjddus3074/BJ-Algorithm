@@ -1,0 +1,87 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		n = Integer.parseInt(br.readLine());
+		brr = new int[n+1];
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++)
+			brr[i] = Integer.parseInt(st.nextToken());
+		
+		m = Integer.parseInt(br.readLine());
+		for(int test = 0; test<m; test++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if( a== 1) {
+				for(int i = 1; b*i<=n; i++) {
+					if(brr[b*i] == 0)
+						brr[b*i] = 1;
+					else
+						brr[b*i] = 0;
+				}
+			}
+			
+			if(a == 2) {
+				int count = 1;
+				if(brr[b] == 0)
+					brr[b] = 1;
+				else
+					brr[b] = 0;
+				
+				while(true) {
+					if(b-count <1 || b+count>n)
+						break;
+					
+					if(brr[b-count] != brr[b+count])
+						break;
+					
+					count++;
+				}
+				if(count == 1)
+					continue;
+				for(int i=1; i<count; i++) {
+					if(brr[b+i] == 0)
+						brr[b+i] = 1;
+					else
+						brr[b+i] = 0;
+					
+					if(brr[b-i] == 0)
+						brr[b-i] = 1;
+					else
+						brr[b-i] = 0;
+				}
+			}
+		}
+		
+		int count = 0;
+		for(int i=1; i<=n; i++) {
+			if(count == 20) {
+				System.out.print("\n");
+				count = 0;
+			}
+			System.out.print(brr[i] + " ");
+			count++;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

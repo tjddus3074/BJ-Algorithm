@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <malloc.h>
+
+#define MAX_SIZE 1000001
+
+char alphabet[] = { "abcdefghijklmnopqrstuvwxyz" };
+char alphabet2[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+int search[26] = { 0 };
+
+void find(char a) {
+	for (int i = 0; i < 26; i++) {
+		if (alphabet[i] == a) {
+			search[i]++;
+			break;
+		}
+	}
+	for (int i = 0; i < 26; i++) {
+		if (alphabet2[i] == a) {
+			search[i]++;
+			break;
+		}
+	}
+
+	return;
+}
+
+void find2() {
+	int max = 0;
+	int maxnum;
+	int flag = 0;
+
+	for (int i = 0; i < 26; i++) {
+		if (max < search[i]) {
+			max = search[i];
+			maxnum = i;
+		}
+	}
+
+	for (int i = 0; i < 26; i++) {
+		if (i == maxnum)
+			continue;
+
+		if (search[i] == max)
+			flag = 1;
+	}
+
+	if (flag == 0)
+		printf("%c\n", alphabet2[maxnum]);
+	else
+		printf("?\n");
+
+	return;
+}
+
+int main() {
+	char* arr;
+	arr = (char*)malloc(MAX_SIZE);
+	scanf(" %s", arr);
+
+	int i = 0;
+	while (arr[i] != NULL) {
+		find(arr[i]);
+		i++;
+	}
+
+	find2();
+	free(arr);
+}

@@ -1,0 +1,75 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		n = Integer.parseInt(br.readLine());
+		int g = 0;
+		int s = 0;
+		char[][] a = new char[n][n];
+		for(int i=0; i<n; i++) {
+			String t= br.readLine();
+			for(int j=0 ;j<n; j++) {
+				a[i][j] = t.charAt(j);
+			}
+		}
+		if(n == 1) {
+			System.out.print(0 + " " + 0);
+			return;
+		}
+		for(int i=0; i<n; i++) {
+			int count = 0;
+			for(int j=0; j<n; j++) {
+				if(a[i][j] == '.')
+					count++;
+				if(a[i][j] == 'X') {
+					if(count>=2) {
+						g++;
+						count = 0;
+					}
+					else
+						count = 0;
+				}
+			}
+			if(count>=2)
+				g++;
+		}
+		
+		for(int i=0; i<n; i++) {
+			int count = 0;
+			for(int j=0; j<n; j++) {
+				if(a[j][i] == '.') 
+					count++;
+				if(a[j][i] == 'X') {
+					if(count>=2) {
+						s++;
+						count=0;
+					}
+					else
+						count=0;
+				}
+			}
+			if(count>=2)
+				s++;
+		}
+		
+		System.out.print(g + " " + s);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

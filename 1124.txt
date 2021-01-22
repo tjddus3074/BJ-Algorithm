@@ -1,0 +1,63 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+//import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int max = 100001;
+	static int[] era = new int[100001];
+	static boolean[] prime = new boolean[max];
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		
+		int count = 0;
+		prime[0] = true;
+		prime[1] = true;
+		
+		for(int i=2; i<max; i++) {
+			if(prime[i] == false) {
+				era[i] = 1;
+				for(int j=2*i; j<max; j+= i)
+					prime[j] = true;
+			}
+		}
+		
+		for(int i=2; i<=b; i++) {
+			if(era[i] == 0) {
+				for(int j=2; ; j++) {
+					if(i%j == 0) {
+						era[i] = era[i/j] + 1;
+						break;
+					}
+				}
+			}
+		}
+		
+		for(int i=a; i<=b; i++) {
+			if(prime[era[i]] == false)
+				count++;
+		}
+		System.out.println(count);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

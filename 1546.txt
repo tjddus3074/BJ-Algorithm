@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int main(void)
+{
+	double arr[1000];
+	int N;
+	scanf("%d", &N);
+
+	int a, b;
+	int temp = 0;
+
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%lf", &arr[i]);
+	}
+
+	for (a = 0; a < N - 1; a++)
+	{
+		for (b = 0; b < N - 1 - a; b++)
+		{
+			if (arr[b] < arr[b + 1])
+			{
+				temp = arr[b];
+				arr[b] = arr[b + 1];
+				arr[b + 1] = temp;
+			}
+		}
+	}
+
+	double max = arr[0];
+	double sum = 0;
+
+	for (int i = 0; i < N; i++)
+	{
+		arr[i] = arr[i] / max * 100;
+		sum += arr[i];
+	}
+	printf("%.2lf", sum / N);
+	return 0;
+
+} 
+

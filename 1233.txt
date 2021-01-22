@@ -1,0 +1,58 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static int s1, s2, s3;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		int a, b, c;
+		st = new StringTokenizer(br.readLine());
+		s1 = Integer.parseInt(st.nextToken());
+		s2 = Integer.parseInt(st.nextToken());
+		s3 = Integer.parseInt(st.nextToken());
+		
+		brr = new int[s1+s2+s3+1];
+		n = s1+s2+s3+1;
+
+		for(int i=1; i<=s1; i++) {
+			for(int j=1; j<=s2; j++) {
+				for(int l=1; l<=s3; l++) {
+					brr[i+j+l]++;
+				}
+			}
+		}
+		
+		int maxnum = 0;
+		for(int i=1; i<n; i++) {
+			maxnum = Math.max(maxnum, brr[i]);
+		}
+		
+		int max = 1000;
+		for(int i=1; i<n; i++) {
+			if(brr[i] == maxnum) {
+				max = Math.min(i, max);
+			}
+		}
+		
+		System.out.print(max);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

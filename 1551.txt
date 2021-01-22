@@ -1,0 +1,61 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new int[n];
+		String[] t = br.readLine().split(",");
+		for(int i=0; i<t.length; i++) 
+			arr[i] = Integer.parseInt(t[i]);
+		
+		if(m == 0) {
+			for(int i=0; i<n; i++) {
+				if(i == n-1)
+					System.out.print(arr[i]);
+				else
+					System.out.print(arr[i] + ",");
+			}
+			return;
+		}
+		
+		int count = 0;
+		while(true) {
+			for(int i=0; i<n-1; i++) {
+				arr[i] = arr[i+1] - arr[i];
+			}
+			
+			n--;
+			count++;
+			if(count == m) {
+				for(int i=0; i<n; i++) {
+					if(i == n-1)
+						System.out.print(arr[i]);
+					else
+						System.out.print(arr[i] + ",");
+				}
+				break;
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

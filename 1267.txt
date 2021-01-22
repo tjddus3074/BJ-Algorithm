@@ -1,0 +1,35 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static long n, m, k;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(br.readLine());
+		st = new StringTokenizer(br.readLine());
+		int sumy= 0;
+		int summ = 0;
+		for(int i=0; i<n; i++) {
+			m = Integer.parseInt(st.nextToken());
+			sumy += 10 + (m/30) * 10;
+			summ += 15 + (m/60) * 15;
+		}
+		if(sumy>summ)
+			System.out.println("M " + summ);
+		else if(summ>sumy)
+			System.out.println("Y " + sumy);
+		else
+			System.out.println("Y M " + summ);
+
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

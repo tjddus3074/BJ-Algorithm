@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+	int e, s, m;
+	scanf("%d %d %d", &e, &s, &m);
+	int a = 1, b = 1, c = 1;
+	int count = 1;
+	while (1) {
+		if (a == e && b == s && c == m)
+			break;
+
+		a = a + 1;
+		if (a > 15)
+			a = 1;
+
+		b = b + 1;
+		if (b > 28)
+			b = 1;
+
+		c = c + 1;
+		if (c > 19)
+			c = 1;
+		count++;
+	}
+	printf("%d", count);
+}

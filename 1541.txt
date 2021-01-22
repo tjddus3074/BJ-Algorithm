@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char arr[55];
+
+char numset[10];
+int numsetcount = 0;
+
+void enter() {
+	numsetcount = 0;
+	strcpy(numset, "       ");
+}
+
+int main() {
+	scanf("%s", &arr);
+	int i = 0;
+	int flag = 0;
+	int num=0, test=0;
+	
+	while (1) {
+		if (arr[i] == '\0') {
+			if (flag == 0) {
+				test = atoi(numset);
+				num = num + test;
+				test = 0;
+				enter();
+				flag = 1;
+			}
+			else {
+				test += atoi(numset);
+				enter();
+				num = num - test;
+				test = 0;
+			}
+			break;
+		}
+
+		if (arr[i] == '-') {
+			if (flag == 0) {
+				test = atoi(numset);
+				num = num + test;
+				test = 0;
+				enter();
+				flag = 1;
+			}
+			else {
+				test += atoi(numset);
+				enter();
+				num = num - test;
+				test = 0;
+			}
+		}
+		else if (arr[i] == '+') {
+			if (flag == 0) {
+				test = atoi(numset);
+				num = num + test;
+				test = 0;
+				enter();
+			}
+			if (flag == 1) {
+				test += atoi(numset);
+				enter();
+			}
+		}
+		else {
+			numset[numsetcount] = arr[i];
+			numsetcount++;
+		}
+
+		i++;
+	}
+
+	
+
+	printf("%d", num);
+}

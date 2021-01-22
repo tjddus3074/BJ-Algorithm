@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+	int num;
+	int count = 0;
+	int flag = 0;
+
+	scanf("%d", &num);
+
+	for (int i = 1; ; i++) {
+		count += i;
+		if (num <= count) {
+			flag = i;
+			count = count - i;
+			break;
+		}
+	}
+
+	int num2 = num - count - 1;
+
+	if (flag % 2 == 0) {
+		printf("%d/%d\n", 1 + num2, flag - num2);
+	}
+	else {
+		printf("%d/%d\n", flag - num2, 1 + num2);
+	}
+}

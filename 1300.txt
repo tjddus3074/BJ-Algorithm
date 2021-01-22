@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class Main {
+	public int solution(int n, int k) {
+		int high = k, low = 1, mid = 0, sum = 0, answer = 0;
+		
+		while(low <= high) {
+			mid = (high + low) / 2;
+			sum = 0;
+			for(int i = 1; i <= n; i++)
+				sum += Math.min(mid / i, n);
+			
+			if(sum >= k) {
+				high = mid - 1;
+				answer = mid;
+			}else
+				low = mid + 1;
+		}		
+		return answer;
+	}
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt(), k = scan.nextInt();	
+		System.out.println(new Main().solution(n, k));
+	}
+}

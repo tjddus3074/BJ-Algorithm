@@ -1,0 +1,52 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		boolean visit[][] = new boolean[8][8];		//true가 하얀색
+		int flag = 0;
+		int count = 0;
+		for(int i=0; i<8; i++) {
+			flag = i%2;
+			for(int j=0; j<8; j++) {
+				if(flag == 0) {
+					visit[i][j] = true;
+					flag = 1;
+				}
+				else {
+					visit[j][i] = false;
+					flag = 0;
+				} 
+				
+			}
+		}
+		
+		char arr[][] = new char[8][8];
+		for(int i=0; i<8; i++) {
+			String t = br.readLine();
+			for(int j=0; j<8; j++) {
+				char a = t.charAt(j);
+				arr[i][j] = a;
+				if(a == 'F')
+					if(visit[i][j] == true)
+						count++;
+			}
+		}
+		
+		System.out.println(count);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

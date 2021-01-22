@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	String name;
+	int x;
+	
+	public Node(String name, int x) {
+		this.name = name;
+		this.x = x;
+	}
+}
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		ArrayList<Node> q = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<>();
+		n = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			if(list.contains(t)) {
+				for(int j=0; j<q.size(); j++) {
+					Node temp = q.get(j);
+					if(temp.name.contentEquals(t))
+						q.get(j).x++;
+				}
+			}
+			else {
+				list.add(t);
+				q.add(new Node(t, 1));
+			}
+		}
+		
+		int max = 0;
+		for(int i=0; i<q.size(); i++) {
+			max = Math.max(max, q.get(i).x);
+		}
+		ArrayList<String> mlist = new ArrayList<>();
+		for(int i=0; i<q.size(); i++) {
+			if(q.get(i).x == max)
+				mlist.add(q.get(i).name);
+		}
+		
+		Collections.sort(mlist);
+		System.out.print(mlist.get(0));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

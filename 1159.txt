@@ -1,0 +1,54 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr = new int[5];
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		ArrayList<Character> q = new ArrayList<>();
+		n = Integer.parseInt(br.readLine());
+		String[] temp = new String[n];
+		for(int i=0; i<n; i++) {
+			temp[i] = br.readLine();
+		}
+		
+		for(int i=0; i<n; i++) {
+			char a = temp[i].charAt(0);
+			int count = 1;
+			for(int j=0; j<n; j++) {
+				if(j==i)
+					continue;
+				
+				if(temp[j].charAt(0) == a)
+					count++;
+				
+				if(count >= 5) {
+					if(!q.contains(a))
+						q.add(a);
+					break;
+				}
+			}
+		}
+		if(q.isEmpty()) {
+			System.out.print("PREDAJA");
+			return;
+		}
+		
+		Collections.sort(q);
+		for(int i=0; i<q.size(); i++)
+			System.out.print(q.get(i));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

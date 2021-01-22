@@ -1,0 +1,45 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int k, n;
+	static long[] arr;
+	static long max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		k = Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(st.nextToken());
+		arr = new long[k];
+
+		for(int i=0; i<k; i++) 
+			arr[i] = Integer.parseInt(br.readLine());
+		
+		Arrays.sort(arr);
+		System.out.println(bfind(1, arr[k-1]));
+	}
+	
+	static long bfind(long l, long r) {
+		long sum = 0;
+		long mid =(l+r)/2;
+		if(l>r) return max;
+		
+		for(int i=0; i<k; i++) 
+			sum += arr[i]/mid;
+		
+		if(sum>=n) {
+			max = Math.max(max, mid);
+			return bfind(mid+1, r);
+		}
+		else
+			return bfind(l, mid-1);
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+
+	}
+}

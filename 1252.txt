@@ -1,0 +1,74 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+ 
+public class Main {
+         
+    public static void main(String[] args)
+    {
+        BigInteger a ;
+        BigInteger b ;
+        
+        Scanner sc = new Scanner(System.in);
+ 
+        a = sc.nextBigInteger();
+        b = sc.nextBigInteger();
+ 
+        if(a.compareTo(BigInteger.ZERO) == 0 && b.compareTo(BigInteger.ZERO) == 0)
+        {
+            System.out.println("0");
+            System.exit(0);
+        }
+            
+        BigInteger decA = BigInteger.valueOf(0);
+        BigInteger decB = BigInteger.valueOf(0);
+        
+        BigInteger cnt = new BigInteger("1");
+        
+        int lenA = a.toString().length();
+        int lenB = b.toString().length();
+        
+        // 2진수 a를 10진수 decA로 바꾸는 과정
+        for(int i = 0 ; i < lenA; i ++)
+        {
+            BigInteger tmp = a.mod(BigInteger.valueOf(10));
+            
+            decA = decA.add(tmp.multiply(cnt));
+            a = a.divide(BigInteger.valueOf(10));
+            
+            cnt = cnt.multiply(BigInteger.valueOf(2));
+        }
+        
+        cnt = BigInteger.valueOf(1);
+ 
+        // 2진수 b를 10진수 decB로 바꾸는 과정
+        for(int i = 0 ; i < lenB; i ++)
+        {
+            BigInteger tmp = b.mod(BigInteger.valueOf(10));
+            
+            decB = decB.add(tmp.multiply(cnt));
+            b = b.divide(BigInteger.valueOf(10));
+            
+            cnt = cnt.multiply(BigInteger.valueOf(2));
+        }
+ 
+        
+        // 10진수 a + b를 a에 저장해준다.
+        decA = decA.add(decB);
+        String str = new String();
+        
+        // decA가 0이 될때까지 계속 나누어준다(2진수로 변환)
+        while(decA != BigInteger.valueOf(0))
+        {
+            str += decA.mod(BigInteger.valueOf(2));
+            
+            decA = decA.divide(BigInteger.valueOf(2));
+        }
+        
+        // 뒤집어진 2진수를 역으로 출력
+        for(int i = str.length() - 1; i >= 0; i --)
+            System.out.print(str.charAt(i));
+    }
+    
+}
+ 
+

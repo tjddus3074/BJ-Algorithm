@@ -1,0 +1,41 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		Scanner sc = new Scanner(System.in);
+        int alpha[] = new int[26];
+        int max = 0;
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            for(int i = 0; i < line.length(); i++){
+                if(line.charAt(i) != ' '){
+                    alpha[line.charAt(i) - 'a']++;
+                    if(max < alpha[line.charAt(i) - 'a']){
+                        max = alpha[line.charAt(i) - 'a'];
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < 26; i++){
+            if(alpha[i] == max) System.out.print((char)(i + 'a'));
+        }
+        sc.close();
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

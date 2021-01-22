@@ -1,0 +1,78 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		Stack<Character> s = new Stack<>();
+		Stack<Character> s2 = new Stack<>();
+		String t = br.readLine();
+		for(int i=0; i<t.length(); i++) {
+			s.push(t.charAt(i));
+		}
+		
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			String a = st.nextToken();
+			if(a.contentEquals("L")) {
+				if(!s.isEmpty()) {
+					char temp = s.peek();
+					s.pop();
+					s2.push(temp);
+				}
+			}
+			
+			else if(a.contentEquals("D")) {
+				if(!s2.isEmpty()) {
+					char temp = s2.peek();
+					s2.pop();
+					s.push(temp);
+				}
+			}
+			
+			else if(a.contentEquals("P")) {
+				String b = st.nextToken();
+				s.push(b.charAt(0));
+			}
+			
+			else if(a.contentEquals("B")) {
+				if(!s.isEmpty())
+					s.pop();
+			}
+		}
+		
+		while(!s.isEmpty()) {
+			char temp = s.peek();
+			s.pop();
+			s2.push(temp);
+		}
+		
+		while(!s2.isEmpty())
+			bw.write(s2.pop());
+		
+		bw.flush();
+		bw.close();
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

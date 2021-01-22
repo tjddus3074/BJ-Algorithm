@@ -1,0 +1,58 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	
+	static int n, s, m;
+	static int[] vol;
+	static int[][] dp;
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		s = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		vol = new int[n];
+		dp = new int[n][m+1];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) 
+			vol[i] = Integer.parseInt(st.nextToken());
+		
+		if(s + vol[0] <= m)
+			dp[0][s+vol[0]] = 1;
+		if(s- vol[0] >= 0)
+			dp[0][s-vol[0]] = 1;
+		
+		for(int i=1; i<n; i++)
+			cal(i);
+		
+		System.out.println(getmax());
+	}
+	
+	static void cal(int cur) {
+		int i, changevol = vol[cur], prev = cur-1;
+		for(i=0; i<=m; i++) {
+			if(dp[prev][i] == 1) {
+				if(i+changevol <= m)
+					dp[cur][i+changevol] = 1;
+				if(i-changevol >= 0)
+					dp[cur][i-changevol] = 1;
+			}
+		}
+	}
+	
+	static int getmax() {
+		for(int i=m; i>=0; i--)
+			if(dp[n-1][i] == 1) return i;
+		return -1;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,46 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		String a = st.nextToken();
+		String b = st.nextToken();
+		int aa = aaa(a);
+		int bb = aaa(b);
+		int sum = aa+bb;
+		String Sum = Integer.toString(sum);
+		System.out.print(aaa(Sum));
+
+	}
+	
+	static int aaa(String t) {
+		int a = Integer.parseInt(t);
+		String temp = "";
+		for(int i=t.length()-1; i>=0; i--) {
+			char ttt = t.charAt(i);
+			temp = temp+ttt;
+		}
+		
+		int b = Integer.parseInt(temp);
+		return b;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

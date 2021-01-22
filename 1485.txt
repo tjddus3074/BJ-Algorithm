@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node {
+	int x;
+	int y;
+
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		long[] x, y, s;
+		x = new long[4];
+		y = new long[4];
+		s = new long[6];
+
+		n = Integer.parseInt(br.readLine());
+		for (int test = 0; test < n; test++) {
+			int k = 0;
+			for (int i = 0; i < 4; i++) {
+				st = new StringTokenizer(br.readLine());
+				x[i] = Long.parseLong(st.nextToken());
+				y[i] = Long.parseLong(st.nextToken());
+			}
+
+			k = 0;
+			for (int i = 0; i < 4; i++) {
+				for (int j = i + 1; j < 4; j++) {
+					s[k] = (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]);
+					k++;
+				}
+			}
+			
+			Arrays.sort(s);
+			if(s[0] == s[1] && s[1] == s[2] && s[2] == s[3] && s[4] == s[5])
+				System.out.println(1);
+			else
+				System.out.println(0);
+
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	int n; scanf(" %d", &n);
+	int count = 0;
+
+	for (int i = 0; i < n; i++) {
+		char group[101]; scanf(" %s", group);
+		char groupcheck[27] = "\0";
+		int flag = 0;
+
+		for (int j = 0; ; j++) {
+			if (group[j] == '\0')
+				break;
+			if (j >= 1 && group[j] == group[j - 1])
+				continue;
+
+			int k = 0;
+			while (1) {
+				if (groupcheck[k] == group[j]) {
+					flag = 1;
+					break;
+				}
+				if (groupcheck[k] == '\0') {
+					groupcheck[k] = group[j];
+					break;
+				}
+				k++;
+			}
+		}
+		if (flag == 0)
+			count++;
+	}
+
+	printf("%d", count);
+}

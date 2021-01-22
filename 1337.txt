@@ -1,0 +1,49 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		Set<Integer> set = new HashSet<>();
+		for(int i=0; i<n; i++) {
+			int a = Integer.parseInt(br.readLine());
+			set.add(a);
+		}
+		
+		int min = 10;
+		Iterator<Integer> it = set.iterator();
+		while(it.hasNext()) {
+			int a = it.next();
+			int count = 4;
+			for(int i=1; i<=4; i++) {
+				if(set.contains(a+i))
+					count--;
+			}
+			
+			min = Math.min(min, count);
+		}
+		
+		System.out.print(min);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

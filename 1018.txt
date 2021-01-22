@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+char arr[51][51];
+int n, m;
+int finalcount = 10000;
+
+char firstw[9][9] = { "WBWBWBWB", "BWBWBWBW","WBWBWBWB", "BWBWBWBW","WBWBWBWB", "BWBWBWBW","WBWBWBWB", "BWBWBWBW" };
+char firstb[9][9] = { "BWBWBWBW" ,"WBWBWBWB","BWBWBWBW" ,"WBWBWBWB","BWBWBWBW" ,"WBWBWBWB","BWBWBWBW","WBWBWBWB" };
+
+int firstwchange(int a, int b) {
+	int num = 0;
+	for (int i = a; i < a+8; i++) {
+		for (int j = b; j < b+8; j++) {
+			if (arr[i][j] != firstw[i - a][j - b])
+				num++;
+		}
+	}
+
+	return num;
+}
+
+int firstbchange(int a, int b) {
+	int num = 0;
+	for (int i = a; i < a + 8; i++) {
+		for (int j = b; j < b + 8; j++) {
+			if (arr[i][j] != firstb[i - a][j - b])
+				num++;
+		}
+	}
+
+	return num;
+}
+
+int min(int a, int b, int c) {
+	int minum;
+	if (a >= b)
+		minum = b;
+	else
+		minum = a;
+
+	if (minum >= c)
+		minum = c;
+	
+	return minum;
+}
+int main() {
+	
+	scanf(" %d %d", &n, &m);
+	for (int i = 0; i < n; i++) {
+		scanf(" %s", &arr[i]);
+	}
+
+	for (int i = 0; i + 7 < n; i++) {
+		for (int j = 0; j + 7 < m; j++) {
+			finalcount = min(finalcount, firstwchange(i, j), firstbchange(i, j));
+		}
+	}
+
+	printf("%d\n", finalcount);
+}

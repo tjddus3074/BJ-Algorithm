@@ -1,0 +1,64 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*; 
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		int pacmin = Integer.MAX_VALUE;
+		int min = Integer.MAX_VALUE;
+		
+		for(int test = 0; test<k; test++) {
+			st = new StringTokenizer(br.readLine());
+			int pac = Integer.parseInt(st.nextToken());
+			int a = Integer.parseInt(st.nextToken());
+			
+			pacmin = Math.min(pacmin, pac);
+			min = Math.min(min, a);
+		}
+		
+		int mon = Integer.MAX_VALUE;
+		int a = 0;
+		if(n%6 == 0)
+			a = n/6;
+		else
+			a = n/6 +1;
+		while(true) {
+			if(a == -1)
+				break;
+			int sum = 0;
+			sum += a*pacmin;
+			if(a*6 >= n) {
+				a--;
+			}
+			else {
+				sum += (n - a*6) * min;
+				a--;
+			}
+			mon = Math.min(mon, sum);
+		}
+		
+		System.out.print(mon);
+	}
+		
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

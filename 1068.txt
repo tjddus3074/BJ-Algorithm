@@ -1,0 +1,102 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+class Node{
+	Node child1;
+	Node child2;
+	private int element;
+	Node parent;
+	int flag = 0;
+	int rootflag = 0;
+	int live=100;
+	
+	public Node(int a) {
+		this.element = a;
+		this.live = 1;
+		child1 = null;
+		child2 = null;
+		parent = null;
+	}
+	
+	public int getNodeElement() {
+		return this.element;
+	}
+	
+	public void NodeParent(Node N) {
+		this.parent = N;
+	}
+	
+	public void NodeChild(Node N) {
+		if(flag ==0) {
+			this.child1 = N;
+			flag = 1;
+		}
+		else if(flag==1) {
+			this.child2 = N;
+			this.live = 2;
+		}
+	}
+	
+	public void isRoot() {
+		this.rootflag = 1;
+	}
+	
+	public void delNode() {
+		this.live = 0;
+		if(child1 != null)
+			this.child1.delNode();
+		if(child2 != null)
+			this.child2.delNode();
+	}
+	
+	public boolean isLeaf() {
+		if(flag==0)
+			return true;
+		else if(flag==1) {
+			if(this.child1.live == 0)
+				return true;
+		}
+		else if(flag ==2) {
+			if(this.child1.live == 0 && this.child2.live == 0)
+				return true;
+		}
+		return false;
+	}
+}
+
+public class Main{
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int n = Integer.parseInt(br.readLine());
+		
+		Node[] nodelist = new Node[n];
+		for(int i=0; i<n; i++) {
+			nodelist[i] = new Node(i);
+		}
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			if(a == -1)
+				nodelist[i].isRoot();
+			else {
+				nodelist[i].NodeParent(nodelist[a]);
+				nodelist[a].NodeChild(nodelist[i]);
+			}
+		}
+		
+		int delnum = Integer.parseInt(br.readLine());
+		nodelist[delnum].delNode();
+		int count=0;
+		
+		for(int i=0; i<n; i++) {
+			if(nodelist[i].live==1 && nodelist[i].isLeaf()) {
+				count++;
+			}
+		}
+		
+		System.out.println(count);
+	}
+}

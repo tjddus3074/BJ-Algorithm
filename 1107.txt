@@ -1,0 +1,81 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int minnum;
+	static int l;
+	
+	static Set<Integer> banned_button = new HashSet<>();
+	static ArrayList<Character> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		String t = br.readLine();
+		l = t.length();
+		n = Integer.parseInt(t);
+		minnum = Math.abs(n-100);
+		k = Integer.parseInt(br.readLine());
+		
+		if (k != 0) {
+			st = new StringTokenizer(br.readLine());
+			for (int test = 0; test < k; test++) {
+				int a = Integer.parseInt(st.nextToken());
+				banned_button.add(a);
+			}
+		}
+		
+		for(int i=0; i<10; i++) 
+			if(!banned_button.contains(i)) {
+				char a = (char)(i + '0');
+				list.add(a);
+			}
+		
+		String temp = "";
+		dfs(temp);
+		
+//		int count = 0;
+//		System.out.println(minnum);
+//		if(minnum != n)
+//			count += l;
+//		count += Math.abs(minnum - n);
+//		System.out.print(count);
+		
+		System.out.println(minnum);
+	}
+	
+	static void dfs(String temp) {
+		if (!temp.contentEquals("")) {
+			int num = Integer.parseInt(temp);
+			int c = temp.length() + Math.abs(num - n);
+			minnum = Math.min(minnum, c);
+		}
+		
+		if(temp.length() == l+1)
+			return;
+		
+		for(int i=0; i<list.size(); i++) {
+			String t = temp;
+			t += list.get(i);
+			dfs(t);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

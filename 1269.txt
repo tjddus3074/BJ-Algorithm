@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		int[] Arr = new int[n];
+		int[] Brr = new int[m];
+		
+		Set<Integer> A = new HashSet<>();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			A.add(a);
+			Arr[i] = a;
+		}
+		
+		Set<Integer> B = new HashSet<>();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			B.add(a);
+			Brr[i] = a;
+		}
+		
+		int anum = n;
+		int bnum = m;
+		Set<Integer> C =new HashSet<>();
+		for(int i=0; i<n; i++) {
+			if(!B.contains(Arr[i])) {
+				if(!C.contains(Arr[i]))
+					C.add(Arr[i]);
+			}
+		}
+		
+		for(int i=0; i<m; i++) {
+			if(!A.contains(Brr[i])) {
+				if(!C.contains(Brr[i]))
+					C.add(Brr[i]);
+			}
+		}
+		
+		System.out.println(C.size());
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

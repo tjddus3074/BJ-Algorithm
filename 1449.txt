@@ -1,0 +1,66 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+	
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++)
+			list.add(Integer.parseInt(st.nextToken()));
+		
+		if(m == 1) {
+			System.out.print(n);
+			return;
+		}
+		
+		Collections.sort(list);
+		visit = new boolean[n];
+		
+		int count = 0;
+		for(int i=0; i<list.size()-1; i++) {
+			if(visit[i])
+				continue;
+			
+			int a= list.get(i);
+			visit[i] = true;
+			count++;
+			for(int j=i+1; j<list.size(); j++) {
+				int b = list.get(j);
+				if(b - a >= m)
+					break;
+				else
+					visit[j] = true;
+			}
+		}
+		
+		if(!visit[list.size()-1])
+			count++;
+		System.out.print(count);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
