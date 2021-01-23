@@ -1,0 +1,73 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*; 
+
+class Node{
+	char a;
+	int dir;
+	
+	public Node(char a, int dir) {
+		this.a =a ;
+		this.dir = dir;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		String a = br.readLine();			//방향 1
+		String b = br.readLine();			//방향 2
+		Node[] t = new Node[n+m];
+		k = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<n; i++) {
+			char aa = a.charAt(n-1-i);
+			t[i] = new Node(aa, 1);
+		}
+		for(int i=n; i<n+m; i++) {
+			char aa = b.charAt(i-n);
+			t[i] = new Node(aa, 2);
+		}
+		
+		for(int test = 0; test<k; test++) {
+			for(int i=0; i<n+m-1; ) {
+				if(t[i].dir == 1) {
+					if(t[i+1].dir == 2) {
+						Node temp = t[i];
+						t[i] = t[i+1];
+						t[i+1] = temp;
+						i+=2;
+					}
+					else
+						i++;
+				}
+				else
+					i++;
+			}
+		}
+		
+		for(int i=0; i<n+m; i++)
+			System.out.print(t[i].a);
+	}
+		
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

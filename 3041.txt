@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		//char z = 'z';  122
+		
+		char[][] table = new char[4][4];
+		for(int i=0; i<4; i++) {
+			String t = br.readLine();
+			for(int j=0; j<4; j++) 
+				table[i][j] = t.charAt(j);
+		}
+		
+		int ret = 0;
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<4; j++) {
+				if(table[i][j] != '.')
+					ret += Math.abs((table[i][j] - 'A') / 4 - i) + 
+							Math.abs((table[i][j] - 'A') % 4 - j);
+			}
+		}
+		
+		System.out.print(ret);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

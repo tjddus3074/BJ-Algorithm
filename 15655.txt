@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
+
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		brr= new int[n+1];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) {
+			brr[i] = Integer.parseInt(st.nextToken());
+		}
+		Arrays.sort(brr);
+		visit = new boolean[n+1];
+		dfs(0);
+	}
+	
+	static void dfs(int d) throws IOException{
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		if(d == m) {
+			int flag = 0;
+			for (int i = 1; i < list.size(); i++) {
+				if (list.get(i) < list.get(i - 1)) {
+					flag = 1;
+					break;
+				}
+			}
+			if (flag == 0) {
+				for (int i = 0; i < list.size(); i++)
+					bw.write(list.get(i) + " ");
+				bw.newLine();
+
+				bw.flush();
+			}
+		}
+		for(int i=1; i<=n; i++) {
+			if(!visit[i]) {
+				list.add(brr[i]);
+				visit[i] = true;
+				dfs(d+1);
+				list.remove(d);
+				visit[i] = false;
+			}
+		}
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+

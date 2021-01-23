@@ -1,0 +1,36 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int n, k;
+	static int[][] p = new int [1001][1001];
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		if(n == k || k ==0) {
+			System.out.println(1);
+			return;
+		}
+		
+		p[1][1] = 1;
+		p[2][1] = 2;
+		p[3][2] = 3;
+		for(int i=2; i<=1000; i++) {
+			p[i][i] = 1;
+			p[i][1] = i;
+			p[1][i] = 0;
+		}
+		
+		for(int i=3; i<=n; i++) {
+			for(int j=2; j<i; j++) {
+				p[i][j] = ((p[i-1][j-1] % 10007) + (p[i-1][j] % 10007)) % 10007;
+			}
+		}
+		
+		System.out.println(p[n][k]%10007);
+	}
+}

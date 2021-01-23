@@ -1,0 +1,15 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main(){
+    double a,b,c,l,j,k;
+    cin >> a >> b >> c >> l >> j >> k;
+    double mini = min({a/l, b/j, c/k});
+    cout.precision(7);
+    if(a- l * mini <= 0) cout << 0 <<' ';
+    else cout << a - l*mini << ' ';
+    if(b - j*mini <= 0) cout << 0 << ' ';
+    else cout << b - j * mini << ' ';
+    if(c - k*mini<=0) cout << 0 << ' ';
+    else cout << c - k*mini << ' ';
+}

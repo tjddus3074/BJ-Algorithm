@@ -1,0 +1,45 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+public class Main{
+	
+	static int n,m,l,k;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		l = Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		
+		int a = k/3600;
+		int b = (k%3600) / 60;
+		int c = k%60;
+		
+		n += a;
+		m += b;
+		l += c;
+		if(l>=60) {
+			l = l%60;
+			m++;
+		}
+		if(m>=60) {
+			m = m%60;
+			n++;
+		}
+		
+		if(n>=24) {
+			n = n%24;
+		}
+		
+		System.out.print(n + " " + m + " " + l);
+	}
+}

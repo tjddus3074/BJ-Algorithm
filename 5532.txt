@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+public class Main{
+	
+	static int l, a, b, c, d;
+	static int max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		l = Integer.parseInt(br.readLine());
+		a = Integer.parseInt(br.readLine());
+		b = Integer.parseInt(br.readLine());
+		c = Integer.parseInt(br.readLine());
+		d = Integer.parseInt(br.readLine());
+		
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		if(a%c == 0)
+			max = Math.max(max,  a/c);
+		else
+			max = Math.max(max, (a/c )+1);
+		
+		if(b%d == 0)
+			max = Math.max(max, b/d);
+		else
+			max = Math.max(max,  (b/d)+1);
+		
+		System.out.print(l-max);
+	}
+	
+}

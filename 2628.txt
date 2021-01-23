@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		ArrayList<Integer> list2 = new ArrayList<>();
+		list.add(0);
+		list.add(n);
+		list2.add(0);
+		list2.add(m);
+		for(int test= 0; test<k; test++) {
+			st = new StringTokenizer(br.readLine());
+			int a =Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if(a == 1)
+				list.add(b);
+			else
+				list2.add(b);
+		}
+		
+		Collections.sort(list);
+		Collections.sort(list2);
+		ArrayList<Integer> sort1 = new ArrayList<>();
+		ArrayList<Integer> sort2 = new ArrayList<>();
+		for(int i=1; i<list.size(); i++) {
+			sort1.add(list.get(i) - list.get(i-1));
+		}
+		for(int i=1; i<list2.size(); i++) {
+			sort2.add(list2.get(i) - list2.get(i-1));
+		}
+		Collections.sort(sort1);
+		Collections.sort(sort2);
+		System.out.print(sort1.get(sort1.size()-1) * sort2.get(sort2.size()-1));
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+	int a, b, c;
+	c = 0;
+	scanf("%d %d", &a, &b);
+	int small, big;
+
+	if (a >= b) {
+		big = a;
+		small = b;
+	}
+	else {
+		big = b;
+		small = a;
+	}
+
+	for (int i = 1; i <= small; i++) {
+		if (a % i == 0 && b % i == 0) {
+			if (c < i)
+				c = i;
+		}
+	}
+	printf("%d\n", c);
+
+	for (int i = 1; ; i++) {
+		if ((small * i) % big == 0) {
+			printf("%d\n", small * i);
+			break;
+		}
+	}
+
+}

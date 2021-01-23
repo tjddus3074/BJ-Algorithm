@@ -1,0 +1,43 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(br.readLine());
+		int max = Integer.MIN_VALUE;
+		PriorityQueue<Integer> q = new PriorityQueue<>((o1, o2) -> o2 - o1);
+		
+		for(int i=0; i<n; i++) {
+			int a = Integer.parseInt(br.readLine());
+			q.add(a);
+		}
+		
+		int min = Integer.MAX_VALUE;
+		int count = 1;
+		while(!q.isEmpty()) {
+			int num = q.poll();
+			min = Math.min(num, min);
+			max = Math.max(max, min*count);
+			count++;
+		}
+		
+		System.out.print(max);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

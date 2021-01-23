@@ -1,0 +1,45 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(br.readLine());
+		if(n == 1) {
+			System.out.print(1);
+			return;
+		}
+		else if(n==2) {
+			System.out.print(1);
+			return;
+		}
+		
+		BigInteger bignum1 = BigInteger.ZERO;
+		BigInteger bignum2 = BigInteger.ONE;
+		BigInteger bignum3 = BigInteger.ZERO;
+		for(int i=2; i<=n; i++) {
+			bignum3 = bignum1.add(bignum2);
+			bignum1 = bignum2;
+			bignum2 = bignum3;
+		}
+		
+		System.out.print(bignum3);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

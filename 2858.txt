@@ -1,0 +1,21 @@
+int main(void) {
+	int r, b;
+	scanf("%d %d", &r, &b);
+	int i = 3, j = 3;
+
+	int flag = 0;
+
+	for (;; i++) {
+		int aa = (r+b) / i;
+		if ((r+b) % i != 0)
+			continue;
+
+		if (i + aa == r/2+2) {
+			if (i > aa)
+				printf("%d %d", i, aa);
+			else
+				printf("%d %d", aa, i);
+			break;
+		}
+	}
+}

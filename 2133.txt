@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		n = Integer.parseInt(br.readLine());
+		brr = new int[n+1];
+		System.out.print(n%2 == 0 ? go(n) : 0);
+		
+	}
+	
+	static int go(int n) {
+		if(n == 0) return 1;
+		if(n == 2) brr[2] = 3;
+		else if(brr[n] == 0) {
+			for(int i=2; i<=n; i+=2) {
+				int s = i == 2? 3: 2;
+				brr[n] += s * go(n-i);
+			}
+		}
+		return brr[n];
+	}
+
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

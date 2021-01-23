@@ -1,0 +1,73 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		n = Integer.parseInt(br.readLine());
+		ArrayList<Node> list = new ArrayList<>();
+		int count = 0;
+		
+		for(int i=0; i<n; i++) {
+			int a, b;
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			list.add(new Node(a, b));
+		}
+		
+		for(int i=0; i<list.size(); i++) {
+			Node t = list.get(i);
+			boolean case1 = true;
+			boolean case2 = true;
+			for(int j=0; j<list.size(); j++) {
+				if(i==j)
+					continue;
+				
+				Node o = list.get(j);
+				if(t.x> o.x) {
+					if(t.y>=o.y)
+						case1 = false;
+				}
+				
+				if(t.y>o.y) {
+					if(t.x>=o.x)
+						case2 = false;
+				}
+			}
+			
+			if(case1 && case2)
+				count++;
+		}
+		System.out.print(count);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

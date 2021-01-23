@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>   // char - 48 = 해당 정수
+
+double whate(int a) {
+	double num = 1;
+	double b;
+	for (int i = a; i > 0; i--) {
+		num = num * i;
+	}
+	b = 1 / num;
+	return b;
+}
+
+int main() {
+	printf("n e\n");
+	printf("- -----------\n");
+	printf("0 1\n");
+	double a = 1;
+	for (int i = 1; i < 3; i++) {
+		a = a + whate(i);
+		printf("%d %g\n", i, a);
+	}
+	for (int i = 3; i < 10; i++) {
+		a = a + whate(i);
+		printf("%d %.9f\n", i, a);
+	}
+
+}

@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+	int a, b, v; // a = 낮에 올라감 b = 밤에 미끄러짐 v = 높이
+	scanf("%d %d %d", &a, &b, &v);
+	int ans;
+	int re = a - b;
+	if ((v - a) % re != 0) {
+		printf("%d\n", ((v - a) / re) + 2);
+	}
+	else {
+		printf("%d\n", ((v - a) / re) + 1);
+	}
+	
+}

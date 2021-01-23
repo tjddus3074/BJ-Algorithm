@@ -1,0 +1,50 @@
+
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		brr = new int[n+1];
+		int[] dp = new int[n+1];
+		dp[0] = 0;
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) {
+			brr[i] = Integer.parseInt(st.nextToken());
+			dp[i] = dp[i-1] + brr[i];
+		}
+		
+		for(int i=0; i<m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if(a== b)
+				System.out.println(brr[a]);
+			else
+				System.out.println(dp[b] - dp[a-1]);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

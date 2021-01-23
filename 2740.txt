@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int data1[101][101];
+	int data2[101][101];
+	int ans[101][101] = { 0 };
+	
+	int n, m, k;
+	scanf("%d %d", &n, &m);
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
+			scanf("%d", &data1[i][j]);
+		}
+	}
+
+	scanf("%d %d", &m, &k);
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= k; j++) {
+			scanf("%d", &data2[i][j]);
+		}
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= k; j++) {
+			for (int a = 1; a <= m; a++) {
+				ans[i][j] = (data1[i][a] * data2[a][j]) + ans[i][j];
+			}
+		}
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= k; j++) {
+			printf("%d ", ans[i][j]);
+		}
+		printf("\n");
+	}
+}

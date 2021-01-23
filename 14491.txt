@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+void f(int x, int p){
+	if(x){
+		f(x/p, p);
+		putchar('0'+x%p);
+	}
+}
+int main(){
+	int a;
+	scanf("%d", &a);
+	f(a, 9);
+}

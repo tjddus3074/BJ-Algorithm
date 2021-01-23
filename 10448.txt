@@ -1,0 +1,46 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr = new int[45];
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		for(int i=1; i<=44; i++) {
+			arr[i] = (i*i + i) /2;
+		}
+		
+		p = Integer.parseInt(br.readLine());
+		for(int t = 0; t<p; t++) {
+			n = Integer.parseInt(br.readLine());
+			if(aaa(n))
+				System.out.println(1);
+			else
+				System.out.println(0);
+		}
+	}
+	
+	static boolean aaa(int num) {
+		for(int i=1; i<=44; i++) {
+			for(int j=1; j<=44; j++) {
+				for(int l=1; l<=44; l++) {
+					if(arr[i] + arr[j] + arr[l] == num)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

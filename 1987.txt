@@ -1,0 +1,67 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int x;
+	int y;
+	int count;
+	ArrayList<Character> ar = new ArrayList<>();
+	
+	public Node(int x, int y, int count, ArrayList<Character> a) {
+		this.x = x;
+		this.y = y;
+		this.count = count;
+		this.ar = a;
+	}
+}
+
+public class Main{
+	static int n, m;
+	static char[][] arr;
+	static boolean[] visit;
+	static int[] dx = {-1, 1, 0, 0};
+	static int[] dy = {0, 0, -1, 1};
+	static int max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new char[n][m];
+		visit = new boolean[26];
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			for(int j=0; j<m; j++) 
+				arr[i][j] = t.charAt(j);
+		}
+		
+		dfs(0,0,1);
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>= m)
+			return false;
+		return true;
+	}
+	
+	static void dfs(int x, int y, int count) {
+		visit[arr[x][y] - 'A'] = true;
+		for(int i=0; i<4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+			if(isRange(nx,ny))
+				if(!visit[arr[nx][ny] - 'A']) 
+					dfs(nx, ny, count+1);
+		}
+		visit[arr[x][y] - 'A'] = false;
+		max = Math.max(count, max);
+	}
+
+	public static void main(String [] args) throws IOException {
+		Init();
+		System.out.print(max);
+	}
+}

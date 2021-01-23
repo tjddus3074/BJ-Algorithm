@@ -1,0 +1,85 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node>{
+	int country;
+	int num;
+	int score;
+	
+	public Node(int country, int num, int score) {
+		this.country = country;
+		this.num = num;
+		this.score = score;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		if(this.score > o.score) return -1;
+		else if(this.score < o.score)return 1;
+		else return 0;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		//char z = 'z';  122
+		
+		n = Integer.parseInt(br.readLine());
+		ArrayList<Node> list = new ArrayList<>();
+		ArrayList<Node> medal = new ArrayList<>();
+		int max = 0;
+		for(int i=0; i<n; i++) {
+			int c, n, s;
+			st = new StringTokenizer(br.readLine());
+			c = Integer.parseInt(st.nextToken());
+			n = Integer.parseInt(st.nextToken());
+			s = Integer.parseInt(st.nextToken());
+			list.add(new Node(c, n, s));
+			max = Math.max(max, c);
+		}
+		
+		Collections.sort(list);
+		brr = new int[max+1];
+		int count = 0;
+		for(int i=0; i<list.size(); i++) {
+			if(count ==3)
+				break;
+			
+			int nowcon = list.get(i).country;
+			if(brr[nowcon] <2) {
+				count++;
+				brr[nowcon] ++;
+				Node temp = list.get(i);
+				medal.add(temp);
+			}
+			else {
+				continue;
+			}
+		}
+		
+		for(int i=0; i<medal.size(); i++) {
+			System.out.println(medal.get(i).country + " " + medal.get(i).num);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

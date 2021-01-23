@@ -1,0 +1,30 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		while(true) {
+			st = new StringTokenizer(br.readLine());
+			int a, b;
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			if(a== 0 &&  b == 0)
+				break;
+			
+			System.out.println(a/b + " " + a%b + " / " + b);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

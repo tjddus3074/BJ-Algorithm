@@ -1,0 +1,52 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		int t = 0;
+		int pre = 0;
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			int d = Integer.parseInt(st.nextToken());
+			int r = Integer.parseInt(st.nextToken());
+			int g = Integer.parseInt(st.nextToken());
+			
+			t += d -pre;
+			pre = d;
+			
+			int red = t %(r + g);
+			if(red <= r) {
+				t += r- red;
+			}
+		}
+		
+		System.out.println(t + (m - pre));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

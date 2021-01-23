@@ -1,0 +1,107 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		arr = new int[5][5];
+		for(int i=0; i<5; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<5; j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		
+		int count = 0;
+		for(int i=0; i<5; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<5; j++) {
+				int a = Integer.parseInt(st.nextToken());
+				count++;
+				for(int o = 0; o<5; o++) {
+					for(int p = 0; p<5; p++) {
+						if(a == arr[o][p])
+							arr[o][p] = 0;
+					}
+				}
+				
+//				for(int o = 0; o<5; o++) {
+//					for(int p = 0; p<5; p++) {
+//						System.out.print(arr[o][p] + " ");
+//					}
+//					System.out.print("\n");
+//				}
+				
+				if(find()) {
+					System.out.print(count);
+					return;
+				}
+			}
+		}
+	}
+	
+	static boolean find() {
+		int count = 0;
+		for(int i=0; i<5; i++) {
+			int flag = 0;
+			for(int j=0; j<5; j++) {
+				if(arr[i][j] != 0) {
+					flag = 1;
+					break;
+				}
+			}
+			if(flag == 0)
+				count++;
+		}
+		
+		for(int i=0; i<5; i++) {
+			int flag = 0;
+			for(int j=0; j<5; j++) {
+				if(arr[j][i] != 0) {
+					flag = 1;
+					break;
+				}
+			}
+			if(flag == 0)
+				count++;
+		}
+		
+		int flag = 0;
+		for(int i=0; i<5; i++) {
+			if(arr[i][i] != 0)
+				flag = 1;
+		}
+		if(flag == 0)
+			count++;
+		
+		flag = 0;
+		for(int i=0; i<5; i++) {
+			if(arr[i][4-i] != 0)
+				flag = 1;
+		}
+		
+		if(flag == 0)
+			count++;
+		
+		if(count>=3)
+			return true;
+		
+		return false;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

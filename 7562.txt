@@ -1,0 +1,92 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int x;
+	int y;
+	int c;
+	
+	public Node(int x, int y, int c) {
+		this.x = x;
+		this.y = y;
+		this.c = c;
+	}
+}
+
+public class Main {
+	static int t;
+	static int n;
+	static int[][] arr;
+	static int a, b, c, d;
+	static int[][] visit;
+	static int count;
+	static int[] dx = {-2, -2, -1, 1, 2, 2, 1, -1};
+	static int[] dy = {-1, 1, 2, 2, 1, -1, -2, -2};
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		t = Integer.parseInt(br.readLine());
+		for(int test = 0; test<t; test++) {
+			n = Integer.parseInt(br.readLine());
+			arr = new int[n][n];
+			visit = new int[n][n];
+			count = Integer.MAX_VALUE;
+			for(int i=0; i<n; i++) 
+				for(int j=0; j<n; j++) 
+					visit[i][j] = Integer.MAX_VALUE;
+			
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			st = new StringTokenizer(br.readLine());
+			c = Integer.parseInt(st.nextToken());
+			d = Integer.parseInt(st.nextToken());
+			arr[a][b] = 1;
+			arr[c][d] = 2;
+			
+			bfs(a,b);
+//			for(int i=0; i<n; i++) {
+//				for(int j=0; j<n; j++) {
+//					System.out.print(visit[i][j] + " ");
+//				}
+//				System.out.print("\n");
+//			}
+			System.out.println(visit[c][d]);
+		}
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=n)
+			return false;
+		return true;
+	}
+	
+	static void bfs(int x, int y) {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(x, y, 0));
+		visit[x][y] = 0;
+		
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			for(int i=0; i<8; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+				
+				if(!isRange(nx, ny))
+					continue;
+				if(visit[nx][ny] <= t.c+1)
+					continue;
+
+				visit[nx][ny] = t.c + 1;
+				q.add(new Node(nx, ny, t.c + 1));
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

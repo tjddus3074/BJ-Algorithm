@@ -1,0 +1,54 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		
+		String t = br.readLine();
+		if(t.length() == 1) {
+			System.out.print("◝(⑅•ᴗ•⑅)◜..°♡ 뀌요미!!");
+			return;
+		}
+			
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=0; i<t.length(); i++) {
+			int a= t.charAt(i) - '0';
+			list.add(a);
+		}
+		
+		int flag = 0;
+		int n = list.get(0) - list.get(1);
+		for(int i=1; i<list.size()-1; i++) {
+			int a = list.get(i) - list.get(i+1);
+			if(n!=a)
+				flag = 1;
+		}
+		if(flag == 0) {
+			System.out.print("◝(⑅•ᴗ•⑅)◜..°♡ 뀌요미!!");
+		}
+		else
+			System.out.println("흥칫뿡!! <(￣ ﹌ ￣)>");
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

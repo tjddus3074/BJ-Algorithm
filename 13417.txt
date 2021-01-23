@@ -1,0 +1,64 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+//import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		k = Integer.parseInt(br.readLine());
+		while(k-->0) {
+			StringBuilder sb = new StringBuilder();
+			n = Integer.parseInt(br.readLine());
+			Deque<Character> q = new LinkedList<>();
+			String t = br.readLine();
+			char[] arr = new char[n];
+			int count= 0;
+			for(int i=0; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(a == ' ')
+					continue;
+				else {
+					arr[count] = a;
+					count++;
+				}
+			}
+			
+			q.add(arr[0]);
+			for(int i=1; i<n; i++) {
+				char a = q.peek();
+				int A = a - '0';
+				int B = arr[i] - '0';
+				if(A<B)
+					q.addLast(arr[i]);
+				else
+					q.addFirst(arr[i]);
+			}
+			
+			for(int i=0; i<n; i++) {
+				char a = q.poll();
+				sb.append(a);
+			}
+			sb.append("\n");
+			System.out.print(sb);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

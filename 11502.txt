@@ -1,0 +1,84 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static boolean[] isPrime = new boolean[1001];
+	static int[] primeList = new int[1001];
+	static int primeCnt;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		Scanner input = new Scanner(System.in);
+		int t = input.nextInt();
+		
+		int[] testcase = new int[t];
+		int max = 0;
+		for(int i=0; i<t; i++) {
+			testcase[i] = input.nextInt();
+			if(testcase[i] > max)
+				max = testcase[i];
+		}
+		
+		input.close();
+		
+		findPrime(max);
+		
+		for(int i=0; i<t; i++) {
+			int cnt = 0;
+			
+			if(!isPrime[testcase[i] -4]) {
+				cnt++;
+				System.out.println(2 + " " + 2 + " " + (testcase[i] - 4));
+				continue;
+			}
+			
+			outerloop:
+			for(int j=1; j<primeCnt; j++) {
+				for(int k=1; k<primeCnt; k++) {
+					for(int u=1; u<primeCnt; u++) {
+						if(primeList[j] + primeList[k] + primeList[u] == testcase[i]) {
+							cnt++;
+							System.out.println(primeList[j] + " " + primeList[k] + " " + primeList[u]);
+							break outerloop;
+						}
+					}
+				}
+			}
+			
+			if(cnt == 0)
+				System.out.println(0);
+		}
+	}
+	
+	static void findPrime(int n) {
+		for(int i=2; i*i <= n; i++) {
+			for(int j=i*i; j<=n; j+=i) {
+				if(!isPrime[j])
+					isPrime[j] = true;
+			}
+		}
+		
+		for(int i=2; i<=n; i++) {
+			if(!isPrime[i])
+				primeList[primeCnt++] = i;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

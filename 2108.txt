@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int data_num[8002];			// 해당 데이터 개수
+int max_count_array[8002];
+
+void merge(int*data, int low, int mid, int high)  {
+
+	int result[500002];
+	int l = low;
+	int m = mid + 1;
+	int count = 0;
+
+	while (l <= mid && m <= high) {
+		if (data[l] <= data[m]) {
+			result[count] = data[l];
+			l++;
+			count++;
+		}
+		else {
+			result[count] = data[m];
+			count++;
+			m++;
+		}
+	}
+
+	while (l <= mid) {
+		result[count] = data[l];
+		count++;
+		l++;
+	}
+
+	while (m <= high) {
+		result[count] = data[m];
+		count++;
+		m++;
+	}
+
+	count--;
+	while (count >= 0) {
+		data[low + count] = result[count];
+		count--;
+	}
+}
+
+void mergesort(int* data, int low, int high) {
+	int mid = (low + high) / 2;
+
+	if (low < high) {
+		mergesort(data, low, mid);
+		mergesort(data, mid + 1, high);
+		merge(data, low, mid, high);
+	}
+	else
+		return;
+}
+
+void average(int* data, int n) {		// 산술평균
+	double count = 0;
+	for (int i = 0; i < n; i++) {
+		count = (double)data[i] + count;
+	}
+	printf("%.f\n", (double)count/n);
+}
+
+void range(int* data, int n) {
+	printf("%d\n", data[n - 1] - data[0]);
+}
+
+int main() {
+	int n; scanf("%d", &n);
+	int max = 0;
+	int* data = (int*)malloc(sizeof(int) * n);
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &data[i]);
+		data_num[data[i] + 4000]++;
+		if (max < data[i] + 4000)
+			max = data[i] + 4000;
+	}
+
+	int max_count = 0;
+	
+	int many_num;
+	for (int i = 0; i <= max; i++) {
+		if (max_count < data_num[i])
+			max_count = data_num[i];			//최빈숫자의 횟수
+	}
+	
+	int flag = 0;
+	for (int i = 0; i < 8001; i++) {
+		if (max_count == data_num[i])
+			flag++;
+	}
+
+	for (int i = 0; i < 8001; i++) {
+		if (flag == 1) {
+			if (max_count == data_num[i]) {
+				many_num = i - 4000;
+				break;
+			}
+		}
+		else {
+			if (max_count == data_num[i]) {
+				if (flag == 0) {
+					many_num = i - 4000;
+					break;
+				}
+				else
+					flag = 0;
+			}
+		}
+	}
+	
+	mergesort(data, 0, n - 1);		//정렬
+	average(data, n);		//평균
+	printf("%d\n", data[(n + 1) / 2 - 1]);		//중앙값
+	printf("%d\n", many_num);		//최빈값
+	range(data, n);			//범위
+}

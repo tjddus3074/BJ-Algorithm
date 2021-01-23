@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int gcd(int a, int b) {
+	return a % b ? gcd(b , (a % b)) : b;
+}
+int max(int a, int b) {
+	return a >= b ? a : b;
+}
+int min(int a, int b) {
+	return a >= b ? b : a;
+}
+int main() {
+	int a;
+	scanf("%d", &a);
+	int b[100];
+	for (int i = 0; i < a; i++) {
+		scanf("%d", &b[i]);
+	}
+
+	int n, m, g;
+	for (int i = 1; i < a; i++) {
+		m = max(b[0], b[i]);
+		n = min(b[0], b[i]);
+		g = gcd(m, n);
+		printf("%d/%d\n", b[0] / g, b[i] / g);
+	}
+}

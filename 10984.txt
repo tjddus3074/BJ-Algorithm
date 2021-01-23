@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int max = Integer.MIN_VALUE;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		k = Integer.parseInt(br.readLine());
+		for(int i=0; i<k; i++) {
+			int m = Integer.parseInt(br.readLine());
+			int sum = 0;
+			double s = 0;
+			for(int j=0; j<m; j++) {
+				st = new StringTokenizer(br.readLine());
+				int a;
+				double b;
+				a = Integer.parseInt(st.nextToken());
+				b = Double.parseDouble(st.nextToken());
+				sum += a;
+				s += a*b;
+			}
+			
+			System.out.print(sum + " ");
+			s = s/sum;
+			System.out.println(String.format("%.1f", s));
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

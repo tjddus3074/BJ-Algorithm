@@ -1,0 +1,81 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node> {
+	int end, weight;
+	
+	public Node(int end, int weight) {
+		this.end = end;
+		this.weight = weight;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		return weight - o.weight;
+	}
+}
+
+public class Main{
+	static int v, e, k;
+	static List<Node>[] list;
+	static int[] dis;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		v = Integer.parseInt(st.nextToken());
+		e = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(br.readLine());
+		dis = new int[v+1];
+		list = new ArrayList[v+1];
+		Arrays.fill(dis, Integer.MAX_VALUE);
+		
+		for(int i=1; i<=v; i++) 
+			list[i] = new ArrayList<>();
+		
+		for(int i=0; i<e; i++) {
+			st = new StringTokenizer(br.readLine());
+			int start = Integer.parseInt(st.nextToken());
+			int end = Integer.parseInt(st.nextToken());
+			int weight = Integer.parseInt(st.nextToken());
+			list[start].add(new Node(end, weight));
+		}
+		
+		find(k);
+		
+		for(int i=1; i<=v; i++) {
+			if(dis[i] == Integer.MAX_VALUE)
+				System.out.println("INF");
+			else
+				System.out.println(dis[i]);
+		}
+	}
+	
+	static void find(int start) {
+		PriorityQueue<Node> q = new PriorityQueue<>();
+		boolean[] check = new boolean[v+1];
+		q.add(new Node(start, 0));
+		dis[start] = 0;
+		
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			int c = t.end;
+			
+			if(check[c] == true) continue;
+			check[c] = true;
+			
+			for(Node node : list[c]) {
+				if(dis[node.end]> dis[c] + node.weight) {
+					dis[node.end]= dis[c] + node.weight;
+					q.add(new Node(node.end, dis[node.end]));
+				}
+			}
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

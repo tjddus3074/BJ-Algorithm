@@ -1,0 +1,51 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		int flag = 0;
+		int a1, a2, a3;
+		int b1, b2, b3;
+		
+		st = new StringTokenizer(br.readLine());
+		a1 = Integer.parseInt(st.nextToken());
+		a2  = Integer.parseInt(st.nextToken());
+		a3 = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		b1 = Integer.parseInt(st.nextToken());
+		b2 = Integer.parseInt(st.nextToken());
+		b3 = Integer.parseInt(st.nextToken());
+		
+		if(b1-a1 == 0)
+			flag = 0;
+		else if(b1 - a1 == 1) {
+			if(b2 == a2) {
+				if(b3>=a3) flag = 1;
+				else flag = 0;
+			}
+			else if(b2>a2) flag = 1;
+			else flag = 0;
+		}
+		else {
+			if(b2 == a2) {
+				if(b3>= a3) flag = 2;
+				else flag = 1;
+			}
+			else if(b2 > a2) flag = 2;
+			else flag = 1;
+		}
+		
+		if(b1 - a1<2)
+			System.out.print(flag + "\n" + (b1-a1+1) + "\n" + (b1-a1));
+		else
+			System.out.print((b1-a1+flag-2) + "\n" + (b1-a1+1) + "\n" +  (b1-a1));
+	}
+
+}

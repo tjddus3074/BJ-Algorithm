@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int reverse(int num){
+    int a = num%10;
+    int b = (num%100)/10;
+    int c = num/100;
+    int final;
+    final = (a*100) + (b*10) + c;
+    return final;
+}
+
+int main()
+{
+    int N,M;
+    int rn, rm;
+    scanf("%d %d", &N, &M);
+    rn = reverse(N);
+    rm = reverse(M);
+    if(rn>=rm){
+        printf("%d", rn);
+    }
+    else{
+        printf("%d", rm);
+    }
+}

@@ -1,0 +1,88 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static int[] dx = {1, 0, -1, 0};
+	static int[] dy = {0, 1, 0, -1};
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		m = Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		arr = new int[n+1][m+1];
+		arr[1][1] = 1;
+		int x = 1;
+		int y = 1;
+		int cnt = 2;
+		int c = 0;
+		if(k == 1) {
+			System.out.print(1 + " " + 1);
+			return;
+		}
+		if(k>n*m) {
+			System.out.print(0);
+			return;
+		}
+		
+		while(true) {
+			int nx, ny;
+			if(cnt > n*m)
+				break;
+			
+			while(true) {
+				nx = x + dx[c];
+				ny = y + dy[c];
+
+				if (isRange(nx, ny) && arr[nx][ny] == 0)
+					break;
+				else {
+					c++;
+					if(c>3)
+						c = 0;
+				}
+			}
+			
+			arr[nx][ny] = cnt;
+			if(cnt == k) {
+				System.out.print(ny + " " + nx);
+				return;
+			}
+			
+//			for(int i=1; i<=n; i++) {
+//				for(int j=1; j<=m; j++) {
+//					System.out.print(arr[i][j] + " ");
+//				}
+//				System.out.print("\n");
+//			}
+			
+			cnt++;
+			x = nx;
+			y = ny;
+		}
+		
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<1 || x>n || y<1 || y>m)
+			return false;
+		return true;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

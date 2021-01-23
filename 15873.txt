@@ -1,0 +1,32 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+
+public class Main{
+	static int a, b, c, d, e;
+	static double[] arr = new double[3];
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		String t = br.readLine();
+		if(t.length() == 2)
+			System.out.print((t.charAt(0) - '0') + (t.charAt(1) - '0'));
+		else if(t.length() == 3){
+			if(t.charAt(1) == '0') 
+				System.out.print((t.charAt(2)- '0') + 10);
+			else if(t.charAt(2) == '0')
+				System.out.print((t.charAt(0)- '0') + 10);
+		}
+		else if(t.length() == 4)
+			System.out.print(20);
+		
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

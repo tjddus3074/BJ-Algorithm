@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int max = Integer.MIN_VALUE;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		String a, b, c;
+		a = br.readLine();
+		b = br.readLine();
+		c = br.readLine();
+		if (b.equals("*")) {
+			System.out.print(1);
+			for (int i = 0; i < a.length() + c.length() - 2; i++)
+				System.out.print(0);
+		}
+		else {
+			if(a.length() == c.length()) {
+				System.out.print(2);
+				for(int i=0; i<a.length()-1; i++)
+					System.out.print(0);
+			}
+			else {
+				int size = Math.max(a.length(), c.length());
+				int min = Math.min(a.length(), c.length());
+				System.out.print(1);
+				for(int i=1; i<size; i++) {
+					if(i == size - min)
+						System.out.print(1);
+					else
+						System.out.print(0);
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

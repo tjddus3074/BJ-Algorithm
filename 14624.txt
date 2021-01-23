@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main()
+{
+    int n,i,j,r;
+    scanf("%d", &n);
+    if(n%2) {
+        for(i=0; i<n; i++) printf("*");
+        puts("");
+        n/=2;
+        r=n;
+        for(i=0; i<r; i++) printf(" ");
+        puts("*");
+        for(i=1; i<=n; i++) {
+            for(j=1; j<r; j++) printf(" ");
+            r--;
+            printf("*");
+            for(j=0; j<i*2-1; j++) printf(" ");
+            puts("*");
+        }
+    }
+    else puts("I LOVE CBNU");
+}

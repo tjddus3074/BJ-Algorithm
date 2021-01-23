@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char test[100];
+	int arr[100];
+	int testcase;
+
+	scanf("%d", &testcase);
+
+	for (int i = 0; i < testcase; i++)
+	{
+		int sum = 1;
+		int score = 0;
+
+		scanf("%s", test);
+		for (int j = 0; j < strlen(test); j++)
+		{
+			if (test[j] == 'O')
+			{
+				score += sum;
+				sum++;
+			}
+			else
+			{
+				sum = 1;
+			}
+		}
+		arr[i] = score;
+	}
+
+	for (int i = 0; i < testcase; i++)
+	{
+		printf("%d\n", arr[i]);
+	}
+
+	return 0;
+}

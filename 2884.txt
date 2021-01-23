@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+	int h, m;
+	scanf("%d %d", &h, &m);
+	int h1, m1;
+	int flag = 0;
+	if (m - 45 < 0) {
+		m1 = m + 15;
+		flag = 1;
+	}
+	else {
+		m1 = m - 45;
+	}
+
+	if (flag == 1) {
+		if (h == 0)
+			h1 = 23;
+		else
+			h1 = h - 1;
+	}
+	else
+		h1 = h;
+
+	printf("%d %d", h1, m1);
+
+}

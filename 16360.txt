@@ -1,0 +1,65 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+
+		k = Integer.parseInt(br.readLine());
+		while (k-- > 0) {
+			String t = br.readLine();
+			String temp = "";
+			String temp2 = "";
+			for (int i = 0; i < t.length() - 1; i++) {
+				if (i == t.length() - 2) {
+					temp += t.charAt(i);
+				} else {
+					temp += t.charAt(i);
+					temp2 += t.charAt(i);
+				}
+			}
+
+			char a = t.charAt(t.length() - 1);
+			if (a == 'e') {
+				if (t.charAt(t.length() - 2) == 'n') {
+					temp2 += "anes";
+					System.out.println(temp2);
+					continue;
+				}
+			}
+			
+			if(a == 'n') 
+				temp += "anes";
+			else if(a == 'a') 
+				temp += "as";
+			else if(a == 'i' || a== 'y')
+				temp += "ios";
+			else if(a == 'l')
+				temp += "les";
+			else if(a== 'o')
+				temp += "os";
+			else if(a == 'r')
+				temp += "res";
+			else if(a == 't')
+				temp += "tas";
+			else if(a == 'u')
+				temp += "us";
+			else if(a == 'v')
+				temp += "ves";
+			else if(a == 'w')
+				temp += "was";
+			else {
+				temp += a;
+				temp += "us";
+			}
+			
+			System.out.println(temp);
+		}
+	}
+}

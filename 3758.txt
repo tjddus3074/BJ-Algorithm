@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct abc {
+	int sco, sub, tim, idx;
+	bool operator <(abc a)const {
+		if (sco == a.sco) {
+			if (sub == a.sub) {
+				return tim < a.tim;
+			}
+			return sub < a.sub;
+		}
+		return sco > a.sco;
+	}
+};
+
+int main() {
+	int tc;
+	scanf("%d", &tc);
+	while (tc--) {
+		int n, k, t, m;
+		abc a[103][103];
+		memset(a, 0, sizeof(a));
+		scanf("%d %d %d %d", &n, &k, &t, &m);
+		for (int i = 1; i <= m; i++) {
+			int id, pnum, score;
+			scanf("%d %d %d", &id, &pnum, &score);
+			a[id][pnum].sco = max(a[id][pnum].sco, score);
+			a[id][pnum].sub++;
+			a[id][pnum].tim = i;
+		}
+		
+		abc b[103];
+		memset(b, 0, sizeof(b));
+		for (int i = 1; i <= n; i++) {
+			//b[i].tim = 0;
+			for (int j = 1; j <= k; j++) {
+				b[i].sco += a[i][j].sco;
+				b[i].sub += a[i][j].sub;
+				b[i].tim = max(b[i].tim, a[i][j].tim);
+			}
+			b[i].idx = i;
+		}
+		
+		sort(b+1, b+1+n);
+		
+		for (int i = 1; i <= n; i++) {
+			if (b[i].idx == t) {
+				printf("%d\n", i);
+				break;
+			}
+		}
+	} 
+	
+	return 0;
+}

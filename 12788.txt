@@ -1,0 +1,52 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		int need_pen = 0;
+		st = new StringTokenizer(br.readLine());
+		m = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		need_pen = m*k;
+		int[] arr = new int[n];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		Arrays.sort(arr);
+		int sum = 0;
+		int count = 0;
+		for(int i=n-1; i>=0; i--) {
+			sum += arr[i];
+			count++;
+			if(sum >= need_pen) {
+				System.out.print(count);
+				return;
+			}
+		}
+		System.out.println("STRESS");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

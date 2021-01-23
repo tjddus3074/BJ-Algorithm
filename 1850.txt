@@ -1,0 +1,38 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static long a1, a2;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		a1 = Long.parseLong(st.nextToken());
+		a2 = Long.parseLong(st.nextToken());
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		long sum = gcd(a1, a2);
+		for(int i=0; i<sum; i++) 
+			bw.write("1");
+		
+		bw.flush();
+		bw.close();
+		br.close();
+	}
+	
+	static long gcd(long a, long b) {
+		while(b>0) {
+			long t = a;
+			a =b;
+			b = t%a;
+		}
+		return a;
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		
+	}
+}

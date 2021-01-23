@@ -1,0 +1,60 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		String a = br.readLine();
+		String b = br.readLine();
+		char[] mes = new char[a.length()];
+		char[] key = new char[a.length()];
+		
+		for(int i=0; i<a.length(); i++) {
+			mes[i] = a.charAt(i);
+		}
+		
+		int kc = 0;
+		for(int i=0; i<a.length(); i++) {
+			key[i] = b.charAt(kc);
+			kc++;
+			if(kc>=b.length())
+				kc = 0;
+		}
+		
+		
+		for(int i=0; i<a.length(); i++) {
+			int count = (int)(key[i] - 'a') + 1;
+			
+			if(mes[i] == ' ') {
+				System.out.print(" ");
+				continue;
+			}
+			
+			int c = (int)(mes[i] - count);
+			if(c>= 'a')
+				System.out.print((char)c);
+			else if(c<'a') {
+				c += 26;
+				System.out.print((char)c);
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

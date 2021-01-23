@@ -1,0 +1,49 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.math.*;
+
+public class Main{
+	
+	static int[] arr = new int[3];
+	static int sum =0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		for(int i=0; i<3; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			sum += arr[i];
+		}
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		if(sum != 180) {
+			System.out.println("Error");
+			return;
+		}
+		
+		int cnt = Integer.MIN_VALUE;
+		for(int i=0; i<3; i++) {
+			int count=0;
+			for(int j=0; j<3; j++) {
+				if(i==j)
+					continue;
+				
+				if(arr[i] == arr[j]) {
+					count++;
+					cnt = Math.max(cnt, count);
+				}
+			}
+		}
+		
+		if(cnt == Integer.MIN_VALUE)
+			System.out.print("Scalene");
+		else if(cnt == 1)
+			System.out.print("Isosceles");
+		else if(cnt ==2)
+			System.out.print("Equilateral");
+	}
+}

@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		while(true) {
+			String t = br.readLine();
+			if(t.contentEquals("EOI"))
+				break;
+			int flag = 0;
+			for(int i=0; i<t.length()-3; i++) {
+				if(t.charAt(i) == 'n' || t.charAt(i) == 'N') 
+					if(t.charAt(i+1) == 'e' || t.charAt(i+1) == 'E')
+						if(t.charAt(i+2) == 'm' || t.charAt(i+2) == 'M')
+							if(t.charAt(i+3) == 'o' || t.charAt(i+3) == 'O') {
+								flag = 1;
+								break;
+							}
+			}
+			
+			if(flag == 1) {
+				System.out.println("Found");
+			}
+			else
+				System.out.println("Missing");
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

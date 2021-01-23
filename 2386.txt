@@ -1,0 +1,43 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'A'; = 65 a =97
+		while(true) {
+			String t = br.readLine();
+			int count = 0;
+			if(t.contentEquals("#"))
+				break;
+			
+			char start = t.charAt(0);
+			for(int i=2; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(start == a || start == a+32) {
+					count++;
+				}
+			}
+			
+			System.out.println(start + " " + count);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

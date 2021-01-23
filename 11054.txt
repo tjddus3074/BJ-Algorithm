@@ -1,0 +1,79 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+//import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] up;
+	static int[] down;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++)
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		up = new int[n];
+		down = new int[n];
+		
+		for(int i=0; i<n; i++) {
+			up[i] = 1;
+			down[i] = 1;
+		}
+		
+		arrup();
+		arrdown();
+		
+		int max = 0;
+		for(int i=0; i<n; i++) {
+			int sum = up[i] + down[i] -1;
+			max = Math.max(max, sum);
+		}
+		
+		System.out.print(max);
+	}
+	
+	static void arrup() {
+		for(int i=1; i<n; i++) {
+			int max = -1;
+			for(int j=i-1; j>=0; j--) {
+				if(arr[j] < arr[i]) 
+					max = Math.max(max, up[j]);
+			}
+			if(max != -1)
+				up[i] = max+1;
+		}
+	}
+	
+	static void arrdown() {
+		for(int i=n-2; i>=0; i--) {
+			int max = -1;
+			for(int j=i+1; j<n; j++) {
+				if(arr[i] > arr[j])
+					max = Math.max(max, down[j]);
+			}
+			if(max != -1)
+				down[i] = max+1;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,41 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		int bx, by;
+		int dx, dy;
+		int jx, jy;
+		
+		int bj = 0;
+		int dj = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		bx = Integer.parseInt(st.nextToken());
+		by = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		dx = Integer.parseInt(st.nextToken());
+		dy = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		jx = Integer.parseInt(st.nextToken());
+		jy = Integer.parseInt(st.nextToken());
+		
+		bj = Math.max(Math.abs(bx - jx), Math.abs(by - jy));
+		dj = Math.abs(dx - jx) + Math.abs(dy - jy);
+		
+		if(bj<dj) {
+			System.out.print("bessie");
+		}
+		else if(bj>dj)
+			System.out.print("daisy");
+		else
+			System.out.print("tie");
+	}
+
+}

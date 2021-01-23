@@ -1,0 +1,42 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		Long a[] = new Long[36];
+		a[0] = (long)1;
+		a[1] = (long)1;
+		int cnt = 2;
+		while(cnt<=35) {
+			long sum = 0;
+			for(int i = 0; i<cnt; i++) {
+				sum += a[i] * a[cnt-1-i];
+			}
+
+			a[cnt] = sum;
+			cnt++;
+		}
+		
+		n = Integer.parseInt(br.readLine());
+		System.out.print(a[n]);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

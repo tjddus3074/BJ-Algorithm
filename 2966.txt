@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		char[] a1 = {'A', 'B', 'C'};
+		char[] a2 = {'B', 'A', 'B', 'C'};
+		char[] a3 = {'C', 'C', 'A', 'A', 'B', 'B'};
+		int c1 = 0;
+		int c2 = 0;
+		int c3 = 0;
+		int num1 = 0;
+		int num2 = 0;
+		int num3 = 0;
+		n = Integer.parseInt(br.readLine());
+		String t= br.readLine();
+		for(int i=0; i<t.length(); i++) {
+			char a = t.charAt(i);
+			if(a == a1[num1])
+				c1++;
+			if(a == a2[num2])
+				c2++;
+			if(a==a3[num3])
+				c3++;
+			
+			num1++;
+			num2++;
+			num3++;
+			if(num1>=3)
+				num1 -= 3;
+			if(num2>=4)
+				num2-=4;
+			if(num3>=6)
+				num3-=6;
+		}
+		
+		int max = Math.max(Math.max(c1, c2), c3);
+		System.out.println(max);
+		if(c1 == max)
+			System.out.println("Adrian");
+		if(c2 == max)
+			System.out.println("Bruno");
+		if(c3 == max)
+			System.out.println("Goran");
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,21 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		String t = br.readLine();
+		String t2 =br.readLine();
+		long a = Long.valueOf(t, 2);
+		long b = Long.valueOf(t2, 2);
+		long c = a*b;
+		String t3 = Long.toBinaryString(c);
+		System.out.print(t3);
+	}
+
+}

@@ -1,0 +1,82 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		String t = br.readLine();
+		Stack<Character> s = new Stack<>();
+		Stack<Character> s2 = new Stack<>();
+		StringBuilder sb = new StringBuilder();
+		int flag = 0;
+		for(int i=0; i<t.length(); i++) {
+			char a = t.charAt(i);
+			if (flag == 0) {
+				if (a == ' ') {
+					while (!s.isEmpty())
+						sb.append(s.pop());
+					sb.append(' ');
+				} 
+				else if(a == '<') {
+					flag = 1;
+					while (!s.isEmpty())
+						sb.append(s.pop());
+					s.push(a);
+				}
+				else {
+					s.push(a);
+				}
+			}
+			else if(flag == 1) {
+				if(a == '>') {
+					s.push(a);
+					while(true) {
+						char b = s.pop();
+						if(b == '<') {
+							s2.push(b);
+							break;
+						}
+						else {
+							s2.push(b);
+						}
+					}
+					while(!s2.isEmpty())
+						sb.append(s2.pop());
+					
+					flag = 0;
+				}
+				else
+					s.push(a);
+			}
+		}
+		
+		while(!s.isEmpty())
+			sb.append(s.pop());
+		
+		System.out.println(sb);
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

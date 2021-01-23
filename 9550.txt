@@ -1,0 +1,15 @@
+int main(void) {
+	int tc;
+	scanf("%d", &tc);
+	int n, k;
+	int a;
+	for (int i = 0; i < tc; i++) {
+		scanf("%d %d", &n, &k);
+		int sum = 0;
+		for (int j = 0; j < n; j++) {
+			scanf("%d", &a);
+			sum += a / k;
+		}
+		printf("%d\n", sum);
+	}
+}

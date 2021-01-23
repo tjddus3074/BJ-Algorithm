@@ -1,0 +1,22 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Main{
+	
+	public static void main(String [] args) throws IOException {
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy");
+		Date d = new Date();
+		SimpleDateFormat format2 = new SimpleDateFormat("MM");
+		Date e = new Date();
+		SimpleDateFormat format3 = new SimpleDateFormat("dd");
+		Date f = new Date();
+		System.out.println(format.format(d));
+		System.out.println(format2.format(e));
+		System.out.println(format3.format(f));
+	}
+}

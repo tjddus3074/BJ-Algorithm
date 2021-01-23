@@ -1,0 +1,25 @@
+int main(void) {
+	char c[16];
+	gets(c);
+	int sum = 0;
+
+	for (int i = 0; i < sizeof(c); i++) {
+		if (c[i] == 'A' || c[i] == 'B' || c[i] == 'C')
+			sum += 3;
+		if (c[i] == 'D' || c[i] == 'E' || c[i] == 'F')
+			sum += 4;
+		if (c[i] == 'G' || c[i] == 'H' || c[i] == 'I')
+			sum += 5;
+		if (c[i] == 'J' || c[i] == 'K' || c[i] == 'L')
+			sum += 6;
+		if (c[i] == 'M' || c[i] == 'N' || c[i] == 'O')
+			sum += 7;
+		if (c[i] == 'P' || c[i] == 'Q' || c[i] == 'R' || c[i] == 'S')
+			sum += 8;
+		if (c[i] == 'T' || c[i] == 'U' || c[i] == 'V')
+			sum += 9;
+		if (c[i] == 'W' || c[i] == 'X' || c[i] == 'Y' || c[i] == 'Z')
+			sum += 10;
+	}
+	printf("%d", sum);
+}

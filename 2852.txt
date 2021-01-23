@@ -1,0 +1,223 @@
+#include <iostream>
+
+#include <vector>
+
+#include <string>
+
+#include <algorithm>
+
+using namespace std;
+
+ 
+
+int main(void)
+
+{
+
+        ios_base::sync_with_stdio(0);
+
+        cin.tie(0);
+
+        int N;
+
+        cin >> N;
+
+ 
+
+        int team[3];
+
+        pair<int, int> start[3]; //이기기 시작한 시간
+
+        pair<int, int> result[3];
+
+        bool reset = true;
+
+        for (int i = 0; i < N; i++)
+
+        {
+
+                 pair<int, string> temp;
+
+                 cin >> temp.first >> temp.second;
+
+ 
+
+                 team[temp.first]++;
+
+                 if (team[1] == team[2])
+
+                 {
+
+                         int minute = (temp.second[0] - '0') * 10 + temp.second[1] - '0' - start[3 - temp.first].first;
+
+                         int second = (temp.second[3] - '0') * 10 + temp.second[4] - '0' - start[3 - temp.first].second;
+
+                         if (second < 0)
+
+                         {
+
+                                 second += 60;
+
+                                 minute -= 1;
+
+                         }
+
+ 
+
+                         result[3 - temp.first].first += minute;
+
+                         result[3 - temp.first].second += second;
+
+                        
+
+                         if (result[3 - temp.first].second > 60)
+
+                         {
+
+                                 result[3 - temp.first].first += 1;
+
+                                 result[3 - temp.first].second -= 60;
+
+                         }
+
+                         reset = true;
+
+                 }
+
+ 
+
+                 if (team[1] != team[2] && reset)
+
+                 {
+
+                         start[temp.first].first = (temp.second[0] - '0') * 10 + temp.second[1] - '0';
+
+                         start[temp.first].second = (temp.second[3] - '0') * 10 + temp.second[4] - '0';
+
+                         reset = false;
+
+                 }
+
+        }
+
+ 
+
+        for(int i=1; i<=2; i++)
+
+                 if (team[i] > team[3 - i] && (start[i].first || start[i].second))
+
+                 {
+
+                         int minute = 48 - start[i].first;
+
+                         int second = -start[i].second;
+
+                         if (second < 0)
+
+                         {
+
+                                 minute--;
+
+                                 second += 60;
+
+                         }
+
+ 
+
+                         result[i].first += minute;
+
+                         result[i].second += second;
+
+ 
+
+                         if (result[i].second > 60)
+
+                         {
+
+                                 result[i].first++;
+
+                                 result[i].second -= 60;
+
+                         }
+
+                 }
+
+        for (int i = 1; i <= 2; i++)
+
+        {
+
+                 string s;
+
+                 if (0 <= result[i].first && result[i].first <= 9)
+
+                         s += '0';
+
+                
+
+                 string a;
+
+                 if (result[i].first)
+
+                 {
+
+                         while (result[i].first)
+
+                         {
+
+                                 a += (result[i].first % 10) + '0';
+
+                                 result[i].first /= 10;
+
+                         }
+
+                         reverse(a.begin(), a.end());
+
+                         s += a;
+
+                         a.clear();
+
+                 }
+
+                 else
+
+                         s += '0';
+
+                 s += ":";
+
+                 if (0 <= result[i].second && result[i].second <= 9)
+
+                         s += '0';
+
+                 if (result[i].second)
+
+                 {
+
+                         while (result[i].second)
+
+                         {
+
+                                 a += (result[i].second % 10) + '0';
+
+                                 result[i].second /= 10;
+
+                         }
+
+                         reverse(a.begin(), a.end());
+
+                         s += a;
+
+                         a.clear();
+
+                 }
+
+                 else
+
+                         s += '0';
+
+                 cout << s << "\n";
+
+        }
+
+        return 0;
+
+}

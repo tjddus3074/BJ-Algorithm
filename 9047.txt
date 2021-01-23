@@ -1,0 +1,75 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		//char z = 'z';  122
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test = 0; test< k; test++) {
+			String t = br.readLine();
+			int count = 0;
+			ArrayList<Integer> list = new ArrayList<>();
+			while(true) {
+				if(t.contentEquals("6174"))
+					break;
+		
+				for(int i=0; i<t.length(); i++) {
+					int a= t.charAt(i) - '0';
+					list.add(a);
+				}
+				
+				Collections.sort(list);
+				int big = 0;
+				int min = 0;
+				
+				int set = 1;
+				for(int i=0; i<list.size(); i++) {
+					big += set * list.get(i);
+					set *= 10;
+				}
+				
+				set = 1;
+				for(int i= list.size()-1; i>=0; i--) {
+					min += set * list.get(i);
+					set *= 10;
+				}
+				
+				int num = big - min;
+				t = "";
+				if(num < 1000)
+					t += "0";
+				else if(num < 100)
+					t += "00";
+				else if(num < 10)
+					t += "000";
+				t += Integer.toString(num);
+				count++;
+				list.clear();
+				
+			}
+			System.out.println(count);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test =1 ; test<=k; test++) {
+			visit = new boolean[1000001];
+			int flag = 1;
+			int max = 0;
+			st = new StringTokenizer(br.readLine());
+			int a, b, c;
+			a = Integer.parseInt(st.nextToken());
+			visit[a] = true;
+			max = Math.max(max, a);
+			
+			b = Integer.parseInt(st.nextToken());
+			if(visit[b])
+				flag++;
+			else
+				visit[b] = true;
+			max = Math.max(max, b);
+			
+			c = Integer.parseInt(st.nextToken());
+			if(visit[c])
+				flag++;
+			else
+				visit[c] = true;
+			max = Math.max(max, c);
+			
+			System.out.print("Case #" + test + ": ");
+			
+			int n = a+b+c - max;
+			if(n<=max) {
+				System.out.println("invalid!");
+				continue;
+			}
+			
+			if(flag == 1) 
+				System.out.println("scalene");
+			else if(flag == 2) {
+				System.out.println("isosceles");
+			}
+			else if(flag == 3) {
+				System.out.println("equilateral");
+			}
+			
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

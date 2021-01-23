@@ -1,0 +1,51 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n, m;
+	static int[] tree;
+	static long min = Integer.MAX_VALUE;
+	static long max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		tree= new int[n];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) 
+			tree[i] = Integer.parseInt(st.nextToken());
+		
+		Arrays.sort(tree);
+		System.out.println(bfind(0, tree[tree.length-1]));
+	}
+	
+	static long bfind(long l, long r) {
+		long sum = 0;
+		long mid = (l+r)/2;
+		if(l>r) 
+			return max;
+		for(int i=0; i<n; i++) {
+			if(tree[i]<mid) continue;
+			sum += tree[i]-mid;
+		}
+		if(sum >= m) {
+			if(sum <= min) {
+				min = sum;
+				max = mid;
+			}
+			return bfind(mid+1, r);
+		}
+		else
+			return bfind(l, mid-1);
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+
+	}
+}

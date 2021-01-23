@@ -1,0 +1,123 @@
+#include <iostream>
+
+#include <vector>
+
+#include <algorithm>
+
+#include <cmath>
+
+using namespace std;
+
+ 
+
+//세그먼트 트리 초기화
+
+void init(vector<long long> &tree, vector<long long> &array, int node, int start, int end)
+
+{
+
+        //단말 노드
+
+        if (start == end)
+
+                 tree[node] = array[start];
+
+        else
+
+        {
+
+                 int mid = (start + end) / 2;
+
+                 init(tree, array, node * 2, start, mid);
+
+                 init(tree, array, node * 2 + 1, mid + 1, end);
+
+ 
+
+                 tree[node] = tree[node * 2] + tree[node * 2 + 1];
+
+        }
+
+}
+
+ 
+
+//구간 합 구하기
+
+long long query(vector<long long> &tree, int node, int start, int end, int i, int j)
+
+{
+
+        //범위를 벗어나면
+
+        if (j < start || end < i)
+
+                 return 0;
+
+        //범위 내에 있다면
+
+        if (i <= start && end <= j)
+
+                 return tree[node];
+
+ 
+
+        int mid = (start + end) / 2;
+
+        long long leftQuery = query(tree, node * 2, start, mid, i, j);
+
+        long long rightQuery = query(tree, node * 2 + 1, mid + 1, end, i, j);
+
+       
+
+        return leftQuery + rightQuery;
+
+}
+
+ 
+
+int main(void)
+
+{
+
+        ios_base::sync_with_stdio(0);
+
+        cin.tie(0); //cin 실행속도 향상
+
+        int N;
+
+        cin >> N;
+
+ 
+
+        int height = (int)ceil(log2(N));
+
+        int tree_size = 1 << (height + 1);
+
+ 
+
+        vector<long long> arr(N + 1), tree(tree_size);
+
+        for (int i = 1; i <= N; i++)
+
+                 cin >> arr[i];
+
+ 
+
+        //세그먼트 트리 생성
+
+        init(tree, arr, 1, 1, N);
+
+ 
+
+        long long sum = 0;
+
+        for (int i = 0; i <= N - 1; i++)
+
+                 sum += arr[i] * query(tree, 1, 1, N, i+1, N);
+
+        cout << sum << "\n";
+
+        return 0;
+
+}

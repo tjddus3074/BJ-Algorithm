@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+	
+	static int n, m, k;
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		n = Integer.parseInt(br.readLine());
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i=n; i>=1; i--) {
+			if(i == 1) {
+				sb.append("1 bottle of beer on the wall, 1 bottle of beer.\n");
+				sb.append("Take one down and pass it around, no more bottles of beer on the wall.\n\n");
+				sb.append("No more bottles of beer on the wall, no more bottles of beer.\n");
+				sb.append("Go to the store and buy some more, ");
+				sb.append(n);
+				if(n!=1)
+					sb.append(" bottles of beer on the wall.\n\n");
+				else
+					sb.append(" bottle of beer on the wall.\n\n");
+			}
+			else {
+				sb.append(i);
+				sb.append(" bottles of beer on the wall, ");
+				sb.append(i);
+				sb.append(" bottles of beer.\n");
+				sb.append("Take one down and pass it around, ");
+				sb.append(i-1);
+				if(i!=2)
+					sb.append(" bottles of beer on the wall.\n\n");
+				else
+					sb.append(" bottle of beer on the wall.\n\n");
+			}
+		}
+		
+		System.out.print(sb);
+	}
+
+}

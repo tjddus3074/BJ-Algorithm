@@ -1,0 +1,25 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+public class Main{
+	
+	static int n;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(br.readLine());
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		if(n%2 == 0) {
+			System.out.println((n/2+1)*(n/2+1));
+		}
+		else {
+			System.out.println((n/2 +1) * (n/2 +2));
+		}
+	}
+}

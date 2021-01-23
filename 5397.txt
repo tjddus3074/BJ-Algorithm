@@ -1,0 +1,73 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		Stack<Character> s = new Stack<>();
+		Stack<Character> s2 = new Stack<>();
+		
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			StringBuilder sb = new StringBuilder();
+			for(int j=0; j<t.length(); j++) {
+				char a = t.charAt(j);
+				
+				if(a == '<') {
+					if(!s.isEmpty()) {
+						char b = s.pop();
+						s2.push(b);
+					}
+				}
+				else if(a == '>') {
+					if(!s2.isEmpty()) {
+						char b = s2.pop();
+						s.push(b);
+					}
+				}
+				else if(a == '-') {
+					if(!s.isEmpty()) {
+						s.pop();
+					}
+				}
+				else {
+					s.push(a);
+				}
+			}
+			
+			while(!s.isEmpty()) {
+				char a = s.pop();
+				s2.push(a);
+			}
+			while(!s2.isEmpty()) {
+				sb.append(s2.pop());
+			}
+			System.out.println(sb);
+		}
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

@@ -1,0 +1,50 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		String t = br.readLine();
+		char[] a = new char[t.length()];
+		for(int i=0; i<t.length(); i++) {
+			a[i] = t.charAt(i);
+		}
+		
+		int happy = 0;
+		int unhappy = 0;
+		
+		for(int i=0; i<t.length()-2; i++) {
+			if(a[i] == ':' && a[i+1] == '-') {
+				if(a[i+2] == ')')
+					happy++;
+				else if(a[i+2] == '(')
+					unhappy++;
+			}
+		}
+		
+		if(happy == 0 && unhappy == 0)
+			System.out.print("none");
+		else if(happy == unhappy)
+			System.out.print("unsure");
+		else if(happy>unhappy)
+			System.out.print("happy");
+		else if(happy<unhappy)
+			System.out.print("sad");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+void first_star_even(int a) {
+	for (int i = 0; i < a/2; i++) {
+		printf("* ");
+	}
+}
+
+void second_star(int a) {
+	for (int i = 0; i < a / 2; i++) {
+		printf(" *");
+	}
+}
+
+void first_star_odd(int a) {
+	for (int i = 0; i < a / 2 + 1; i++) {
+		printf("* ");
+	}
+}
+
+void line_all(int a) {
+	if (a % 2 == 0) {
+		first_star_even(a); printf("\n");
+		second_star(a); printf("\n");
+	}
+	else {
+		first_star_odd(a); printf("\n");
+		second_star(a); printf("\n");
+	}
+}
+
+int main() {
+	int n; scanf("%d", &n);
+	if (n == 1)
+		printf("*");
+
+	else {
+		for (int i = 0; i < n; i++) {
+			line_all(n);
+		}
+	}
+}
+

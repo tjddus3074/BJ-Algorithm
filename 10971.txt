@@ -1,0 +1,56 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	
+	static int n;
+	static int[][] arr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static List<List<Integer>> list = new ArrayList<>();
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n][n];
+		visit =new boolean[n];
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<n; j++) 
+				arr[i][j] = Integer.parseInt(st.nextToken());
+		}
+		
+		for(int i=0; i<n; i++) {
+			dfs(i, i, 0, 0);
+		}
+		System.out.println(min);
+	}
+	
+	static void dfs(int start, int last, int cnt, int sum) {
+		if(cnt == n && start == last) {
+			min = Math.min(min, sum);
+			return;
+		}
+		
+		for(int i = 0; i<n; i++) {
+			if(arr[last][i] == 0)
+				continue;
+			
+			if(!visit[last] && arr[last][i] >0) {
+				visit[last] = true;
+				sum += arr[last][i];
+				dfs(start, i, cnt+1, sum);
+				visit[last] = false;
+				sum -= arr[last][i];
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

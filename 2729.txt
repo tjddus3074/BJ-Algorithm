@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		k = Integer.parseInt(br.readLine());
+		while(k-->0) {
+			st = new StringTokenizer(br.readLine());
+			String t = st.nextToken();
+			String t2 = st.nextToken();
+			BigInteger a = new BigInteger(t, 2);
+			BigInteger b = new BigInteger(t2, 2);
+			BigInteger c = a.add(b);
+			String t3 = c.toString(2);
+			System.out.println(t3);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

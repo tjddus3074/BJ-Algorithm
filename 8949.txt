@@ -1,0 +1,68 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static int s1, s2, s3;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		String a1, a2;
+		st = new StringTokenizer(br.readLine());
+		a1 = st.nextToken();
+		a2 = st.nextToken();
+		int maxleng = Math.max(a1.length(), a2.length());
+		
+		String[] t1 = new String[maxleng];
+		String[] t2 = new String[maxleng];
+		brr = new int[maxleng];
+		
+		int count = maxleng-1;
+		for(int i=a1.length()-1; i>=0; i--) {
+			String t = "";
+			t += a1.charAt(i);
+			t1[count] = t;
+			count--;
+		}
+		
+		count = maxleng-1;
+		for(int i=a2.length()-1; i>=0; i--) {
+			String t = "";
+			t+= a2.charAt(i);
+			t2[count] = t;
+			count--;
+		}
+		
+		
+		for(int i=0; i<maxleng; i++) {
+			if(t1[i] == null)
+				brr[i] = Integer.parseInt(t2[i]);
+			else if(t2[i] == null)
+				brr[i] = Integer.parseInt(t1[i]);
+			else {
+				brr[i] = Integer.parseInt(t1[i]) + Integer.parseInt(t2[i]);
+			}
+		}
+		
+		for(int i=0; i<maxleng; i++) {
+			System.out.print(brr[i]);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,10 @@
+int main(void) {
+	int a;
+	scanf("%d", &a);
+	int num = 1;
+	for (int i = a; i >= 1; i--) {
+		num = num * i;
+	}
+
+	printf("%d", num);
+}

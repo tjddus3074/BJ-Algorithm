@@ -1,0 +1,48 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.Arrays;
+
+public class Main {
+
+	static int[] arr = new int[9];
+	static int[] visit = new int[9];
+	static int[] check = new int[9];
+	static int find = 0;
+	
+	static void search(int sum, int count, int now) {
+		if(find == 1)
+			return;
+		
+		if(count == 7 && sum == 100) {
+			find = 1;
+			for(int i=0; i<9; i++) {
+				check[i] = visit[i];
+			}
+			return;
+		}
+		
+		if(count>7 || sum>100 || (count == 7 && sum!= 100))
+			return;
+		
+		for(int i = now; i<9; i++) {
+			visit[i] = 1;
+			search(sum+arr[i], count+1, i+1);
+			visit[i] = 0;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		for (int i = 0; i < 9; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+		}
+		Arrays.sort(arr);
+		
+		search(0, 0, 0);
+		
+		for(int i=0; i<9; i++) {
+			if(check[i] == 1)
+				System.out.println(arr[i]);
+		}
+	}
+}

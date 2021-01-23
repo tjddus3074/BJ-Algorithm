@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n;
+	static int[] arr;
+	static int[] cal = new int[4];		//0+ 1- 2x 3%
+	static ArrayList<Integer> q = new ArrayList<>();
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) 
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<4; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			cal[i] = a;
+		}
+		dfs(1, arr[0]);
+		Collections.sort(q);
+		System.out.println(q.get(q.size()-1));
+		System.out.println(q.get(0));
+	}
+	
+	static void dfs(int x, int sum) {
+		if(x == n) 
+			q.add(sum);
+
+		else {
+			for (int i = 0; i < 4; i++) {
+				if (cal[i] != 0) {
+					cal[i]--;
+					switch (i) {
+					case 0:
+						dfs(x + 1, sum + arr[x]);
+						break;
+					case 1:
+						dfs(x + 1, sum - arr[x]);
+						break;
+					case 2:
+						dfs(x + 1, sum * arr[x]);
+						break;
+					case 3:
+						dfs(x + 1, sum / arr[x]);
+						break;
+					}
+					cal[i]++;
+				}
+			}
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		
+	}
+}

@@ -1,0 +1,54 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node>{
+	int x;
+	
+	public Node(int x) {
+		this.x = x;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		return x - o.x;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		long a;
+		long sum = 0;
+		a = Long.parseLong(br.readLine());
+		for(int i=1; ; i++) {
+			sum += i;
+			if(sum== a) {
+				n = i;
+				break;
+			}
+			else if(sum>a) {
+				n = i-1;
+				break;
+			}
+		}
+		
+		System.out.print(n);
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

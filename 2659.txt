@@ -1,0 +1,67 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
+
+public class Main{
+	static int n, N;
+	static int count = 1;
+	static ArrayList<Integer> d = new ArrayList<>();
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int a;
+		int set = 1000;
+		for(int i=0; i<4; i++) {
+			a = Integer.parseInt(st.nextToken());
+			n += set*a;
+			set /= 10;
+		}
+			
+	}
+	
+	static int findclock(int a) {
+		int min = Integer.MAX_VALUE;
+		int t = a;
+		for(int i=0; i<4; i++) {
+			t = t%1000 * 10 + t/1000;
+			min = Math.min(min, t);
+		}
+		return min;
+	}
+		
+	static boolean zero(int a) {
+		if(a % 10 == 0)
+			return false;
+		if(a/ 1000 == 0)
+			return false;
+		a = a%1000;
+		if(a/100 == 0)
+			return false;
+		a = a%100;
+		if(a/10 == 0)
+			return false;
+		return true;
+	}
+	
+	static void findclock2(int a) {
+		for(int i=1111; i<=9999; i++) {
+			if(zero(i) == false)
+				continue;
+			if(d.contains(findclock(i)))
+				continue;
+			if(findclock(i)>=a)
+				break;
+			
+			d.add(findclock(i));
+			count++;
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		findclock2(findclock(n));
+		System.out.print(count);
+	}
+}

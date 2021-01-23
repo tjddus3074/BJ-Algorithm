@@ -1,0 +1,22 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int a, b, c, d, p;
+	static int[] arr = new int[4];
+	static int sum = 0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(br.readLine());
+		double s = (((double)a * (double)a) * 1.7320508075689)/4;
+		System.out.print(String.format("%.10f", s));
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

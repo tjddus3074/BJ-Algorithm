@@ -1,0 +1,44 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		ArrayList<Integer> list = new ArrayList<>();
+		int sum = 0;
+		for(int i=0; i<n; i++) {
+			int a = Integer.parseInt(br.readLine());
+			list.add(a);
+			sum += a;
+		}
+		
+		Collections.sort(list, Comparator.reverseOrder());
+		int count = n/3;
+		int c = 1;
+		for(int i=1; i<=count; i++) {
+			int a = i*3-1;
+			sum -= list.get(a);
+		}
+		
+		System.out.print(sum);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

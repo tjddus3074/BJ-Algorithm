@@ -1,0 +1,58 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static long max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		
+		n = Integer.parseInt(br.readLine());
+		brr = new int[n];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			brr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		Arrays.sort(brr);
+		int case1 = brr[0] * brr[n-1];
+		int case2 = brr[n-1] * brr[n-2];
+		int case3 = brr[0] * brr[1];
+		int case4 = brr[n-1] * brr[n-2] * brr[n-3];
+		int case5 = brr[0] * brr[1] * brr[2];
+		int case6 = brr[0] * brr[n-1] * brr[n-2];
+		int case7 = brr[0] * brr[1] * brr[n-1];
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(case1);
+		list.add(case2);
+		list.add(case3);
+		list.add(case4);
+		list.add(case5);
+		list.add(case6);
+		list.add(case7);
+		Collections.sort(list);
+		System.out.print(list.get(list.size()-1));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

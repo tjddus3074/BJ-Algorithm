@@ -1,0 +1,86 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		n = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<2*n-1; i++) {
+			if(i==0 || i== 2*n-2) {
+				for(int j=0; j<n; j++)
+					System.out.print("*");
+				
+				for(int j=0; j<2*n-3; j++)
+					System.out.print(" ");
+				
+				for(int j=0; j<n; j++)
+					System.out.print("*");
+				
+				System.out.print("\n");
+				continue;
+			}
+			
+			if(i == n-1) {
+				for(int j=0; j<n-1; j++)
+					System.out.print(" ");
+				
+				System.out.print("*");
+				
+				for(int j=0; j<n-2; j++)
+					System.out.print(" ");
+				
+				System.out.print("*");
+				
+				for(int j=0; j<n-2; j++)
+					System.out.print(" ");
+				
+				System.out.print("*\n");
+				
+				continue;
+			}
+			
+			for(int j=0; j< (n-1) - Math.abs(n-1-i); j++)
+				System.out.print(" ");
+			
+			System.out.print("*");
+			
+			for(int j=0; j<n-2; j++)
+				System.out.print(" ");
+			
+			System.out.print("*");
+			
+			for(int j=0; j<2 * Math.abs((n-1) - i) - 1; j++)
+				System.out.print(" ");
+			
+			System.out.print("*");
+			
+			for(int j=0; j<n-2; j++)
+				System.out.print(" ");
+			
+			System.out.print("*\n");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,28 @@
+int main(void) {
+	int n[4];
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+			scanf("%d", &n[j]);
+		}
+		int bae = 0, dng = 0;
+
+		for (int j = 0; j < 4; j++) {
+			if (n[j] == 1)
+				dng++;
+			else
+				bae++;
+		}
+
+		if (bae == 1)
+			printf("A\n");
+		else if (bae == 2)
+			printf("B\n");
+		else if (bae == 3)
+			printf("C\n");
+		else if (bae == 4)
+			printf("D\n");
+		else
+			printf("E\n");
+	}
+}

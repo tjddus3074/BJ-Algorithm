@@ -1,0 +1,65 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+	
+	static int n, m, k;
+	static int[] dx = {1, 1, 0, -1, -1, -1, 0, 1};
+	static int[] dy = {0, -1, -1, -1, 0, 1, 1, 1};
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		n = Integer.parseInt(br.readLine());
+		char[][] arr = new char[n][n];
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			for(int j=0; j<n; j++) {
+				char a = t.charAt(j);
+				arr[i][j] = a;
+			}
+		}
+		
+		char[][] brr = new char[n][n];
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				if(arr[i][j] != '.') {
+					brr[i][j] = '*';
+					continue;
+				}
+				
+				int sum = 0;
+				for(int l=0; l<8; l++) {
+					int nx = i + dx[l];
+					int ny = j + dy[l];
+					if(!isrange(nx, ny))
+						continue;
+					
+					if(arr[nx][ny] != '.') {
+						sum += arr[nx][ny] - '0';
+					}
+				}
+				
+				if(sum>=10)
+					brr[i][j] = 'M';
+				else
+					brr[i][j] = (char)(sum + '0');
+			}
+		}
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++)
+				System.out.print(brr[i][j]);
+			System.out.print("\n");
+		}
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=n)
+			return false;
+		return true;
+	}
+}

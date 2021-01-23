@@ -1,0 +1,61 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static int MAX = 52 * 20 + 10;
+	static int[] minFactor = new int[MAX];
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		String t = br.readLine();
+		era();
+		int sum = 0;
+		for(int i=0; i<t.length(); i++) {
+			if(t.charAt(i) >= 'a')
+				sum += (t.charAt(i) - 'a' +1);
+			else
+				sum += (t.charAt(i) - 'A' + 27);
+		}
+		
+		if(minFactor[sum] == sum)
+			System.out.println("It is a prime word.");
+		else
+			System.out.println("It is not a prime word.");
+	}
+
+	static void era() {
+		minFactor[0] = -1;
+
+		for (int i = 1; i < MAX; i++)
+
+			minFactor[i] = i;
+
+		for (int i = 2; i < MAX; i++)
+
+			if (minFactor[i] == i)
+
+				for (int j = i * i; j < MAX; j += i)
+
+					if (minFactor[j] == j)
+
+						minFactor[j] = i;
+
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

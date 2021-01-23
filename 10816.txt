@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int narr[30000001];
+int marr[800001];
+
+int main() {
+	int n, m; scanf("%d", &n);
+	int temp;
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &temp);
+		if (temp > 0) {
+			narr[temp + 10000000]++;
+		}
+		else {
+			narr[temp * (-1)]++;
+		}
+	}
+
+	scanf("%d", &m);
+	for (int i = 0; i < m; i++) {
+		scanf("%d", &marr[i]);
+	}
+
+	for (int i = 0; i < m; i++) {
+		if (marr[i] > 0) {
+			printf("%d ",narr[marr[i] + 10000000]);
+		}
+		else {
+			printf("%d ", narr[marr[i] * (-1)]);
+		}
+	}
+}

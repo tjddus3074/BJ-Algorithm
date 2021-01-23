@@ -1,0 +1,146 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct aaa {
+	int x;
+	int y;
+}P;
+
+void mergex(P* data, int low, int mid, int high) {
+	P result[100001];
+	int l = low;
+	int m = mid + 1;
+	int count = 0;
+
+	while (l <= mid && m <= high) {
+		if (data[l].x <= data[m].x) {
+			result[count] = data[l];
+			count++;
+			l++;
+		}
+		else {
+			result[count] = data[m];
+			count++;
+			m++;
+		}
+	}
+
+	while (l <= mid) {
+		result[count] = data[l];
+		l++;
+		count++;
+	}
+
+	while (m <= high) {
+		result[count] = data[m];
+		m++;
+		count++;
+	}
+
+	count--;
+	while (count >= 0) {
+		data[low + count] = result[count];
+		count--;
+	}
+}
+
+void mergey(P* data, int low, int mid, int high) {
+	P result[100001];
+	int l = low;
+	int m = mid + 1;
+	int count = 0;
+
+	while (l <= mid && m <= high) {
+		if (data[l].y <= data[m].y) {
+			result[count] = data[l];
+			count++;
+			l++;
+		}
+		else {
+			result[count] = data[m];
+			count++;
+			m++;
+		}
+	}
+
+	while (l <= mid) {
+		result[count] = data[l];
+		count++;
+		l++;
+	}
+
+	while (m <= high) {
+		result[count] = data[m];
+		count++;
+		m++;
+	}
+
+	count--;
+	while (count >= 0) {
+		data[low + count] = result[count];
+		count--;
+	}
+}
+
+void mergesortx(P* data, int low, int high) {
+
+	int mid = (low + high) / 2;
+
+	if (low < high) {
+		mergesortx(data, low, mid);
+		mergesortx(data, mid + 1, high);
+		mergex(data, low, mid, high);
+	}
+	else
+		return;
+}
+
+void mergesorty(P* data, int low, int high) {
+
+	int mid = (low + high) / 2;
+
+	if (low < high) {
+		mergesorty(data, low, mid);
+		mergesorty(data, mid + 1, high);
+		mergey(data, low, mid, high);
+	}
+	else
+		return;
+}
+
+int main() {
+	int n; scanf("%d", &n);
+
+	P* data = (P*)malloc(sizeof(P) * n);
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d %d", &data[i].x, &data[i].y);
+	}
+
+	mergesortx(data, 0, n - 1);		//x순 정렬
+
+	int a = 0;
+	int b;
+	int flag = 0;
+	for (int i = 1; i <= n; i++) {		//x중복검사, y정렬
+		if (data[i].x == data[i - 1].x) {
+			b = i;
+			flag = 1;
+		}
+		if (data[i].x != data[i - 1].x) {
+			if (flag == 1) {
+				mergesorty(data, a, b);
+				a = i;
+				flag = 0;
+			}
+			else
+				a = i;
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		printf("%d %d\n", data[i].x, data[i].y);
+	}
+	
+	free(data);
+}

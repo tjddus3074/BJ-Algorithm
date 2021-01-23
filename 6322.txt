@@ -1,0 +1,80 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		int count = 1;
+		
+		while(true) {
+			st = new StringTokenizer(br.readLine());
+			int a, b, c;
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			c = Integer.parseInt(st.nextToken());
+			
+			double t;
+			int sum;
+			
+			if(a == 0 && b== 0 && c == 0) 
+				break;
+			
+			System.out.println("Triangle #" + count);
+			
+			if(a == -1) {
+				sum = c*c - b*b;
+				if(sum<=0) {
+					System.out.println("Impossible.");
+					count++;
+					System.out.print("\n");
+					continue;
+				}
+				
+				t = Math.sqrt(sum);
+				System.out.print("a = ");
+				System.out.println(String.format("%.3f", t));
+			}
+			else if(b == -1) {
+				sum = c*c - a*a;
+				if(sum<=0) {
+					System.out.println("Impossible.");
+					count++;
+					System.out.print("\n");
+					continue;
+				}
+				t = Math.sqrt(sum);
+				System.out.print("b = ");
+				System.out.println(String.format("%.3f", t));
+			}
+			else if( c == -1) {
+				sum = a*a + b*b;
+				t = Math.sqrt(sum);
+				System.out.print("c = ");
+				System.out.println(String.format("%.3f", t));
+			}
+			
+			count++;
+			System.out.print("\n");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

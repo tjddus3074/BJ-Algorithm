@@ -1,0 +1,106 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static int max = Integer.MIN_VALUE;
+	static int[] dx = {-1, 0, 1, 0};
+	static int[] dy = {0, -1, 0, 1};
+	static boolean[][] visit;
+	static int wcount = 0;
+	static int scount = 0;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new char[n][m];
+		visit = new boolean[n][m];
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			for(int j=0; j<m; j++) {
+				char a = t.charAt(j);
+				arr[i][j] = a;
+			}
+		}
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(arr[i][j] != '#' && visit[i][j] == false)
+					bfs(i,j);
+			}
+		}
+		
+		System.out.print(scount + " " + wcount);
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x < 0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+	
+	static void bfs(int x, int y) {
+		Queue<Node> q = new LinkedList<>();
+		visit[x][y] = true;
+		int s = 0;
+		int w = 0;
+		if(arr[x][y] == 'o')
+			s++;
+		else if(arr[x][y] == 'v')
+			w++;
+		q.add(new Node(x, y));
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			for(int i=0; i<4; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+				if(!isRange(nx, ny))
+					continue;
+				if(visit[nx][ny])
+					continue;
+				if(arr[nx][ny] == '#')
+					continue;
+				
+				visit[nx][ny] = true;
+				if(arr[nx][ny] == 'o')
+					s++;
+				else if(arr[nx][ny] == 'v')
+					w++;
+				q.add(new Node(nx, ny));
+			}
+		}
+		
+		if(s>w)
+			scount+=s;
+		else
+			wcount+=w;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

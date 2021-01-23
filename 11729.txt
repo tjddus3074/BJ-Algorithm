@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+void hanoimove(int n, int from, int by, int to) {
+	if (n == 1)
+		printf("%d %d\n", from, to);
+
+	else {
+		hanoimove(n - 1, from, to, by);
+		printf("%d %d\n", from, to);
+		hanoimove(n - 1, by, from, to);
+	}
+}
+
+void hanoinum(int x) {
+	int num = 1;
+	while (--x) {
+		num = num * 2 + 1;
+	}
+	printf("%d\n", num);
+}
+
+int main() {
+	int x;
+	scanf(" %d", &x);
+
+	hanoinum(x);
+	hanoimove(x, 1, 2, 3);
+
+	return 0;
+}

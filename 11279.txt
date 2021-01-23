@@ -1,0 +1,45 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Queue;
+import java.util.PriorityQueue;
+
+class Node implements Comparable<Node>{
+	int x;
+	
+	public Node(int x) {
+		this.x = x;
+	}
+	
+	@Override
+	public int compareTo(Node n) {
+		if(this.x < n.x)return 1;
+		else if(this.x>n.x) return -1;
+		return 0;
+	}
+}
+
+public class Main{
+	static int n;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		n = Integer.parseInt(br.readLine());
+		PriorityQueue<Node> q = new PriorityQueue<>();
+		for(int i=0; i<n; i++) {
+			int test = Integer.parseInt(br.readLine());
+			if(test != 0)
+				q.add(new Node(test));
+			else if(test == 0)
+				if(q.isEmpty())
+					System.out.println(0);
+				else
+					System.out.println(q.poll().x);
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

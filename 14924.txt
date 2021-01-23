@@ -1,0 +1,23 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int a, b, c, d, e;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		c = Integer.parseInt(st.nextToken());
+		
+		System.out.print(c/(a*2) * b);
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

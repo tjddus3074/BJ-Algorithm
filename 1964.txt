@@ -1,0 +1,22 @@
+int rec(int a) {
+	int sum = 0;
+	sum = a * 3 + 1;
+	return sum;
+}
+
+int main(void) {
+	int n;
+	scanf("%d", &n);
+	long long int num = 5;
+
+	if (n == 1) {
+		printf("%lld", num%45678);
+	}
+
+	else {
+		for (int i = 2; i <= n; i++) {
+			num+= rec(i);
+		}
+		printf("%lld", num%45678);
+	}
+}

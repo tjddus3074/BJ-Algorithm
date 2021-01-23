@@ -1,0 +1,66 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		
+		k = Integer.parseInt(br.readLine());
+		brr = new int[k];
+		st = new StringTokenizer(br.readLine());
+		for(int i =0; i<k; i++) {
+			brr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		int max = 0;
+		for(int i=0; i<k; i++) {
+			if(brr[i] != 0)
+				continue;
+			int num = brr[i];
+			int count = 1;
+			for(int j=i+1; j<k; j++) {
+				if (num == 0) {
+					if (brr[j] == 1) {
+						count++;
+						num = brr[j];
+					}
+				} else if (num == 1) {
+					if (brr[j] == 2) {
+						count++;
+						num = brr[j];
+					}
+				}
+				else if(num == 2) {
+					if(brr[j] == 0) {
+						count++;
+						num = brr[j];
+					}
+				}
+			}
+			
+			max = Math.max(count, max);
+		}
+		
+		System.out.print(max);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

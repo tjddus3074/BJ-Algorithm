@@ -1,0 +1,91 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n, m;
+	static int[][] arr;
+	static int[] dx = {-1, 1, 0, 0};
+	static int dy[] = {0, 0, -1, 1};
+	static int max = Integer.MIN_VALUE;
+	static boolean visit[][];
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new int[n][m];
+		visit = new boolean[n][m];
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<m; j++) 
+				arr[i][j] = Integer.parseInt(st.nextToken());
+		}
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				tet1(i, j, 0, 0);
+				tet2(i, j);
+			}
+		}
+		System.out.print(max);
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+	
+	static void tet1(int x, int y, int d, int sum) {
+		if(d == 4) {
+			max = Math.max(max,  sum);
+			return;
+		}
+		
+		for(int i=0; i<4; i++) {
+			int nx = x + dx[i];
+			int ny = y+ dy[i];
+			if(!isRange(nx, ny))
+				continue;
+			if(visit[nx][ny])
+				continue;
+			
+			visit[nx][ny] = true;
+			tet1(nx, ny, d+1, sum + arr[nx][ny]);
+			visit[nx][ny] = false;
+		}
+	}
+	
+	static void tet2(int x, int y) {
+		int wing = 4;
+		int min = Integer.MAX_VALUE;
+		int sum = arr[x][y];
+		for(int i=0; i<4; i++) {
+			int nx = x + dx[i];
+			int ny = y+dy[i];
+			
+			if(wing <= 2)
+				return;
+			if(!isRange(nx, ny)) {
+				wing --;
+				continue;
+			}
+			
+			min = Math.min(min, arr[nx][ny]);
+			sum = sum+ arr[nx][ny];
+		}
+		if(wing == 4) {
+			sum = sum-min;
+		}
+		max = Math.max(max, sum);
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,36 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		int k = Integer.parseInt(br.readLine());
+		for(int test = 0; test<k; test++) {
+			String a = br.readLine();
+			String[] b = a.split(" ");
+			System.out.print("god");
+			for(int i=1; i<b.length; i++) {
+				System.out.print(b[i]);
+			}
+			System.out.print("\n");
+			
+		}
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

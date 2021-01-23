@@ -1,0 +1,59 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m =Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		brr = new int[k];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<k; i++) {
+			brr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		int sum = 0;
+		int a = 1;
+		for(int i= k-1; i>=0; i--) {
+			sum += brr[i]*a;
+			a *= n;
+		}
+		
+		ArrayList<Integer> q = new ArrayList<>();
+		
+		while(true) {
+			int o = sum/m;
+			int p = sum%m;
+			if(o<m) {
+				q.add(p);
+				q.add(o);
+				break;
+			}
+			
+			sum = o;
+			q.add(p);
+		}
+		
+		for(int i=q.size()-1; i>=0; i--)
+			System.out.print(q.get(i) + " ");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,62 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		for (int test = 0; test < k; test++) {
+
+			String t = br.readLine();
+			char[] front = new char[t.length()];
+			char[] back = new char[t.length()];
+			for (int i = 0; i < t.length(); i++) {
+				char a = t.charAt(i);
+				if(a>='A' && a<='Z')
+					a+=32;
+				front[i] = a;
+			}
+
+			int count = 0;
+			for (int i = t.length() - 1; i >= 0; i--) {
+				char a = t.charAt(i);
+				if(a>='A' && a<='Z')
+					a+=32;
+				back[count] = a;
+				count++;
+			}
+
+			int flag = 0;
+			for (int i = 0; i < t.length(); i++) {
+				if (front[i] != back[i]) {
+					flag = 1;
+					break;
+				}
+			}
+
+			if (flag == 0)
+				System.out.println("Yes");
+			else
+				System.out.println("No");
+
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

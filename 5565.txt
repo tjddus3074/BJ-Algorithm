@@ -1,0 +1,28 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m;
+	static int min = Integer.MAX_VALUE;
+	static int sum = 0;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		m = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<9; i++) {
+			n = Integer.parseInt(br.readLine());
+			m -= n;
+		}
+		System.out.print(m);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

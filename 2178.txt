@@ -1,0 +1,74 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Queue;
+import java.util.LinkedList;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main{
+	
+	static int n, m;
+	static int[][] arr;
+	static boolean[][] visit;
+	static int[] dx = {0, 0, -1, 1};
+	static int[] dy = {-1, 1, 0, 0};
+	static int count =1;
+	static String t;
+	static int max = Integer.MIN_VALUE;
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+	
+	static void bfs() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(0, 0));
+		while(!q.isEmpty()) {
+			Node temp = q.poll();
+			int nx, ny;
+			for(int i=0; i<4; i++) {
+				nx = temp.x + dx[i];
+				ny = temp.y + dy[i];
+				if(isRange(nx, ny) == false)
+					continue;
+				
+				if(arr[nx][ny] == 1 && visit[nx][ny] == false) {
+					visit[nx][ny] = true;
+					q.add(new Node(nx, ny));
+					arr[nx][ny] = arr[temp.x][temp.y] + 1;
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		arr = new int[n][m];
+		visit = new boolean[n][m];
+		for(int i=0; i<n; i++) {
+			t = br.readLine();
+			for(int j=0; j<m; j++) {
+				arr[i][j] = (int)t.charAt(j) - '0';
+			}
+		}
+		
+		visit[0][0] = true;
+		bfs();
+		System.out.print(arr[n-1][m-1]);
+	}
+}

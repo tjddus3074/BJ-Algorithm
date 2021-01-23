@@ -1,0 +1,58 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n;
+	static Deque<Integer> q = new LinkedList<>();
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			String t  = st.nextToken();
+			
+			switch(t) {
+			case "push":
+				q.add(Integer.parseInt(st.nextToken()));
+				break;
+			case "pop":
+				if (q.isEmpty())
+					System.out.println(-1);
+				else
+					System.out.println(q.poll());
+				break;
+			case "size":
+				System.out.println(q.size());
+				break;
+			case "empty":
+				if(q.isEmpty())
+					System.out.println(1);
+				else
+					System.out.println(0);
+				break;
+			case "front" :
+				if(q.isEmpty())
+					System.out.println(-1);
+				else
+					System.out.println(q.getFirst());
+				break;
+			case "back":
+				if(q.isEmpty())
+					System.out.println(-1);
+				else
+					System.out.println(q.getLast());
+				break;
+			}
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+
+	}
+}

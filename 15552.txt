@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main(void)
+{
+	int arr[1000000];
+	int a, b;
+	int t;
+
+	scanf("%d", &t);
+	for (int i = 0; i < t; i++)
+	{
+		scanf("%d %d", &a, &b);
+		arr[i] = a + b;
+	}
+
+	for (int i = 0; i < t; i++)
+	{
+		printf("%d\n", arr[i]);
+	}
+
+	return 0;
+}

@@ -1,0 +1,27 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+public class Main{
+	
+	static int n,m,l;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		if(n<m || ((n+m)%2!= 0)) {
+			System.out.print(-1);
+			return;
+		}
+		System.out.print((n+m)/2 + " " + (n - (n+m)/2));
+	}
+}

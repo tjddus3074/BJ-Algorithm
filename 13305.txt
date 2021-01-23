@@ -1,0 +1,60 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		ArrayList<Long> dis = new ArrayList<>();
+		ArrayList<Long> price = new ArrayList<>();
+		k = Integer.parseInt(br.readLine());
+		long sum = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<k-1; i++) {
+			long a = Long.parseLong(st.nextToken());
+			dis.add(a);
+		}
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<k; i++) {
+			long a = Long.parseLong(st.nextToken());
+			price.add(a);
+		}
+		
+		for(int i=0; i<k-1; i++) {
+			if(price.get(i) < price.get(i+1))
+				price.set(i+1, price.get(i));
+		}
+		
+		for(int i=0; i<k-1; i++) {
+			sum += price.get(i) * dis.get(i);
+		}
+		
+		System.out.print(sum);
+		
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

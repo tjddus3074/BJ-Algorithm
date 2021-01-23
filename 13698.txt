@@ -1,0 +1,77 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		
+		brr = new int[5];
+		brr[1] = 1;
+		brr[4] = 2;
+		String t = br.readLine();
+		for(int i=0; i<t.length(); i++) {
+			char a= t.charAt(i);
+			int temp = 0;
+			if(a == 'A') {
+				temp = brr[1];
+				brr[1] = brr[2];
+				brr[2] = temp;
+			}
+			else if(a == 'B') {
+				temp = brr[1];
+				brr[1] = brr[3];
+				brr[3] = temp;
+			}
+			else if(a == 'C') {
+				temp = brr[1];
+				brr[1] = brr[4];
+				brr[4] = temp;
+			}
+			else if(a == 'D') {
+				temp = brr[2];
+				brr[2] = brr[3];
+				brr[3] = temp;
+			}
+			else if(a == 'E') {
+				temp = brr[2];
+				brr[2] = brr[4];
+				brr[4] = temp;
+			}
+			else {
+				temp =brr[3];
+				brr[3] = brr[4];
+				brr[4] = temp;
+			}
+		}
+		int min = 0;
+		int max = 0;
+		for(int i=1; i<=4; i++) {
+			if(brr[i] == 1)
+				min = i;
+			if(brr[i] == 2)
+				max = i;
+		}
+		
+		System.out.print(min + "\n"+max);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

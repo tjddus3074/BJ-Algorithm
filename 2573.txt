@@ -1,0 +1,139 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main{
+	static int n, m;
+	static int[][] bs;
+	static boolean[][] visitspot;
+	static int[] dx = {-1, 1, 0, 0};
+	static int[] dy = {0, 0, -1, 1};
+	static int year = 0;
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		bs = new int[n][m];
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<m; j++) 
+				bs[i][j] = Integer.parseInt(st.nextToken());
+		}
+		
+		int c = spot();
+		if(c>=2) {
+			System.out.println(0);
+			return;
+		}
+		
+		while(true) {
+			yearchange();
+			year++;
+			c = spot();
+			if(c >= 2) {
+				System.out.println(year);
+				break;
+			}
+			
+			if(aaa()) {
+				System.out.println(0);
+				break;
+			}
+		}
+	}
+	
+	static boolean aaa() {
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(bs[i][j] != 0)
+					return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	static void yearchange() {
+		int[][] arr = new int[n][m];
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(bs[i][j] != 0) {
+					int sea = 0;
+					for(int k=0; k<4; k++) {
+						int x = i + dx[k];
+						int y = j + dy[k];
+						if(bs[x][y] == 0)
+							sea++;
+					}
+					arr[i][j] = bs[i][j] - sea;
+					if(arr[i][j] < 0)
+						arr[i][j] = 0;
+				}
+			}
+		}
+		
+		bs = arr;
+	}
+	
+	static int spot() {				//구역확인
+		int count = 0;
+		visitspot = new boolean[n][m];
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(bs[i][j] != 0) 
+					if(visitspot[i][j] == false) {
+						spotbfs(i, j);
+						count++;
+					}
+			}
+		}
+		
+		return count;
+	}
+	
+	static void spotbfs(int x, int y) {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(x, y));
+		visitspot[x][y] = true;
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			for(int i=0; i<4; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+				if(!isRange(nx, ny))
+					continue;
+				if(visitspot[nx][ny])
+					continue;
+				if(bs[nx][ny] == 0)
+					continue;
+				
+				visitspot[nx][ny] = true;
+				q.add(new Node(nx, ny));
+			}
+		}
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

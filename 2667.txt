@@ -1,0 +1,110 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	private static int[][] dangi = new int[28][28];
+	private static int[] danginum = new int[5000];
+	private static int flag =2;
+	private static int flagnum=1;
+	private static int n;
+	
+	static void merge(int a[], int low, int mid, int high) {
+		int[] b = new int[1000];
+		int i = low;
+		int j = mid+1;
+		int k =0;
+		
+		while(i <= mid && j <= high) {
+			if(a[i] <= a[j]) {
+				b[k] = a[i];
+				k++;
+				i++;
+			}
+			else {
+				b[k] = a[j];
+				k++;
+				j++;
+			}
+		}
+		
+		while(i<=mid) {
+			b[k] = a[i];
+			k++;
+			i++;
+		}
+		
+		while(j<=high) {
+			b[k] = a[j];
+			k++;
+			j++;
+		}
+		
+		k--;
+		while(k >= 0) {
+			a[low+k] = b[k];
+			k--;
+		}
+	}
+	
+	static void mergesort(int a[], int low, int high) {
+		if(low < high) {
+			int m = (low + high) / 2;
+			
+			mergesort(a, low, m);
+			mergesort(a, m+1, high);
+			merge(a, low, m, high);
+		}
+	}
+	
+	static void Check(int i, int j) {
+		dangi[i][j] = flag;
+		
+		if(j>1 && dangi[i][j-1] == 1) {
+			flagnum++;
+			Check(i, j-1);
+		}
+		if(j<n && dangi[i][j+1] == 1) {
+			flagnum++;
+			Check(i, j+1);
+		}
+		if(i>1 && dangi[i-1][j] == 1) {
+			flagnum++;
+			Check(i-1, j);
+		}
+		if(i<n && dangi[i+1][j] == 1) {
+			flagnum++;
+			Check(i+1, j);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		n = Integer.parseInt(br.readLine());
+		
+		for(int i=1; i<=n; i++) {
+			String dan = br.readLine();
+			for(int j=1; j<=n; j++) {
+				dangi[i][j] = dan.charAt(j-1) - '0' ;
+			}
+		}
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=n; j++) {
+				if(dangi[i][j] == 1) {
+					Check(i, j);
+					danginum[flag] = flagnum;
+					flagnum = 1;
+					flag++;
+				}
+			}
+		}
+			
+		mergesort(danginum, 2, flag-1);
+		System.out.println(flag-2);
+		for(int i=2; i<flag; i++) {
+			System.out.println(danginum[i]);
+		}
+	}
+}

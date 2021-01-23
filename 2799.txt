@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int[] ans = new int[5];
+        int[] blind = new int[N];
+        br.readLine();
+        for (int i = 0; i < M; i++) {
+            for(int i1 = 0; i1 < 4; i1++){
+                String line = br.readLine();
+                for (int j = 0; j < N; j++) {
+                    if(line.charAt(5 * j + 1) == '*'){
+                        blind[j]++;
+                    }
+                }
+            }
+            for(int k = 0; k < N; k++){
+                ans[blind[k]]++;
+            }
+            Arrays.fill(blind, 0);
+            br.readLine();
+        }
+        for(int i = 0 ; i < 5; i++){
+            if(i == 4) bw.write(ans[i] + "\n");
+            else bw.write(ans[i] + " ");
+        }
+
+        bw.flush();
+        br.close();
+        bw.close();
+    }
+}

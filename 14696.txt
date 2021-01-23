@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test = 0; test<k; test++) {
+			arr = new int[5];
+			brr = new int[5];
+			int a, a2, b, b2 ;
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			for(int i=0; i<a; i++) {
+				a2 = Integer.parseInt(st.nextToken());
+				arr[a2]++;
+			}
+			
+			st = new StringTokenizer(br.readLine());
+			b = Integer.parseInt(st.nextToken());
+			for(int i=0; i<b; i++) {
+				b2 = Integer.parseInt(st.nextToken());
+				brr[b2]++;
+			}
+			
+			int flag = 0;
+			for(int i=4; i>=1; i--) {
+				if(arr[i] == brr[i])
+					continue;
+				
+				if(arr[i]> brr[i]) {
+					System.out.println("A");
+					flag = 1;
+					break;
+				}
+				
+				else if(brr[i]>arr[i]) {
+					System.out.println("B");
+					flag = 1;
+					break;
+				}
+			}
+			
+			if(flag == 0) {
+				System.out.println("D");
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

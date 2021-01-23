@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		//char z = 'z';  122
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test =0; test<k; test++) {
+			String t = br.readLine();
+			brr = new int[8];
+			for(int i=0; i<t.length()-2; i++) {
+				char a = t.charAt(i);
+				if(a == 'T') {
+					if(t.charAt(i+1) == 'T') {
+						if(t.charAt(i+2) == 'T')
+							brr[0] ++;
+						else
+							brr[1]++;
+					}
+					else {
+						if(t.charAt(i+2) == 'T')
+							brr[2]++;
+						else
+							brr[3]++;
+					}
+				}
+				else {
+					if(t.charAt(i+1) == 'T') {
+						if(t.charAt(i+2) == 'T')
+							brr[4]++;
+						else
+							brr[5]++;
+					}
+					else {
+						if(t.charAt(i+2) == 'T')
+							brr[6]++;
+						else
+							brr[7]++;
+					}
+				}
+			}
+			
+			for(int i=0; i<8; i++) {
+				System.out.print(brr[i] + " ");
+			}
+			System.out.print("\n");
+		}
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

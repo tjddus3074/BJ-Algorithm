@@ -1,0 +1,102 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Main{
+	static int t;
+	static int flag;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		t = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<t; i++) {
+			flag = 0;
+			Deque<Integer> q = new LinkedList<>();
+			String p = br.readLine();
+			char[] c = new char[p.length()];
+			int n;
+			for(int j=0; j<p.length(); j++) 
+				c[j] = p.charAt(j);
+			n = Integer.parseInt(br.readLine());
+			String pp = br.readLine();
+			
+			if (n != 0) {
+				char[] pptest = new char[pp.length() - 2];
+				for (int j = 1; j < pp.length() - 1; j++)
+					pptest[j - 1] = pp.charAt(j);
+				pp = String.copyValueOf(pptest);
+				String[] pp2 = pp.split(",");
+				for (int j = 0; j < pp2.length; j++)
+					q.add(Integer.parseInt(pp2[j]));
+			}
+			
+			for(int j=0; j<p.length(); j++) {
+				if(c[j] == 'R') {
+					if(flag == 0)
+						flag = 1;
+					else if(flag == 1)
+						flag = 0;
+				}
+				
+				else if (c[j] == 'D') {
+					if (q.isEmpty()) {
+						flag = -1;
+						break;
+					} else {
+						if (flag == 0)
+							q.removeFirst();
+						else if (flag == 1)
+							q.removeLast();
+					}
+				}
+			}
+			
+			if(flag == -1)
+				System.out.println("error");
+			if(flag == 0)
+				if(q.isEmpty())
+					System.out.println("[]");
+				else {
+					System.out.print("[");
+					while(!q.isEmpty()) {
+						int temp = q.poll();
+						if(q.isEmpty())
+							System.out.print(temp);
+						else
+							System.out.print(temp + ",");
+					}
+					System.out.println("]");
+				}
+			if(flag == 1) {
+				if(q.isEmpty())
+					System.out.println("[]");
+				else {
+					/*Deque<Integer> qq = new LinkedList<>();
+					for (int j = 0; j <= q.size(); j++) {
+						qq.add(q.pollLast());
+					}*/
+					System.out.print("[");
+					while(!q.isEmpty()) {
+						int temp = q.pollLast();
+						if(q.isEmpty())
+							System.out.print(temp);
+						else
+							System.out.print(temp + ",");
+					}
+					System.out.println("]");
+				}
+			}
+		}
+		
+		
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,50 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		int a, b, c;
+		st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		c = Integer.parseInt(st.nextToken());
+		if (a + b == c) {
+			System.out.print(a + "+" + b + "=" + c);
+			return;
+		} else if (a - b == c) {
+			System.out.print(a + "-" + b + "=" + c);
+			return;
+		} else if (a * b == c) {
+			System.out.print(a + "*" + b + "=" + c);
+			return;
+		} else if (a / b == c) {
+			System.out.print(a + "/" + b + "=" + c);
+			return;
+		} else if (a == b + c) {
+			System.out.print(a + "=" + b + "+" + c);
+			return;
+		} else if(a == b-c) {
+			System.out.print(a + "=" + b + "-" + c);
+			return;
+		} else if(a == b*c) {
+			System.out.print(a + "=" + b + "*" + c);
+			return;
+		} else if( a== b/c) {
+			System.out.print(a + "=" + b + "/" + c);
+			return;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

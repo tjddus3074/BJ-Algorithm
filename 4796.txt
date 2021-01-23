@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		int count = 1;
+
+		while (true) {
+			st = new StringTokenizer(br.readLine());
+			n = Integer.parseInt(st.nextToken());
+			m = Integer.parseInt(st.nextToken());
+			k = Integer.parseInt(st.nextToken());
+
+			if (n == 0 && m == 0 && k == 0)
+				break;
+			
+			int sum = 0;
+			int a = k/m;
+			int b = k%m;
+			sum += a*n;
+			if(n>b)
+				sum += b;
+			else
+				sum += n;
+			
+			System.out.println("Case " + count + ": " + sum);
+			count++;
+		}
+
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+char arr[21];
+
+void clear() {
+	for (int i = 0; i < 20; i++) {
+		arr[i] = NULL;
+	}
+}
+
+int main() {
+	int tk;
+	scanf("%d", &tk);
+	int r;
+	int a = 0;
+	
+	while (a < tk) {
+		scanf(" %d %s", &r, &arr);
+
+		int j = 0;
+
+		while (arr[j]!=NULL) {
+			for (int i = 0; i < r; i++) {
+				printf("%c", arr[j]);
+			}
+			j++;
+		}
+		printf("\n");
+		clear();
+		a++;
+	}
+}

@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main()
+{
+    char a[20];
+    scanf("%s", a);
+    
+    if(a== "ksy"){
+        printf("1");
+    }
+    else{
+        printf("0");
+    }
+
+    return 0;
+}

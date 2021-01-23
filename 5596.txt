@@ -1,0 +1,32 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+public class Main{
+	
+	static int[] arr = new int[4];
+	static int max = Integer.MIN_VALUE;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		for(int i=0; i<2; i++) {
+			st= new StringTokenizer(br.readLine());
+			int sum = 0;
+			for(int j=0; j<4; j++) {
+				arr[j] = Integer.parseInt(st.nextToken());
+				sum+= arr[j];
+			}
+			
+			max = Math.max(sum, max);
+		}
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		
+		Init();
+		System.out.print(max);
+	}
+}

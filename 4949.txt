@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int flag;
+int top;
+
+void push(char data[], char d) {
+	data[top+1] = d;
+	top++;
+	
+}
+
+void pop(char data[], char d) {
+
+	if (top<0) {
+		if (d == ']' || d == ')')
+			flag = 1;
+	}
+
+	if (d == ']') {
+		if (data[top] == '[') {
+			top--;
+		}
+		else if (data[top] == '(') {
+			flag = 1;
+		}
+	}
+
+	if (d == ')') {
+		if (data[top] == '(') {
+			top--;
+		}
+		else if (data[top] == '[') {
+			flag = 1;
+		}
+	}
+}
+
+int main() {
+	char finish[101] = ".";
+
+	while (1) {
+		char data[102];
+		top = -1;
+		flag = 0;
+
+		char a[105];
+		gets(a);
+
+		if (strcmp(a, finish)==0) {
+			break;
+		}
+
+		for (int i = 0; a[i] != '\0'; i++) {
+			if (a[i] == '(' || a[i] == '[')
+				push(data, a[i]);
+			if (a[i] == ')' || a[i] == ']') {
+				pop(data, a[i]);
+				if (flag == 1) {
+					printf("no\n");
+					break;
+				}
+			}
+		}
+		
+		if (flag == 0) {
+			if (top < 0)
+				printf("yes\n");
+			else
+				printf("no\n");
+		}
+
+
+	}
+}

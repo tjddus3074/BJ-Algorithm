@@ -1,0 +1,20 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		double pi = 3.141592;
+		double a, b;
+
+		a = Double.parseDouble(br.readLine());
+		b = Double.parseDouble(br.readLine());
+		double sum = a * 2;
+		sum += (b*2) * pi;
+		System.out.println(String.format("%.6f", sum));
+	}
+
+}

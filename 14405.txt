@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		
+		String t = br.readLine();
+		int count = 0;
+		String temp = "";
+		Set<String> set = new HashSet<>();
+		set.add("pi");
+		set.add("ka");
+		set.add("chu");
+		char flag = '.';
+		
+		while(true) {
+			if(count == t.length())
+				break;
+			char a = t.charAt(count);
+			if(flag == '.') {
+				temp+= a;
+				flag = a;
+				count++;
+				continue;
+			}
+			else if(a == 'p' || a == 'k' || a == 'c'){
+				if(!set.contains(temp)) {
+					System.out.print("NO");
+					return;
+				}
+				else {
+					temp = "";
+					temp += a;
+					flag = a;
+				}
+			}
+			else {
+				temp += a;
+			}
+			
+			count++;
+		}
+		
+		if(!set.contains(temp))
+			System.out.print("NO");
+		else
+			System.out.print("YES");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

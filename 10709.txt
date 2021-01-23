@@ -1,0 +1,67 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		int a ,b;
+		st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		char[][] table = new char[a][b];
+		for(int i=0; i<a; i++) {
+			String t = br.readLine();
+			for(int j=0; j<b; j++) {
+				table[i][j] = t.charAt(j);
+			}
+		}
+		
+		arr = new int[a][b];
+		for(int i=0; i<a; i++) {
+			int count = -1;
+			int flag = 0;
+			for(int j=0; j<b; j++) {
+				char c = table[i][j];
+				if(c == '.' && flag == 0)
+					arr[i][j] = count;
+				else if(c == '.' && flag == 1) {
+					count++;
+					arr[i][j] = count;
+				}
+				else if(c == 'c') {
+					count = 0;
+					flag = 1;
+				}
+			}
+		}
+		
+		for(int i=0; i<a; i++) {
+			for(int j=0; j<b; j++)
+				System.out.print(arr[i][j] + " ");
+			System.out.print("\n");
+		}
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

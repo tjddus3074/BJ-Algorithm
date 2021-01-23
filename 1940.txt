@@ -1,0 +1,21 @@
+int main(void) {
+	int n, m;
+	int k[15000];
+	int count = 0;
+	scanf("%d", &n);
+	scanf("%d", &m);
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &k[i]);
+	}
+
+	for (int i = 0; i < n-1; i++) {
+		for (int j = i+1; j < n; j++) {
+			int sum;
+			sum = k[i] + k[j];
+			if(sum==m){
+				count++;
+			}
+		}
+	}
+	printf("%d", count);
+}

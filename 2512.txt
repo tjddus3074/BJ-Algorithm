@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int arr[1000001];
+
+int main() {
+	int n, money;
+	scanf(" %d", &n);
+	for (int i = 0; i < n; i++) {
+		scanf(" %d", &arr[i]);
+	}
+
+	scanf(" %d", &money);
+	int temp = money;
+	int max = 0;
+	for (int i = 0; i < n; i++) {
+		temp -= arr[i];
+		if (max < arr[i])
+			max = arr[i];
+	}
+
+	if (temp >= 0) {
+		printf("%d\n", max);
+		return 0;
+	}
+
+	int left = 0;
+	int right = max;
+	
+	while (left <= right) {
+		temp = money;
+		int mid = (left + right) / 2;
+
+		for (int i = 0; i < n; i++) {
+			if (mid >= arr[i]) {
+				temp -= arr[i];
+			}
+			else {
+				temp -= mid;
+			}
+		}
+
+		if (temp >= 0)
+			left = mid + 1;
+		else
+			right = mid - 1;
+	}
+
+	printf("%d\n", right);
+	return 0;
+}

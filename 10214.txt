@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int max = Integer.MIN_VALUE;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			int y =0 ;
+			int ko = 0;
+			for(int j=0; j<9; j++) {
+				st = new StringTokenizer(br.readLine());
+				m = Integer.parseInt(st.nextToken());
+				k = Integer.parseInt(st.nextToken());
+				y += m;
+				ko += k;
+			}
+			
+			if(y>ko)
+				System.out.println("Yonsei");
+			else if(y<ko)
+				System.out.println("Korea");
+			else
+				System.out.println("Draw");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

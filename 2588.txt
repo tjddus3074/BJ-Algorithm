@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main() {
+	int a, b;
+	scanf("%d %d", &a, &b);
+	int q = a * b;
+	printf("%d\n", a * (b % 10));
+	b = b / 10;
+	printf("%d\n", a * (b % 10));
+	b = b / 10;
+	printf("%d\n", a * (b % 10));
+	printf("%d", q);
+}

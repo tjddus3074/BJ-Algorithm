@@ -1,0 +1,52 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		int[] arr = new int[n];
+		Set<Integer> set = new HashSet<>();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int a= Integer.parseInt(st.nextToken());
+			arr[i] = a;
+			set.add(a);
+		}
+		
+		Arrays.sort(arr);
+		
+		m = Integer.parseInt(br.readLine());
+		
+		int count = 0;
+		for(int i=0; i<n; i++) {
+			if(arr[i] >= m)
+				break;
+			
+			int a = m - arr[i];
+			if(set.contains(a))
+				count++;
+		}
+		
+		System.out.print(count/2);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

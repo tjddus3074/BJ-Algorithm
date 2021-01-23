@@ -1,0 +1,35 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+
+public class Main{
+	static int a, b, c, d, p;
+	static int[] arr = new int[4];
+	static int sum = 0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		c = Integer.parseInt(st.nextToken());
+		
+		if(a%c != 0)
+			d = a/c + 1;
+		else
+			d = a/c;
+		
+		if(b%c != 0)
+			p = b/c +1;
+		else
+			p = b/c;
+		
+		System.out.print((long)d*p);
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

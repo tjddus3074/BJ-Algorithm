@@ -1,0 +1,47 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		int count = 0;
+		while(true) {
+			int sum = 0;
+			st = new StringTokenizer(br.readLine());
+			double r = Double.parseDouble(st.nextToken());
+			if(r == 0)
+				break;
+			double w = Double.parseDouble(st.nextToken());
+			w = Math.pow(w, 2);
+			double l = Double.parseDouble(st.nextToken());
+			l = Math.pow(l, 2);
+			r = r*2;
+			count++;
+			
+			if(r>=Math.sqrt(w+l)) {
+				System.out.println("Pizza " + count + " fits on the table.");
+			}
+			else
+				System.out.println("Pizza " + count + " does not fit on the table.");
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

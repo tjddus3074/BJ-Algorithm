@@ -1,0 +1,56 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		int count = Integer.parseInt(br.readLine());
+		int[] hs = {1, 2, 3, 3, 4, 10};
+		int[] ds = {1, 2, 2, 2, 3, 5, 10};
+		
+		for(int test =1; test<=count; test++) {
+			int[] human = new int[6];
+			int[] devil = new int[7];
+			int humansum = 0;
+			int devilsum = 0;
+			
+			st = new StringTokenizer(br.readLine());
+			for(int i=0; i<6; i++) {
+				human[i] = Integer.parseInt(st.nextToken());
+				humansum += human[i] * hs[i];
+			}
+			
+			st = new StringTokenizer(br.readLine());
+			for(int i=0; i<7; i++) {
+				devil[i] = Integer.parseInt(st.nextToken());
+				devilsum += devil[i] * ds[i];
+			}
+			
+			if(humansum > devilsum) 
+				System.out.println("Battle " + test + ": " + "Good triumphs over Evil");
+			else if(humansum < devilsum) {
+				System.out.println("Battle " + test + ": " + "Evil eradicates all trace of Good");
+			}
+			else
+				System.out.println("Battle " + test + ": " + "No victor on this battle field");
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,86 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		ArrayList<String> list = new ArrayList<>();
+		ArrayList<String> list2 = new ArrayList<>();
+		ArrayList<String> list3 = new ArrayList<>();
+		list.add("zero");
+		list.add("one");
+		list.add("two");
+		list.add("three");
+		list.add("four");
+		list.add("five");
+		list.add("six");
+		list.add("seven");
+		list.add("eight");
+		list.add("nine");
+		
+		st = new StringTokenizer(br.readLine());
+		m = Integer.parseInt(st.nextToken());
+		n = Integer.parseInt(st.nextToken());
+		for(int i=m; i<=n; i++) {
+			int num = i;
+			String temp = "";
+			String t = Integer.toString(num);
+			for(int j=0; j<t.length(); j++) {
+				int  a= t.charAt(j) - '0';
+				if(temp.contentEquals(""))
+					temp += list.get(a);
+				else {
+					temp += " ";
+					temp += list.get(a);
+				}
+			}
+			
+			list2.add(temp);
+		}
+		Collections.sort(list2);
+		
+		for(int i=0; i<list2.size(); i++) {
+			String[] temp = list2.get(i).split(" ");
+			String t = "";
+			for(int j=0; j<temp.length; j++) {
+				for(int l=0; l<=9; l++)
+					if(temp[j].contentEquals(list.get(l)))
+						t += l;
+			}
+			
+			list3.add(t);
+		}
+		
+		int count = 0;
+		for(int i=0; i<list3.size(); i++) {
+			System.out.print(list3.get(i) + " ");
+			count++;
+			if(count == 10) {
+				System.out.print("\n");
+				count = 0;
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

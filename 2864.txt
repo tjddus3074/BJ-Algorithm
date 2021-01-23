@@ -1,0 +1,56 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr = new int[31];
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
+		String a = st.nextToken();
+		String b = st.nextToken();
+		
+		String mina = "", minb = "", maxa = "", maxb = "";
+		for(int i=0; i<a.length(); i++) {
+			if(a.charAt(i) == '5' || a.charAt(i) == '6') {
+				mina = mina+'5';
+				maxa = maxa+'6';
+			}
+			else {
+				char t = a.charAt(i);
+				mina = mina+t;
+				maxa = maxa+t;
+			}
+		}
+		
+		for(int i=0; i<b.length(); i++) {
+			if(b.charAt(i) == '5' || b.charAt(i) == '6') {
+				minb = minb+'5';
+				maxb = maxb+'6';
+			}
+			else {
+				char t = b.charAt(i);
+				minb = minb+t;
+				maxb = maxb+t;
+			}
+		}
+		
+		int min1 = Integer.parseInt(mina);
+		int min2 = Integer.parseInt(minb);
+		int max1 = Integer.parseInt(maxa);
+		int max2 = Integer.parseInt(maxb);
+		System.out.println((min1 + min2) + " " + (max1 + max2));
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

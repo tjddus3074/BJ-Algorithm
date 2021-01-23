@@ -1,0 +1,134 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.Queue;
+import java.util.StringTokenizer;
+import java.util.LinkedList;
+import java.util.ArrayList;
+
+class snake{
+	int x;
+	int y;
+	int dir;
+	int gen;
+	
+	public snake(int x, int y, int dir, int gen) {
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		this.gen = gen;
+	}
+}
+
+public class Main{
+	
+	static int n;
+	static int count = 0;
+	static ArrayList<Integer> arr = new ArrayList<>();
+	static Queue<snake> q = new LinkedList<>();
+	static boolean[][] visit = new boolean[102][102];
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		n = Integer.parseInt(br.readLine());
+		StringTokenizer st;
+		int x, y, d, g;
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			x = Integer.parseInt(st.nextToken());
+			y = Integer.parseInt(st.nextToken());
+			d = Integer.parseInt(st.nextToken());
+			g = Integer.parseInt(st.nextToken());
+			q.add(new snake(x, y, d, g));
+		}
+	}
+	
+	static void curve(int gen) {
+		int n = 0;
+		while (n < gen) {
+			int size = arr.size();
+			for (int i = size - 1; i >= 0; i--) {
+				int temp = arr.get(i);
+				if (temp == 3)
+					arr.add(0);
+				else
+					arr.add(temp + 1);
+			}
+			n++;
+		}
+	}
+	
+	static void dragoncurve(int x, int y) {
+		visit[y][x] = true;
+		int nx = x;
+		int ny = y;
+		int size = arr.size();
+		for(int i=0; i<size; i++) {
+			switch(arr.get(i)) {
+			case 0:
+				nx++;
+				visit[ny][nx] = true;
+				break;
+			case 1:
+				ny--;
+				visit[ny][nx] = true;
+				break;
+			case 2:
+				nx--;
+				visit[ny][nx] = true;
+				break;
+			case 3:
+				ny++;
+				visit[ny][nx] = true;
+				break;
+			}
+			
+		}
+	}
+	
+	static void check(int x, int y) {
+		if (visit[x+1][y] == true && visit[x][y + 1] == true && visit[x + 1][y + 1] == true) {
+			count++;
+			//System.out.println(x + " " + y);
+		}
+	}
+	
+	static void check2(int x, int y) {
+		if(visit[y+1][x] == true && visit[y][x+1] == true && visit[y+1][x+1] == true)
+			System.out.println("cham");
+	}
+	
+	static void info() {
+		for(int i=0; i<=10; i++) {
+			for(int j=0; j<=10; j++) {
+				if(visit[i][j])
+					System.out.print(1 + " ");
+				else
+					System.out.print(0 + " ");
+			}
+			System.out.print("\r");
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		while(!q.isEmpty()) {
+			snake temp = q.poll();
+			arr.add(temp.dir);
+			curve(temp.gen);
+			dragoncurve(temp.x, temp.y);
+			arr.clear();
+		}
+		
+		//info();
+		
+		for(int i=0; i<=100; i++) {
+			for(int j=0; j<=100; j++) {
+				if(visit[i][j] == true)
+					check(i, j);
+			}
+		}
+		
+		
+		System.out.print(count);
+	}
+}

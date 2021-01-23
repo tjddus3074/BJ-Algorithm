@@ -1,0 +1,33 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	static long n, m;
+	static long t = 0;
+	static long f = 0;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+
+		for (long i = 2; i <= n; i *= 2)
+			t += n / i;
+		for (long i = 2; i <= m; i *= 2)
+			t -= m / i;
+		for (long i = 2; i <= (n - m); i *= 2)
+			t -= (n-m) / i;
+
+		for (long i = 5; i <= n; i *= 5)
+			f += n / i;
+		for (long i = 5; i <= m; i *= 5)
+			f -= m / i;
+		for (long i = 5; i <= (n - m); i *= 5)
+			f -= (n-m) / i;
+
+		System.out.print(Math.min(t, f));
+	}
+}

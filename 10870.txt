@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int Fibonachi(int a) {
+	int n1 = 0;
+	int n2 = 1;
+	int sum = 0;
+	for (int i = 0; i <= a-2; i++) {
+		sum = n1 + n2;
+		n1 = n2;
+		n2 = sum;
+	}
+
+	return sum;
+}
+int main() {
+	int i;
+	scanf("%d", &i);
+	if (i >= 2)
+		i = Fibonachi(i);
+		
+	printf("%d\n", i);
+}

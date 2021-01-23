@@ -1,0 +1,66 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		String t =  br.readLine();
+		int starp = 0;
+		for(int i=0; i < t.length(); i++) 
+			if(t.charAt(i) == '*')
+				starp = i;
+		
+		int sum = t.length()-1;
+		
+		for (int test = 0; test < n; test++) {
+			int flag = 0;
+			String temp = br.readLine();
+			if(temp.length() < sum) {
+				System.out.println("NE");
+				continue;
+			}
+			
+			for(int i=0; i<starp; i++) {
+				if(temp.charAt(i) != t.charAt(i)) {
+					flag = 1;
+					break;
+				}
+			}
+			
+			int l = temp.length()-1;
+			for(int i=t.length()-1; i>starp; i--) {
+				if(t.charAt(i) != temp.charAt(l)) {
+					flag = 1;
+					break;
+				}
+				l--;
+			}
+
+			if (flag == 0)
+				System.out.println("DA");
+			else
+				System.out.println("NE");
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

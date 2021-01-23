@@ -1,0 +1,80 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		Set<Character> set = new HashSet<>();
+		set.add('a');
+		set.add('e');
+		set.add('i');
+		set.add('o');
+		set.add('u');
+		
+		while(true) {
+			String t =br.readLine();
+			if(t.contentEquals("end"))
+				break;
+			
+			int flag_mo = 0;
+			int flag_ja = 0;
+			boolean flag_havemo = false;
+			boolean pass_possible = true;
+
+			for (int i = 0; i < t.length(); i++) {
+				if (i != 0)
+					if (t.charAt(i) != 'e' && t.charAt(i) != 'o')
+						if (t.charAt(i) == t.charAt(i - 1)) {
+							pass_possible = false;
+							break;
+						}
+				
+				if(set.contains(t.charAt(i))) {
+					flag_havemo = true;
+					flag_mo ++;
+					flag_ja = 0;
+				}
+				else {
+					flag_ja ++;
+					flag_mo = 0;
+				}
+				
+				if(flag_ja >=3 || flag_mo >= 3) {
+					pass_possible = false;
+					break;
+				}
+			}
+			
+			if(flag_havemo == false)
+				pass_possible = false;
+			
+			if(pass_possible) {
+				System.out.println("<" + t + "> is acceptable.");
+			}
+			else
+				System.out.println("<" + t + "> is not acceptable.");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

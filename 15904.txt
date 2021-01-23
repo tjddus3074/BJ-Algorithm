@@ -1,0 +1,37 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		char[] a = {'U', 'C', 'P', 'C'};
+		String t = br.readLine();
+		int count = 0;
+		for(int i=0; i<t.length(); i++) {
+			if(t.charAt(i) == a[count])
+				count++;
+			if(count>3) {
+				System.out.print("I love UCPC");
+				return;
+			}
+		}
+		
+		System.out.print("I hate UCPC");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

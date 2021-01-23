@@ -1,0 +1,20 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		String t = br.readLine();
+		BigInteger b = new BigInteger(t, 2);
+		String tt = "17";
+		BigInteger c = new BigInteger(tt);
+		BigInteger a = b.multiply(c);
+		System.out.print(a.toString(2));
+	}
+
+}

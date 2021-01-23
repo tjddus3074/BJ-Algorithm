@@ -1,0 +1,15 @@
+#include <stdio.h>
+long long arr[100];
+int main()
+{
+	int input;
+	scanf("%d", &input);
+	arr[1] = 1;
+	for (int i = 2; i <= input; i++)
+	{
+		arr[i] = arr[i - 1] + arr[i - 2];
+	}
+
+	printf("%lld", arr[input]);
+
+}

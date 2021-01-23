@@ -1,0 +1,25 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int n;
+	static double a = 0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		n = Integer.parseInt(br.readLine());
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			a = Double.parseDouble(br.readLine());
+			System.out.println("$" + String.format("%.2f", a*0.8));
+		}
+	
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		
+	}
+}

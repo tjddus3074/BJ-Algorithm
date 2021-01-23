@@ -1,0 +1,50 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static int r, a, c, b;
+	static int flag = 0;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		ArrayList<Integer> q = new ArrayList<>();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) {
+			int a =Integer.parseInt(st.nextToken());
+			q.add(a);
+		}
+		int sum = 0;
+		for(int i=1; i<=n; i++) {
+			for(int j=0; j<m; j++) {
+				if(i%q.get(j) == 0) {
+					sum += i;
+					break;
+				}
+			}
+		}
+		
+		System.out.print(sum);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

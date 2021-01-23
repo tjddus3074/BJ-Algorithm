@@ -1,0 +1,43 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		int max = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			if(a == 1 || a ==2)
+				max ++;
+			else {
+				if(a%2 == 0)
+					max += a/2;
+				else
+					max += (a/2)+1;
+			}
+		}
+		
+		if(max>=n)
+			System.out.println("YES");
+		else
+			System.out.println("NO");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

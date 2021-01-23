@@ -1,0 +1,32 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int a, b, c, d, p;
+	static int xcost=0, ycost=0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(br.readLine());
+		b = Integer.parseInt(br.readLine());
+		c = Integer.parseInt(br.readLine());
+		d = Integer.parseInt(br.readLine());
+		p = Integer.parseInt(br.readLine());
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		xcost = p*a;
+		
+		if(p<=c)
+			ycost = b;
+		else 
+			ycost = b + ((p-c)*d);
+		
+		System.out.println(Math.min(xcost, ycost));
+	}
+}

@@ -1,0 +1,72 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+	
+	static int n, m;
+	static List<List<Integer>> list = new ArrayList<>();
+	static boolean[] visit;
+	static int count = 0;
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		n = Integer.parseInt(br.readLine());
+		m = Integer.parseInt(br.readLine());
+		
+		visit = new boolean[n+1];
+		for(int i=0; i<n+1; i++) {
+			list.add(new ArrayList<>());
+		}
+		
+		for(int i=0; i<m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a, b;
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			list.get(a).add(b);
+			list.get(b).add(a);
+		}
+		
+		bfs();
+		System.out.println(count);
+	}
+	
+	static void bfs() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(1, 0));
+		visit[1] = true;
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			if(t.y >=2)
+				continue;
+			int size = list.get(t.x).size();
+			for(int i=0; i<size; i++) {
+				int a = list.get(t.x).get(i);
+				if(visit[a])
+					continue;
+				
+				visit[a] = true;
+				count++;
+				q.add(new Node(a, t.y+1));
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

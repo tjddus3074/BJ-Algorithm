@@ -1,0 +1,67 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		ArrayList<String> list = new ArrayList<>();
+		
+		for(int test = 0; test<n; test++) {
+			String t = br.readLine();
+			String temp = "";
+			
+			for(int i=0; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(a >= '0' && a<= '9')
+					temp += a;
+				else {
+					if(!temp.contentEquals("")) {
+						list.add(temp);
+					}
+					temp = "";
+				}
+			}
+			
+			if(!temp.contentEquals(""))
+				list.add(temp);
+		}
+		
+		ArrayList<BigInteger> list2 = new ArrayList<>();
+		
+		for(int i=0; i<list.size(); i++) {
+			BigInteger a = new BigInteger(list.get(i));
+			list2.add(a);
+		}
+		
+		Collections.sort(list2);
+		for(int i=0; i<list2.size(); i++) {
+			System.out.println(list2.get(i));
+		}
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

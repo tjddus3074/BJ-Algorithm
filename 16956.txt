@@ -1,0 +1,92 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static int[] dx = {1, -1, 0, 0};
+	static int[] dy = {0, 0, 1, -1};
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		int w = 0;
+		arr = new char[n][m];
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			for(int j=0; j<m; j++) {
+				arr[i][j] = t.charAt(j);
+				if(arr[i][j] == 'W')
+					w++;
+			}
+		}
+		
+		if(w == 0) {
+			int dflag = 0;
+			for(int i=0; i<n; i++) {
+				for(int j=0; j<m; j++) {
+					if(arr[i][j] == '.') {
+						arr[i][j] = 'D';
+						dflag= 1;
+						break;
+					}
+				}
+				if(dflag == 1)
+					break;
+			}
+		} else {
+			boolean SW = false;
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < m; j++) {
+					if (arr[i][j] == 'S') {
+						for (int l = 0; l < 4; l++) {
+							int nx = i + dx[l];
+							int ny = j + dy[l];
+							if (nx < 0 || nx >= n || ny < 0 || ny >= m)
+								continue;
+
+							if (arr[nx][ny] == 'W') {
+								System.out.print("0");
+								return;
+							}
+
+							if(arr[nx][ny] == '.')
+								arr[nx][ny] = 'D';
+						}
+					}
+				}
+			}
+		}
+		
+		
+		System.out.println(1);
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				System.out.print(arr[i][j]);
+			}
+			System.out.print("\n");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

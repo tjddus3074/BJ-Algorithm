@@ -1,0 +1,43 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		long[] brr = new long[90];
+		n = Integer.parseInt(br.readLine());
+		brr[1] = 1;
+		brr[2] = 1;
+		brr[3] = 2;
+		if(n == 1) {
+			System.out.print(4);
+			return;
+		}
+		else if(n == 2) {
+			System.out.print(6);
+			return;
+		}
+		
+		for(int i = 4; i<=n; i++) {
+			brr[i] = brr[i-1] + brr[i-2];
+		}
+		
+		long sum = 0;
+		sum = (brr[n] + brr[n-1]) *2 + (brr[n-1] + brr[n-2]) *2;
+		System.out.print(sum);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

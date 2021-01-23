@@ -1,0 +1,41 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	
+	static int n, m;
+	static int[] visit;
+	
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	static void p(int count, int lastnum) throws IOException {
+		if(count>m) {
+			for(int i=1; i<=m; i++) {
+				bw.write(String.valueOf(visit[i]) + " ");
+			}
+			bw.newLine();
+			return;
+		}
+		
+		for(int i=lastnum; i<=n; i++) {
+			visit[count] = i;
+			p(count+1, i);
+		}
+	}
+	
+	public static void main(String [] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		visit = new int[m+1];
+		
+		p(1, 1);
+		
+		br.close();
+		bw.flush();
+		bw.close();
+	}
+}

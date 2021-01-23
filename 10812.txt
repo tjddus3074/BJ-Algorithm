@@ -1,0 +1,67 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		brr = new int[n+1];
+		for(int i=0; i<=n; i++){
+			brr[i] = i;
+		}
+		
+		for(int i=0; i<m; i++) {
+			int a, b, c;
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			c = Integer.parseInt(st.nextToken());
+			change(a, c, b);
+		}
+		
+		for(int i=1; i<=n; i++) {
+			System.out.print(brr[i] + " ");
+		}
+	}
+	
+	static void change(int begin, int mid, int end) {
+		int n = end - begin +1;
+		int[] temp = new int[n];
+		int count = 0;
+		for(int i=mid; i<=end; i++) {
+			temp[count] = brr[i];
+			count++;
+		}
+		
+		for(int i=begin; i<mid; i++) {
+			temp[count] = brr[i];
+			count++;
+		}
+		
+		count = 0;
+		for(int i=begin; i<=end; i++) {
+			brr[i] = temp[count];
+			count++;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

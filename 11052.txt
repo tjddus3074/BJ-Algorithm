@@ -1,0 +1,44 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		int[] arr = new int[n+1];
+		int[] dp = new int[n+1];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++)
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=i; j++) {
+				dp[i] = Math.max(dp[i], dp[i-j] + arr[j]);
+			}
+		}
+		
+		System.out.println(dp[n]);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

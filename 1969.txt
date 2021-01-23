@@ -1,0 +1,80 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		String[] t = new String[n];
+		for(int i=0; i<n; i++) {
+			t[i] = br.readLine();
+		}
+
+		char[] temp = new char[m];
+		
+		for(int i=0; i<m; i++) {
+			brr = new int[4];		//ATGC
+			int max = Integer.MIN_VALUE;
+			int maxnum = 0;
+			for(int j=0; j<n; j++) {
+				if(t[j].charAt(i) == 'T')
+					brr[0] ++;
+				else if(t[j].charAt(i) == 'G')
+					brr[1] ++;
+				else if(t[j].charAt(i) == 'C')
+					brr[2] ++;
+				else
+					brr[3] ++;
+			}
+			
+			for(int j=0; j<4; j++) {
+				if(max<=brr[j]) {
+					max = brr[j];
+					maxnum = j;
+				}
+			}
+			
+			if(maxnum == 0)
+				temp[i] = 'T';
+			else if(maxnum == 1)
+				temp[i] = 'G';
+			else if(maxnum == 2)
+				temp[i] = 'C';
+			else
+				temp[i] = 'A';
+		}
+		
+		for(int i=0; i<m; i++)
+			System.out.print(temp[i]);
+		
+		int count = 0;
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(t[i].charAt(j) != temp[j])
+					count++;
+			}
+		}
+		System.out.print("\n");
+		System.out.print(count);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

@@ -1,0 +1,6 @@
+#include <stdio.h>
+ 
+int main() {
+    printf("47\n");
+    printf("tjddus3074\n");
+}

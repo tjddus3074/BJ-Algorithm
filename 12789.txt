@@ -1,0 +1,74 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		Queue<Integer> list = new LinkedList<>();
+		Stack<Integer> wait = new Stack<>();
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) {
+			int a = Integer.parseInt(st.nextToken());
+			list.add(a);
+		}
+		
+		int count = 1;
+		boolean flag = true;
+		while(true) {
+			if(!flag)
+				break;
+			if(list.isEmpty() && wait.isEmpty())
+				break;
+			
+			if(!wait.isEmpty()) {
+				if(wait.peek() == count) {
+					wait.pop();
+					count++;
+					continue;
+				}
+				else if(wait.peek() != count && list.isEmpty()) {
+					flag = false;
+					continue;
+				}
+			}
+			
+			if(!list.isEmpty()) {
+				if(list.peek() == count) {
+					count++;
+					list.poll();
+					continue;
+				}
+				else {
+					wait.push(list.poll());
+				}
+			}
+		}
+		
+		if(flag) {
+			System.out.print("Nice");
+		}
+		else
+			System.out.print("Sad");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

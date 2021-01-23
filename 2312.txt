@@ -1,0 +1,51 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n, m, t;
+	static boolean[] sosu = new boolean[100001];
+	static int root = (int)Math.sqrt(100000);
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		t = Integer.parseInt(br.readLine());
+		che();
+		for(int i=0; i<t; i++) {
+			n = Integer.parseInt(br.readLine());
+			for(int j=2; j<=n; j++) {
+				if(sosu[j] == false) {
+					int c = find(j);
+					if(c != 0)
+						System.out.println(j + " " + c);
+				}
+			}
+		}
+	}
+	
+	static int find(int sosu) {
+		int cnt = 0;
+		while(true) {
+			if(n%sosu != 0)
+				return cnt;
+			n = n/sosu;
+			cnt++;
+		}
+	}
+	
+	static void che() {
+		for(int i=2; i<root; i++) {
+			if(sosu[i] == false) {
+				for(int j=i; i*j<=100000; j++)
+					sosu[i*j] = true;
+			}
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+
+	}
+}

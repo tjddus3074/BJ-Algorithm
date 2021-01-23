@@ -1,0 +1,65 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	private static int[] X = new int[50];
+	private static int[] Y = new int[50];
+	private static int[] WIDTH = new int[50];
+	private static int[] HEIGHT = new int[50];
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+
+		double x, y, width, height;
+		int max_x = 0;
+		int max_y = 0;
+
+		for (int i = 0; i < n; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			x = Double.parseDouble(st.nextToken());
+			y = Double.parseDouble(st.nextToken());
+			width = Double.parseDouble(st.nextToken());
+			height = Double.parseDouble(st.nextToken());
+
+			x *= 10;
+			y *= 10;
+			width *= 10;
+			height *= 10;
+
+			X[i] = (int) x;
+			Y[i] = (int) y;
+			WIDTH[i] = (int) width;
+			HEIGHT[i] = (int) height;
+
+			if (max_x < X[i] + WIDTH[i])
+				max_x = X[i] + WIDTH[i];
+			if (max_y < Y[i] + HEIGHT[i])
+				max_y = Y[i] + HEIGHT[i];
+
+		}
+		int[][] table = new int[max_x][max_y];
+		double sum = 0;
+
+		for (int i = 0; i < n; i++) {
+			for (int j = X[i]; j < X[i] + WIDTH[i]; j++) {
+				for (int k = Y[i]; k < Y[i] + HEIGHT[i]; k++) {
+					if (table[j][k] == 0) {
+						table[j][k] = 1;
+						sum++;
+					}
+				}
+			}
+		}
+
+		if (sum % 100 == 0) {
+			int isum = (int)sum;
+			System.out.print(isum/100);
+		} else {
+			System.out.print((double) (sum / 100));
+		}
+
+	}
+}

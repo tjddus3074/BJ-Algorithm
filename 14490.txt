@@ -1,0 +1,58 @@
+
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int val;
+	int num;
+	
+	public Node(int val, int num) {
+		this.val = val;
+		this.num = num;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Node> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		String[] t = br.readLine().split(":");
+		n = Integer.parseInt(t[0]);
+		m = Integer.parseInt(t[1]);
+		int c = gcd(n, m);
+		System.out.print(n/c + ":" + m/c);
+		
+	}
+	
+	static int gcd(int a, int b) {
+		while(b>0) {
+			int temp = a;
+			a =b;
+			b = temp %b;
+		}
+		return a;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

@@ -1,0 +1,29 @@
+int main(void) {
+	int t;
+	scanf("%d", &t);
+	int a, b;
+	int s, big;
+	for (int i = 0; i < t; i++) {
+		scanf("%d %d", &a, &b);
+		if (a < b)
+		{
+			s = a;
+			big = b;
+		}
+		else {
+			s = b;
+			big = a;
+		}
+
+		int j = 1;
+		int sum=0;
+		while(1) {
+			sum = s * j;
+			if (sum % big == 0) {
+				printf("%d\n", sum);
+				break;
+			}
+			j++;
+		}
+	}
+}

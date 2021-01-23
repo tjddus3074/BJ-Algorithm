@@ -1,0 +1,26 @@
+int main(void) {
+	int n, m;
+	int sum = 0;
+	int small[100];
+	int count = 0;
+	scanf("%d", &n);
+	scanf("%d", &m);
+	for (int i = 1; ; i++) {
+		if (i * i < n)
+			continue;
+		else if (i * i >= n && i * i <= m) {
+			sum += i * i;
+			small[count] = i * i;
+			count++;
+			continue;
+		}
+		else if (i * i > m)
+			break;
+	}
+	if (sum == 0) {
+		printf("-1");
+	}
+	else {
+		printf("%d\n%d", sum, small[0]);
+	}
+}

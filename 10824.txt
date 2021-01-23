@@ -1,0 +1,30 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static long n, m, k;
+	static int max = Integer.MAX_VALUE;
+	static int max2 = Integer.MAX_VALUE;
+	static int sum = 0;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		String a, b, c, d;
+		a = st.nextToken();
+		b = st.nextToken();
+		c = st.nextToken();
+		d = st.nextToken();
+		n = Long.parseLong(a.concat(b));
+		m = Long.parseLong(c.concat(d));
+		System.out.print(n+m);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

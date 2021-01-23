@@ -1,0 +1,48 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int n = 1000000;
+	static boolean[] visit = new boolean[n+1];
+	static List<Integer> list = new ArrayList<>();
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		Arrays.fill(visit, true);
+		for(int i=3; i*i<=n; i+=2) {
+			if(visit[i])
+				for(int j=i*i; j<=n; j+=i)
+					visit[j] = false;
+		}
+		
+		for(int i=3; i<=n; i+=2)
+			if(visit[i])
+				list.add(i);
+		
+		while(true) {
+			int a = Integer.parseInt(br.readLine());
+			boolean b = true;
+			if(a == 0)
+				break;
+			
+			for(int i=0; i<list.size(); i++) {
+				if(visit[a-list.get(i)]) {
+					System.out.println(a + " = " + list.get(i) + " + " + (a-list.get(i)));
+					b = false;
+					break;
+				}
+			}
+			
+			if(b)
+				System.out.println("Goldbach's conjecture is wrong.");
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

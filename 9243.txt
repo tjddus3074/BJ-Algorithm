@@ -1,0 +1,60 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		
+		k = Integer.parseInt(br.readLine());
+		String t = br.readLine();
+		String t2 = br.readLine();
+		if(k%2 == 0) {
+			int flag = 0;
+			for(int i=0; i<t.length(); i++) {
+				if(t.charAt(i) != t2.charAt(i)) {
+					flag = 1;
+					break;
+				}
+			}
+			
+			if(flag == 0) 
+				System.out.println("Deletion succeeded");
+			else
+				System.out.println("Deletion failed");
+			
+		}
+		else {
+			int flag = 0;
+			for(int i=0; i<t.length(); i++) {
+				if(t.charAt(i) == t2.charAt(i)){
+						flag = 1;
+						break;
+				}
+			}
+			
+			if(flag == 0) 
+				System.out.println("Deletion succeeded");
+			else
+				System.out.println("Deletion failed");
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

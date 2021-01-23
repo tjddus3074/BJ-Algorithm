@@ -1,0 +1,53 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		int[] man = new int[6+1];
+		int[] wom = new int[6+1];
+		int count = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if(a == 0) {
+				wom[b]++;
+			}
+			else
+				man[b]++;
+		}
+		
+		for(int i=1; i<=6; i++) {
+			if(man[i]%k == 0)
+				count += man[i] /k;
+			else
+				count += man[i]/k + 1;
+			
+			if(wom[i]%k == 0)
+				count += wom[i]/k;
+			else
+				count += wom[i]/k +1;
+		}
+		
+		System.out.print(count);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

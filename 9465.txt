@@ -1,0 +1,46 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	
+	static int t;
+	static int[][] arr;
+	static int[][] dp;
+	static int n;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		t = Integer.parseInt(br.readLine());
+		for(int i=0; i<t; i++){
+			n = Integer.parseInt(br.readLine());
+			int max = 0;
+			arr = new int[2][n];
+			dp = new int[2][n];
+			for(int j=0; j<2; j++) {
+				st = new StringTokenizer(br.readLine());
+				for(int k=0; k<n; k++) 
+					arr[j][k] = Integer.parseInt(st.nextToken());
+			}
+			
+			dp[0][0] = arr[0][0];
+			dp[1][0] = arr[1][0];
+			dp[0][1] = arr[1][0] + arr[0][1];
+			dp[1][1] = arr[0][0] + arr[1][1];
+			for(int j=2; j<n; j++) {
+				dp[0][j] = Math.max(Math.max(dp[0][j-2], dp[1][j-2]), dp[1][j-1]) + arr[0][j];
+				dp[1][j] = Math.max(Math.max(dp[0][j-2], dp[1][j-2]), dp[0][j-1]) + arr[1][j];
+			}
+			
+			max = Math.max(dp[0][n-1], dp[1][n-1]);
+			System.out.println(max);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

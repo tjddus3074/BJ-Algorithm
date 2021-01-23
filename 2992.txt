@@ -1,0 +1,64 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+//import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c;
+	static int min = Integer.MAX_VALUE;
+	static boolean[] visit;
+	static ArrayList<Character> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		String t = br.readLine();
+		c = t.length();
+		visit = new boolean[c];
+		n = Integer.parseInt(t);
+		for(int i=0; i<t.length(); i++)
+			list.add(t.charAt(i));
+		
+		dfs(0, "");
+		if(min == Integer.MAX_VALUE)
+			System.out.print(0);
+		else
+			System.out.print(min);
+	}
+	
+	static void dfs(int count, String t) {
+		if(count == c) {
+			m = Integer.parseInt(t);
+			if(m>n)
+				min = Math.min(min, m);
+			return;
+		}
+		
+		for(int i=0; i<c; i++) {
+			if(visit[i])
+				continue;
+			
+			String temp = t;
+			visit[i] = true;
+			temp += list.get(i);
+			dfs(count+1, temp);
+			visit[i] = false;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

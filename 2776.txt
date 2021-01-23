@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node{
+	int val;
+	int num;
+	
+	public Node(int val, int num) {
+		this.val = val;
+		this.num = num;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Node> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test = 0; test<k; test++) {
+			Set<Integer> map = new HashSet<>();
+			StringBuilder sb = new StringBuilder();
+			n = Integer.parseInt(br.readLine());
+			st = new StringTokenizer(br.readLine());
+			for(int i=0; i<n; i++) {
+				int a= Integer.parseInt(st.nextToken());
+				map.add(a);
+			}
+			
+			m = Integer.parseInt(br.readLine());
+			st = new StringTokenizer(br.readLine());
+			for(int i=0; i<m; i++) {
+				int a = Integer.parseInt(st.nextToken());
+				if(map.contains(a)) 
+					sb.append(1 + "\n");
+				else
+					sb.append(0 + "\n");
+			}
+			
+			System.out.print(sb);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

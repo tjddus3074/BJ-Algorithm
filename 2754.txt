@@ -1,0 +1,46 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int max = Integer.MIN_VALUE;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+		String t = br.readLine();
+		if(t.equals("A+"))
+			System.out.print("4.3");
+		else if(t.equals("A0"))
+			System.out.print("4.0");
+		else if(t.equals("A-"))
+			System.out.print("3.7");
+		else if(t.contentEquals("B+"))
+			System.out.print("3.3");
+		else if(t.contentEquals("B0"))
+			System.out.print("3.0");
+		else if(t.contentEquals("B-"))
+			System.out.print("2.7");
+		else if(t.contentEquals("C+"))
+			System.out.print("2.3");
+		else if(t.contentEquals("C0"))
+			System.out.print("2.0");
+		else if(t.contentEquals("C-"))
+			System.out.print("1.7");
+		else if(t.contentEquals("D+"))
+			System.out.print("1.3");
+		else if(t.contentEquals("D0"))
+			System.out.print("1.0");
+		else if(t.contentEquals("D-"))
+			System.out.print("0.7");
+		else if(t.contentEquals("F"))System.out.print("0.0");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

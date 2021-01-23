@@ -1,0 +1,8 @@
+#include <stdio.h>
+
+int main()
+{
+    char cnum;
+    scanf("%c", &cnum);
+    printf("%d \n", cnum);
+}

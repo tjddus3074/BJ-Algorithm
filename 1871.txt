@@ -1,0 +1,46 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+import java.math.BigInteger;
+
+public class Main {
+
+	static int n, m, k;
+	static char[][] arr;
+	static int[] brr;
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		k = Integer.parseInt(br.readLine());
+		for(int test = 0; test < k; test++) {
+			String[] t = br.readLine().split("-");
+			int front =0;
+			int back = Integer.parseInt(t[1]);
+			
+			int z = 1;
+			for(int i= t[0].length()-1; i>=0; i--) {
+				int a = t[0].charAt(i) - 'A';
+				front += a*z;
+				z *= 26;
+			}
+
+			int sum = Math.abs(front - back);
+			if(sum<=100)
+				System.out.println("nice");
+			else
+				System.out.println("not nice");
+		}
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

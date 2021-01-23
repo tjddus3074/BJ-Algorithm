@@ -1,0 +1,40 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		int N = scan.nextInt();		
+		int dow = scan.nextInt();		
+		int toping = scan.nextInt();	
+		int dowCal = scan.nextInt();	
+		int[] topingCal = new int[N];
+		int index = topingCal.length - 1;	
+		for(int i=0; i<topingCal.length; i++) 	
+			topingCal[i] = scan.nextInt();
+		
+		int beforePerCal = dowCal / dow;	
+		int afterPerCal = dowCal;	
+		int totalCal = dowCal;			
+		int price = dow;			
+
+		Arrays.sort(topingCal);
+		
+		while(true) {
+			price += toping;
+			totalCal += topingCal[index--];
+			afterPerCal = totalCal / price; 
+			if(beforePerCal > afterPerCal)
+				break;
+			else {
+				beforePerCal = afterPerCal;
+			}
+		}
+		
+		System.out.println(beforePerCal);
+		scan.close();
+	}
+
+}

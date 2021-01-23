@@ -1,0 +1,60 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+//import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		k = Integer.parseInt(br.readLine());
+		while(k-->0) {
+			StringBuilder sb = new StringBuilder();
+			n = Integer.parseInt(br.readLine());
+			String[] t = new String[n];
+			int[] arr = new int[n];
+			String[] key1 = br.readLine().split(" ");
+			String[] key2 = br.readLine().split(" ");
+			String[] pass = br.readLine().split(" ");
+			
+			int count = 0;
+			
+			Map<String, Integer> key_1 = new HashMap<>();
+			for(int i=0; i<key1.length; i++) 
+				key_1.put(key1[i],i);
+			
+			for(int i=0; i<key2.length; i++) {
+				int a = key_1.get(key2[i]);
+				arr[i] = a;
+			}
+			
+			for(int i=0; i<n; i++) {
+				int a = arr[i];
+				t[a] = pass[i];
+			}
+			
+			for(int i=0; i<n; i++) {
+				sb.append(t[i] + " ");
+			}
+			sb.append("\n");
+			System.out.print(sb);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

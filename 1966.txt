@@ -1,0 +1,54 @@
+typedef struct aaa {
+	int num;
+	int flag;
+}P;
+
+int main() {
+	int t; scanf("%d", &t);
+
+	for (int k = 0; k < t; k++) {
+
+		int n, m; scanf("%d %d", &n, &m);
+		P data[5000001]; 
+
+		for (int i = 0; i < n; i++) {
+			scanf("%d", &data[i].num);
+			if (i == m)
+				data[i].flag = 1;
+			else
+				data[i].flag = 0;
+		}
+
+		int exit = n - 1;
+		int count = 0;
+		int top = 0;
+
+		while (1) {
+
+			int flag = 0;
+
+			//탑보다 중요도가 더 큰 문서가 있는지 확인
+			for (int i = top + 1; i <= exit; i++) {
+				if (data[top].num < data[i].num) {
+					flag = 1;
+					break;
+				}
+			}
+
+			if (flag == 1) {		//중요도가 더 큰게 존재할경우, 탑을 큐의 맨 뒤로 보냄
+				data[exit + 1] = data[top];
+				top++;
+				exit++;
+			}
+			else if (flag == 0) {		//큰게 없을경우, 인쇄
+				count++;
+				if (data[top].flag == 1) {
+					printf("%d\n", count);
+					break;
+				}
+				else
+					top++;
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+int main(void) {
+	int n, k;
+	scanf("%d", &n);
+	int sum = 1;
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &k);
+		sum += k - 1;
+	}
+
+	printf("%d", sum);
+}

@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		int t = Integer.parseInt(br.readLine());
+		for(int test = 0; test<t; test++) {
+			String temp = br.readLine();
+			String[] a = temp.split(" ");
+			double b = Double.parseDouble(a[0]);
+			for(int i=1; i<a.length; i++) {
+				if(a[i].contentEquals("@"))
+					b *= 3;
+				else if(a[i].contentEquals("%"))
+					b += 5;
+				else if(a[i].contentEquals("#"))
+					b -= 7;
+			}
+			
+			System.out.println(String.format("%.2f", b));
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

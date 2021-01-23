@@ -1,0 +1,57 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	static int min = Integer.MAX_VALUE;
+	static int max = Integer.MIN_VALUE;
+	static ArrayList<Integer> list = new ArrayList<>();
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		PriorityQueue<Long> q = new PriorityQueue<>();
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			Long a = Long.parseLong(st.nextToken());
+			q.add(a);
+		}
+		
+		for(int i=0; i<m; i++) {
+			long a = q.poll();
+			long b = q.poll();
+			long sum = a+b;
+			q.add(sum);
+			q.add(sum);
+		}
+		long s = 0;
+		
+		while(!q.isEmpty()) {
+			s+= q.poll();
+		}
+		
+		System.out.print(s);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}
+
+

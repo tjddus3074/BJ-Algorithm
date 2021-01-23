@@ -1,0 +1,23 @@
+int main(void) {
+	int n;
+	int count = 0;
+	scanf("%d", &n);
+	int save;
+
+		for (int j = n; j > 0; j--) {
+			int sum = 0;
+			for (int i = j; i > 0; i--) {
+				sum += i;
+
+				if (sum < n)
+					continue;
+				else if (sum > n)
+					break;
+				else {
+					count++;
+					break;
+				}
+			}
+		}
+		printf("%d", count);
+}

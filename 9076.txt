@@ -1,0 +1,80 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int c, p;
+	static int[] arr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		int t = Integer.parseInt(br.readLine());
+		for(int test = 0; test<t; test++) {
+			arr = new int[5];
+			st = new StringTokenizer(br.readLine());
+			int max =0;
+			int min = 10;
+			int maxnum= 0;
+			int minnum=0;
+			for(int i=0; i<5; i++) {
+				arr[i] = Integer.parseInt(st.nextToken());
+				if(max< arr[i]) {
+					max = arr[i];
+					maxnum = i;
+				}
+				if(min>arr[i]) {
+					min = arr[i];
+					minnum = i;
+				}
+			}
+			
+			int flag = 0;
+			int g = arr[0];
+			for(int i=1; i<5; i++) {
+				if(g != arr[i])
+					flag = 1;
+			}
+			
+			if(flag == 0) {
+				System.out.println(g*3);
+				continue;
+			}
+			
+			int max2 = 0;
+			int min2 = 10;
+			for(int i=0; i<5; i++) {
+				if(i == maxnum || i == minnum)
+					continue;
+				
+				max2 = Math.max(max2, arr[i]);
+				min2 = Math.min(min2, arr[i]);
+			}
+			
+			if(max2 - min2>=4) {
+				System.out.println("KIN");
+				continue;
+			}
+			
+			int sum = 0;
+			for(int i=0; i<5; i++) {
+				if(i == maxnum || i == minnum)
+					continue;
+				
+				sum += arr[i];
+			}
+			
+			System.out.println(sum);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

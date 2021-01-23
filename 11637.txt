@@ -1,0 +1,73 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		k = Integer.parseInt(br.readLine());
+		for (int test = 0; test < k; test++) {
+			n = Integer.parseInt(br.readLine());
+			int sum = 0;
+			int max_score = 0;
+			int max_num = 0;
+			boolean half_over = false;
+			brr = new int[n];
+			for(int i=0; i<n; i++) {
+				brr[i] = Integer.parseInt(br.readLine());
+				sum += brr[i];
+				if(max_score < brr[i]) {
+					max_score = brr[i];
+					max_num = i;
+				}
+			}
+			
+			int flag = 0;
+			//최다가 한명이상인지 확인
+			for(int i=0; i<n; i++) {
+				if(brr[i] == max_score) {
+					if(i != max_num) {
+						flag = 1;
+						break;
+					}
+				}
+			}
+			
+			if(flag == 1) {
+				System.out.println("no winner");
+				continue;
+			}
+			
+			if(sum/2 < max_score)
+				half_over = true;
+			
+			if(half_over)
+				System.out.print("majority winner ");
+			else
+				System.out.print("minority winner ");
+			
+			System.out.println(max_num +1);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

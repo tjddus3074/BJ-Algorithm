@@ -1,0 +1,118 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node>{
+	char a;
+	int num;
+	
+	public Node(char a, int num) {
+		this.a = a;
+		this.num = num;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		return o.a - a;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean visit[];
+	static boolean visit2[];
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		n = Integer.parseInt(br.readLine());
+		String temp = br.readLine();
+		int num = 0;
+		for(int i=0; i<n-1; i++) {
+			String t = br.readLine();
+			if(find(temp, t))
+				num++;
+		}
+		
+		System.out.print(num);
+	}
+	
+	static boolean find(String temp, String t) {
+		visit = new boolean[temp.length()];
+		visit2 = new boolean[t.length()];
+		int count = 0;
+		if(temp.length() == t.length()) {
+			for(int i=0; i<temp.length(); i++) {
+				char a = temp.charAt(i);
+				for(int j=0; j<t.length(); j++) {
+					if(a == t.charAt(j) && visit2[j] == false) {
+						visit2[j] = true;
+						break;
+					}
+				}
+			}
+			
+			for(int i=0; i<t.length(); i++) {
+				if(visit2[i] == false)
+					count++;
+			}
+			
+			if(count>1)
+				return false;
+		}
+		else if(temp.length() > t.length()) {
+			if(temp.length() - t.length() > 1)
+				return false;
+			
+			for(int i=0; i<temp.length(); i++) {
+				char a = temp.charAt(i);
+				for(int j=0; j<t.length(); j++) {
+					if(a == t.charAt(j) && visit2[j] == false) {
+						visit2[j] = true;
+						break;
+					}
+				}
+			}
+			
+			for(int i=0; i<t.length(); i++) {
+				if(visit2[i] == false)
+					return false;
+			}
+		}
+		else if(temp.length() < t.length()) {
+			if(t.length() - temp.length() > 1)
+				return false;
+			
+			for(int i=0; i<t.length(); i++) {
+				char a =t.charAt(i);
+				for(int j=0; j<temp.length(); j++) {
+					if(a == temp.charAt(j) && visit[j] == false) {
+						visit[j] = true;
+						break;
+					}
+				}
+			}
+			
+			for(int i=0; i<temp.length(); i++) {
+				if(visit[i] == false)
+					return false;
+			}
+		}
+		
+		return true;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

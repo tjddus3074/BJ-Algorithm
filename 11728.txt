@@ -1,0 +1,65 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node implements Comparable<Node>{
+	int x;
+	
+	public Node(int x) {
+		this.x = x;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		return x - o.x;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		brr = new int[n+m];
+		int count = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int a= Integer.parseInt(st.nextToken());
+			brr[count] = a;
+			count++;
+		}
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) {
+			int a= Integer.parseInt(st.nextToken());
+			brr[count] = a;
+			count++;
+		}
+		
+		
+		Arrays.sort(brr);
+		for(int i=0; i<brr.length; i++) {
+			bw.write(brr[i] + " ");
+		}
+		
+		bw.flush();
+		bw.close();
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

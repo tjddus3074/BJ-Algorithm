@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+	int h, w, n;
+	int tc;
+	scanf("%d", &tc);
+	for (int i = 0; i < tc; i++) {
+
+		scanf("%d %d %d", &h, &w, &n);
+		int count = 0;
+		int hh, ww;
+		for (int a = 1; a <= w; a++) {
+			for (int b = 1; b <= h; b++) {
+				count++;
+				if (count == n)
+				{
+					hh = b;
+					ww = a;
+					break;
+				}
+			}
+			if (count == n)
+				break;
+		}
+		if (ww < 10) {
+			printf("%d0%d\n", hh, ww);
+		}
+		else
+			printf("%d%d\n", hh, ww);
+	}
+}

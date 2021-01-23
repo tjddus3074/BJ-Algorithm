@@ -1,0 +1,14 @@
+int main(void) {
+	int tc;
+	scanf("%d", &tc);
+	for (int j = 0; j < tc; j++) {
+		int a;
+		scanf("%d", &a);
+		double sum = 0;
+		for (int i = 0; i < a; i++) {
+			sum += 0.5;
+			sum = sum * 2;
+		}
+		printf("%.f\n", sum);
+	}
+}

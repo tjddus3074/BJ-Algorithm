@@ -1,0 +1,54 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+
+	static int[] arr;
+	static int[] dp;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		dp = new int[10001];
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		for(int i=1; i<=k; i++)
+			dp[i] = 10001;
+		
+		arr = new int[n+1];
+		for(int i=1; i<=n; i++)
+			arr[i] = Integer.parseInt(br.readLine());
+		
+		for(int i=1; i<=n; i++) {
+			for(int j= arr[i]; j<=k; j++) {
+				dp[j] = Math.min(dp[j], dp[j-arr[i]]+1);
+			}
+		}
+		
+		if(dp[k] == 10001)
+			System.out.print(-1);
+		else
+			System.out.print(dp[k]);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

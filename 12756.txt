@@ -1,0 +1,54 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		int at, ah, bt, bh;
+		st = new StringTokenizer(br.readLine());
+		at = Integer.parseInt(st.nextToken());
+		ah = Integer.parseInt(st.nextToken());
+
+		st = new StringTokenizer(br.readLine());
+		bt = Integer.parseInt(st.nextToken());
+		bh = Integer.parseInt(st.nextToken());
+		
+		while(true) {
+			bh = bh-at;
+			ah = ah-bt;
+			if(ah<=0 && bh>0) {
+				System.out.println("PLAYER B");
+				break;
+			}
+			else if(ah>0 && bh<=0) {
+				System.out.println("PLAYER A");
+				break;
+			}
+			else if(ah<=0 && bh<=0) {
+				System.out.println("DRAW");
+				break;
+			}
+		}
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

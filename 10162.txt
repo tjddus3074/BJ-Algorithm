@@ -1,0 +1,39 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main{
+	static int n;
+	static int a = 0;
+	static int b = 0;
+	static int c  =0;
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(br.readLine());
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		if(n%10 != 0) {
+			System.out.print(-1);
+			return;
+		}
+		
+		if(n>=300) {
+			a = n/300;
+			n = n%300;
+		}
+		
+		if(n>=60) {
+			b = n/60;
+			n = n%60;
+		}
+		if(n<60)
+			c = n/10;
+		
+		System.out.print(a + " " + b + " " + c);
+	}
+}

@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+void sugar(int a){
+    int count, big;
+    count = 0;
+    if(a%5 ==0){
+        big = a/5;
+        printf("%d", big);
+    }
+    else{
+         while(1){
+        count++;
+        if((a-(3*count))%5==0){
+            big= (a-(3*count))/5;
+            printf("%d", count+big);
+            break;
+        }
+        else;
+         }
+    }
+    return;
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    if(n==1 || n==2 || n==4|| n==7)
+        printf("-1");
+    else
+        sugar(n);
+    return 0;
+}

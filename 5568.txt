@@ -1,0 +1,62 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static ArrayList<String> list = new ArrayList<>();
+	static Set<String> set = new HashSet<>();
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		n = Integer.parseInt(br.readLine());
+		k = Integer.parseInt(br.readLine());
+		visit = new boolean[n];
+		
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			list.add(t);
+		}
+		
+		recul(0, "");
+		System.out.print(set.size());
+	}
+	
+	static void recul(int count, String temp) {
+		if(count == k) {
+			if(!set.contains(temp))
+				set.add(temp);
+		}
+		
+		for(int i=0; i<n; i++) {
+			if(visit[i] == true)
+				continue;
+			
+			String t = temp;
+			t+= list.get(i);
+			visit[i] = true;
+			recul(count+1, t);
+			visit[i] = false;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

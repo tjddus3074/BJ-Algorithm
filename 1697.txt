@@ -1,0 +1,71 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+
+class Node {
+	int n;
+	int count;
+
+	public Node(int n, int count) {
+		this.n = n;
+		this.count = count;
+	}
+}
+
+public class Main {
+	static int n, k;
+	static Queue<Node> q = new LinkedList<>();
+	static int max = 100002;
+	static boolean[] visit = new boolean[max];
+	static int day;
+
+	static void bfs() {
+
+		q.add(new Node(n, 0));
+		visit[n] = true;
+
+		while (!q.isEmpty()) {
+			Node temp = q.poll();
+
+			if (temp.n == k) {
+				day = temp.count;
+				break;
+			}
+
+			if (temp.n < k) {
+				if (temp.n > 0)
+					if (!visit[temp.n - 1]) {
+						q.add(new Node(temp.n - 1, temp.count + 1));
+						visit[temp.n - 1] = true;
+					}
+				
+				if (temp.n+1<max && !visit[temp.n + 1]) {
+					q.add(new Node(temp.n + 1, temp.count + 1));
+					visit[temp.n + 1] = true;
+				}
+				if (temp.n*2<max && !visit[temp.n * 2]) {
+					q.add(new Node(temp.n * 2, temp.count + 1));
+					visit[temp.n * 2] = true;
+				}
+			}
+
+			if (temp.n > k) {
+				if (!visit[temp.n - 1]) {
+					q.add(new Node(temp.n - 1, temp.count + 1));
+					visit[temp.n - 1] = true;
+				}
+			}
+		}
+
+		System.out.print(day);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		k = sc.nextInt();
+		bfs();
+	}
+}

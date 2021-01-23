@@ -1,0 +1,60 @@
+import java.io.IOException;   //백준
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Main {
+	static int[] festive1 = new int[101];
+	static int[] money1 = { 0, 5000000, 3000000, 2000000, 500000, 300000, 100000 };
+	static int[] festive2 = new int[65];
+	static int[] money2 = { 0, 5120000, 2560000, 1280000, 640000, 320000 };
+
+	static int p(int a) {
+		int n = 1;
+		if (a == 1)
+			return 1;
+
+		for (int i = 1; i < a; i++) {
+			n = n * 2;
+		}
+		return n;
+	}
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int t = Integer.parseInt(br.readLine());
+		int a, b;
+		int count = 1;
+
+		for (int i = 1; i <= 6; i++) {
+			for (int j = 1; j <= i; j++) {
+				festive1[count] = money1[i];
+				count++;
+			}
+		}
+
+		count = 1;
+		for (int i = 1; i < 6; i++) {
+			int num = p(i);
+			for (int j = 1; j <= num; j++) {
+				festive2[count] = money2[i];
+				count++;
+			}
+		}
+
+		StringTokenizer st;
+		for (int i = 0; i < t; i++) {
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			int num = festive1[a] + festive2[b];
+			
+			bw.write(String.valueOf(num));
+			bw.newLine();
+		}
+		
+		br.close();
+		bw.flush();
+		bw.close();
+	}
+}

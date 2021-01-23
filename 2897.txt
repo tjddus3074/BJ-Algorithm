@@ -1,0 +1,74 @@
+import java.util.*;
+import java.io.*;
+
+import java.math.*;
+
+public class Main {
+	
+	static int n, m, k;
+	static int[] dx = {0, 0, 1, 1};
+	static int[] dy = {0, 1, 0, 1};
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		char[][] arr = new char[n][m];
+		int[] brr = new int[5];
+		
+		for(int i=0; i<n; i++) {
+			String t = br.readLine();
+			for(int j=0; j<t.length(); j++) {
+				char a = t.charAt(j);
+				arr[i][j] = a;
+			}
+		}
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(arr[i][j] == '#')
+					continue;
+				
+				int num = 0;
+				int flag = 0;
+				for(int l=0; l<4; l++) {
+					int nx = i + dx[l];
+					int ny = j + dy[l];
+					
+					if(!isrange(nx, ny)) {
+						flag = 1;
+						break;
+					}
+					
+					if(arr[nx][ny] == '#') {
+						flag = 1;
+						break;
+					}
+					
+					if(arr[nx][ny] == 'X')
+						num++;
+				}
+				
+				if(flag == 1)
+					continue;
+				else
+					brr[num] ++;
+			}
+		}
+		
+		for(int i=0; i<5; i++) {
+			System.out.println(brr[i]);
+		}
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+
+}

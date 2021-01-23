@@ -1,0 +1,28 @@
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Arrays;
+
+public class Main{
+	static long a, b, c, d, e;
+	static double[] arr = new double[3];
+	
+	static void Init() throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		a = Long.parseLong(st.nextToken());
+		b = Long.parseLong(st.nextToken());
+		
+		if(a==b)
+			System.out.print(1);
+		else
+			System.out.print(0);;
+		
+	}
+	
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+	}
+}

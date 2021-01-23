@@ -1,0 +1,55 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+import java.math.BigDecimal;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[] visit;
+	
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		//char a = 'a';  97
+		//char A = 'A';  65
+		
+		brr = new int[6];
+		for(int i=0; i<5; i++) {
+			int sum = 1;
+			for(int j=1; j<=i+1; j++) {
+				sum*=j;
+			}
+			
+			brr[i] = sum;
+		}
+		
+		while (true) {
+			String t = br.readLine();
+			if(t.contentEquals("0"))
+				break;
+			int sum = 0;
+			int count = 0;
+			for (int i = t.length() - 1; i >= 0; i--) {
+				int a = t.charAt(i) - '0';
+				sum += a * brr[count];
+				count++;
+			}
+
+			System.out.println(sum);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

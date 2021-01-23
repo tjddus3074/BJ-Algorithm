@@ -1,0 +1,157 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+class Node {
+	int x;
+	int y;
+
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+	static char[][] arr = new char[12][6];
+	static int[] dx = { -1, 1, 0, 0 };
+	static int[] dy = { 0, 0, -1, 1 };
+	static boolean[][] visit = new boolean[12][6];
+	static int count = 0;
+	static int cflag = 0;
+
+	static void Init() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		StringTokenizer st;
+
+		for (int i = 0; i < 12; i++) {
+			String t = br.readLine();
+			for (int j = 0; j < 6; j++)
+				arr[i][j] = t.charAt(j);
+		}
+
+		while (true) {
+			cflag = 0;
+			visit = new boolean[12][6];
+			for (int i = 0; i < 12; i++) {
+				for (int j = 0; j < 6; j++) {
+					if (visit[i][j])
+						continue;
+					if (arr[i][j] == '.') {
+						visit[i][j] = true;
+						continue;
+					}
+					if (arr[i][j] != '.')
+						bfs(i, j);
+				}
+			}
+			if (cflag == 1)
+				count++;
+			if(cflag == 0)
+				break;
+
+			for (int j = 0; j < 6; j++) {
+				ArrayList<Character> a = new ArrayList<>();
+				int flag = 0;
+				for (int i = 11; i >= 0; i--) {
+					if (arr[i][j] != '.') {
+						a.add(arr[i][j]);
+						flag = 1;
+					}
+				}
+				if (flag == 0) // .밖에 없을떄
+					continue;
+
+				for (int i = 0; i < 12 - a.size(); i++)
+					arr[i][j] = '.';
+
+				int c = a.size()-1;
+				for (int i = 12 - a.size(); i < 12; i++) {
+					arr[i][j] = a.get(c);
+					c--;
+				}
+			}
+
+//			info();
+		}
+		System.out.println(count);
+	}
+
+	static void info() {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 6; j++) {
+				System.out.print(arr[i][j]);
+			}
+			System.out.print("\n");
+		}
+	}
+
+	static boolean isRange(int x, int y) {
+		if (x < 0 || x >= 12 || y < 0 || y >= 6)
+			return false;
+		return true;
+	}
+
+	static void bfs(int x, int y) { // 갯수 확인하고, 제거작업까지
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(x, y));
+		char a = arr[x][y];
+		visit[x][y] = true;
+		int count = 1;
+
+		while (!q.isEmpty()) {
+			Node t = q.poll();
+
+			for (int i = 0; i < 4; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+
+				if (!isRange(nx, ny))
+					continue;
+				if (visit[nx][ny])
+					continue;
+
+				if (arr[nx][ny] == a) {
+					visit[nx][ny] = true;
+					q.add(new Node(nx, ny));
+					count++;
+				}
+
+				if (count >= 4) {
+					delete(x, y);
+					cflag = 1;
+					return;
+				}
+
+			}
+		}
+	}
+
+	static void delete(int x, int y) {
+		char a = arr[x][y];
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(x, y));
+		arr[x][y] = '.';
+
+		while (!q.isEmpty()) {
+			Node t = q.poll();
+			for (int i = 0; i < 4; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+
+				if (!isRange(nx, ny))
+					continue;
+
+				if (arr[nx][ny] == a) {
+					q.add(new Node(nx, ny));
+					arr[nx][ny] = '.';
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

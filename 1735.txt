@@ -1,0 +1,64 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main{
+	static int a1, a2, b1, b2;
+	static int c1, c2;
+	static int mo, ja;
+	static int max, min;
+	
+	static void Init() throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		a1 = Integer.parseInt(st.nextToken());
+		a2 = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		b1 = Integer.parseInt(st.nextToken());
+		b2 = Integer.parseInt(st.nextToken());
+		
+		for(int i=1; i<=b2; i++) {
+			int sum = a2 * i;
+			if(sum % b2 ==0) {
+				c2 = sum/b2;
+				c1 = i;
+				break;
+			}
+		}
+		mo = c1*a2;
+		ja = c1*a1 + c2*b1;
+		max = Math.max(mo, ja);
+		min = Math.min(mo, ja);
+		
+		while(true) {
+			int flag = 0;
+			for(int i=2; i<=min; i++) {
+				if(max%i == 0 && min%i ==0) {
+					max = max/i;
+					min = min/i;
+					flag = 1;
+					break;
+				}
+			}
+			
+			if(flag == 0)
+				break;
+		}
+		
+		if(mo>ja) {
+			System.out.println(min);
+			System.out.println(max);
+		}
+		else {
+			System.out.println(max);
+			System.out.println(min);
+		}
+	}
+	
+	public static void main(String [] args) throws IOException {
+		Init();
+		
+	}
+}

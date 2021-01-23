@@ -1,0 +1,62 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		Set<Character> set = new HashSet<>();
+		set.add('&');
+		set.add('*');
+		set.add('[');
+		set.add(']');
+		String[] t = br.readLine().split(" ");
+		for(int i=1; i<t.length; i++) {
+			String bbb = "";
+			String temp = t[i];
+			String name = "";
+			for(int j=0; j<temp.length(); j++) {
+				char a = temp.charAt(j);
+				if(!set.contains(a) && a != ',' && a != ';') {
+					name += a;
+				}
+				
+				if(set.contains(a)) {
+					if(a == '[')
+						bbb += ']';
+					else if(a ==']')
+						bbb += '[';
+					else
+						bbb += a;
+				}
+			}
+			
+			System.out.print(t[0]);
+			for(int j=bbb.length()-1; j>=0; j--)
+				System.out.print(bbb.charAt(j));
+			
+			System.out.println(" " + name + ";");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

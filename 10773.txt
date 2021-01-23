@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main() {
+	int arr[100000];
+	int k; scanf(" %d", &k);
+	int count = 0;
+	int setnum = 0;
+
+	for (int i = 0; i < k; i++) {
+		int n;
+		scanf(" %d", &n);
+
+		if (n == 0) {
+			arr[count] = 0;
+			count--;
+		}
+		else {
+			arr[count] = n;
+			count++;
+		}
+	}
+
+	for (int i = 0; i < count; i++) {
+		setnum += arr[i];
+	}
+
+	printf("%d\n", setnum);
+}

@@ -1,0 +1,61 @@
+import java.io.IOException; //백준
+import java.math.BigInteger;
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		ArrayList<Integer> a = new ArrayList<>();
+		Set<Integer> b = new HashSet<>();
+		PriorityQueue<Integer> q = new PriorityQueue<>((o1, o2) -> o1 - o2);
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int aa = Integer.parseInt(st.nextToken());
+			a.add(aa);
+		}
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) {
+			int bb = Integer.parseInt(st.nextToken());
+			b.add(bb);
+		}
+		
+		for(int i=0; i<n; i++) {
+			if(!b.contains(a.get(i)))
+				q.add(a.get(i));
+		}
+		
+		if(q.isEmpty())
+			System.out.print(0);
+		else {
+			System.out.println(q.size());
+			while(!q.isEmpty()) {
+				int aa = q.poll();
+				System.out.print(aa + " ");
+			}
+		}
+	}
+		
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

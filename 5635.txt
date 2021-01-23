@@ -1,0 +1,92 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+	
+	static class Node{
+		String name;
+		int day;
+		int month;
+		int year;
+		
+		public Node(String n, int d, int m, int y) {
+			this.name = n;
+			this.day = d;
+			this.month = m;
+			this.year = y;
+		}
+		
+	}
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static int[] dx = {1, 0, -1, 0};
+	static int[] dy = {0, 1, 0, -1};
+
+	static void Init() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+		
+		ArrayList<Node> list = new ArrayList<>();
+		int miny = Integer.MIN_VALUE;
+		int maxy = Integer.MAX_VALUE;
+		Node min = new Node("", 0, 0, 0);
+		Node max = new Node("", 0, 0, 0);
+		
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			String name = st.nextToken();
+			int d = Integer.parseInt(st.nextToken());
+			int m = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+			if(y>miny) {
+				min = new Node(name, d, m, y);
+				miny = y;
+			}
+			if(y<maxy) {
+				max = new Node(name, d, m, y);
+				maxy = y;
+			}
+			
+			list.add(new Node(name, d, m, y));
+		}
+		
+		for(int i=0; i<n; i++) {
+			Node t = list.get(i);
+			if(!min.name.contentEquals(t.name)) {
+				if(min.year == t.year) {
+					if(t.month > min.month)
+						min = t;
+					else if(t.month == min.month) {
+						if(t.day > min.day)
+							min = t;
+					}
+				}
+			}
+			
+			if(!max.name.contentEquals(t.name)) {
+				if(max.year == t.year) {
+					if(t.month < max.month)
+						max = t;
+					else if(t.month == max.month) {
+						if(t.day < max.day) max = t;
+					}
+				}
+			}
+		}
+		
+		System.out.print(min.name + "\n" + max.name);
+	}
+	
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

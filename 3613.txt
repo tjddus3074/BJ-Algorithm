@@ -1,0 +1,124 @@
+import java.io.IOException; //백준
+import java.io.*;
+//import java.util.StringTokenizer;
+import java.util.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int[] brr;
+	static boolean[][] visit;
+	
+	static int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+	static int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
+	
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		int java = 0;  		//1이면 자바 2이면 c++
+		String t = br.readLine();
+		String temp = "";
+		
+		int flag = 0;
+		int underbar = 0;
+		
+		if(!(t.charAt(0) >= 'a' && t.charAt(0) <= 'z')) {
+			flag = 1;
+		}
+		
+		
+		for(int i=0; i<t.length(); i++) {
+			char a = t.charAt(i);
+			if(a >= 'A' && a<= 'Z') {
+				if(java == 2) {
+					flag = 1;
+					break;
+				}
+				java = 1;
+				underbar = 0;
+			}
+			else if(a == '_') {
+				if(java == 1) {
+					flag = 1;
+					break;
+				}
+				
+				if(underbar == 1) {
+					flag =1 ;
+					break;
+				}
+				
+				java = 2;
+				underbar = 1;
+			}
+			else if(a>='a' && a<='z') {
+				underbar = 0;
+				continue;
+			}
+			else {
+				System.out.print("Error!");
+				return;
+			}
+		}
+		
+		if(java == 2 && t.charAt(t.length()-1) == '_')
+			flag = 1;
+		
+		if(flag == 1) {
+			System.out.print("Error!");
+			return;
+		}
+		
+		
+		if(java == 1) {
+			for(int i=0; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(a>='A' && a<='Z') {
+					int b = a +32;
+					char c = (char)b;
+					
+					temp += '_';
+					temp += c;
+				}
+				else
+					temp +=a;
+			}
+		}
+		else {
+			flag = 0;
+			for(int i=0; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(a == '_') {
+					flag = 1;
+					continue;
+				}
+				else {
+					if(flag == 1) {
+						int b = a - 32;
+						char c = (char)b;
+						temp += c;
+						flag = 0;
+					}
+					else
+						temp +=a;
+				}
+			}
+		}
+		
+		System.out.print(temp);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+}

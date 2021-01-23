@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int arr[302][302];
+
+int main() {
+	int y, x;
+	scanf(" %d %d", &y, &x);
+	for (int i = 1; i <= y; i++) {
+		for (int j = 1; j <= x; j++) {
+			scanf(" %d", &arr[i][j]);
+		}
+	}
+	int n;
+	scanf(" %d", &n);
+	for (int t = 0; t < n; t++) {
+		int x1, x2, y1, y2;
+		int count = 0;
+		scanf(" %d %d %d %d", &x1, &y1, &x2, &y2);
+		for (int i = x1; i <= x2; i++) {
+			for (int j = y1; j <= y2; j++) {
+				count = count + arr[i][j];
+			}
+		}
+		printf("%d\n", count);
+	}
+
+}
