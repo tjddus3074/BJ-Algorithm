@@ -1,0 +1,92 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int num;
+	int count;
+	int clip;
+	
+	public Node(int num, int count) {
+		this.num = num;
+		this.count = count;
+		this.clip = 0;
+	}
+	
+	public Node(int num, int count, int clip) {
+		this.num = num;
+		this.count = count;
+		this.clip = clip;
+	}
+}
+
+public class Main {
+
+	static int n, m, k, h;
+	static int min = 0;
+	static boolean[][] visit;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		visit = new boolean[1501][1501];
+		bfs();
+		System.out.print(min);
+	}
+	
+	static void bfs() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(1, 0));
+		
+		while(!q.isEmpty()) {
+			Node o = q.poll();
+			if(o.num>1500 || o.num<0)
+				continue;
+			
+			if(visit[o.num][o.clip])
+				continue;
+			
+			if(o.num == n) {
+				min = o.count;
+				break;
+			}
+			
+			visit[o.num][o.clip] = true;
+			
+			if(o.num > n) {
+				q.add(new Node((o.num-1), o.count+1));
+				continue;
+			}
+			
+			if(o.clip != 0) {
+				q.add(new Node((o.num + o.clip), o.count+1, o.clip));
+				if(o.num != o.clip)
+					q.add(new Node(o.num, o.count+1, o.num));
+			}
+			else {
+				q.add(new Node(o.num, o.count+1, o.num));
+			}
+			
+			q.add(new Node(o.num-1, o.count+1, o.clip));
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

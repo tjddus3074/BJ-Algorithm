@@ -1,0 +1,82 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] dp;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n+1];
+		dp = new int[n+1];
+		dp[1] = 0;
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		Stack<Integer> stack = new Stack<>();
+		
+		for(int i=n; i>=1; i--) {
+			if(stack.isEmpty()) {
+				stack.push(i);
+				continue;
+			}
+			
+			if(arr[stack.peek()] > arr[i])
+				stack.push(i);
+			else {
+				while(true) {
+					if(stack.isEmpty())
+						break;
+
+					if (arr[stack.peek()] > arr[i]) 
+						break;
+					else {
+						int num = stack.pop();
+						dp[num] = i;
+					}
+				}
+				stack.push(i);
+			}
+		}
+		
+		if(!stack.isEmpty()) {
+			while(!stack.isEmpty()) {
+				int num = stack.pop();
+				dp[num] = 0;
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i=1; i<=n; i++) {
+			sb.append(dp[i] + " ");
+		}
+		
+		System.out.print(sb);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

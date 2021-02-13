@@ -1,0 +1,148 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static boolean[][] visit;
+	static boolean[][] airvisit;
+	static int min = 0;
+	static int count = 0;
+	static int[] dx = {0, 1, 0, -1};
+	static int[] dy = {1, 0, -1, 0};
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		arr = new int[n][m];
+		int num = 0;
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<m; j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+				if(arr[i][j] == 1)
+					num++;
+			}
+		}
+		
+		min = num;
+		
+		while(true) {
+			count++;
+			visit = new boolean[n][m];
+			airvisit = new boolean[n][m];
+			air();
+			chzmelt();
+			if(chz())
+				break;
+		}
+		
+		System.out.print(count + "\n" + min);
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x <0 || x>= n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+	
+	static void air() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(0, 0));
+		airvisit[0][0] = true;
+		
+		while(!q.isEmpty()) {
+			Node o = q.poll();
+			for(int i=0; i<4; i++) {
+				int nx = o.x + dx[i];
+				int ny = o.y + dy[i];
+				
+				if(!isrange(nx, ny))
+					continue;
+				if(arr[nx][ny] == 1)
+					continue;
+				if(airvisit[nx][ny])
+					continue;
+				
+				airvisit[nx][ny] = true;
+				q.add(new Node(nx, ny));
+			}
+		}
+	}
+	
+	static void chzmelt() {
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(arr[i][j] == 1) {
+					int flag = 0;
+					for(int l=0; l<4; l++) {
+						int nx = i + dx[l];
+						int ny = j + dy[l];
+						if(!isrange(nx, ny))
+							continue;
+						
+						if(arr[nx][ny] == 0 && airvisit[nx][ny] == true) {
+							flag= 1;
+							break;
+						}
+					}
+					
+					if(flag == 1)
+						arr[i][j] = 0;
+				}
+			}
+		}
+	}
+	
+	static boolean chz() {
+		int flag = 0;
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(arr[i][j] == 1) {
+					flag++;
+				}
+			}
+		}
+		
+		if(flag == 0)
+			return true;
+		else {
+			min = Math.min(min, flag);
+			return false;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

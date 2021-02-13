@@ -1,0 +1,84 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr = new int[100001];
+	static int min = Integer.MAX_VALUE;
+	static int count = 0;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		if(n >= k) {
+			System.out.println((n-k) + "\n1");
+			return;
+		}
+		
+		bfs();
+		
+		System.out.println(min + "\n" + count);
+	}
+	
+	static void bfs() {
+		Queue<Integer> q = new LinkedList<>();
+		
+		q.add(n);
+		arr[n] = 1;
+		
+		while(!q.isEmpty()) {
+			int now = q.poll();
+			
+			if(min < arr[now])
+				return;
+			
+			for(int i=0; i<3; i++) {
+				int nx;
+				
+				if(i == 0)
+					nx = now+1;
+				else if(i == 1)
+					nx = now-1;
+				else
+					nx = now*2;
+				
+				if(nx<0 || nx>100000)
+					continue;
+				
+				if(nx == k) {
+					min = arr[now];
+					count++;
+				}
+				
+				if(arr[nx] == 0 || arr[nx] == arr[now] +1) {
+					q.add(nx);
+					arr[nx] = arr[now] + 1;
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

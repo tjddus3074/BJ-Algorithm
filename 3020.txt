@@ -1,0 +1,71 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static int[] dpup;
+	static int[] dpdown;
+	static int[] arr;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		h = Integer.parseInt(st.nextToken());
+		
+		dpup = new int[h+1];
+		dpdown = new int[h+1];
+		
+		for(int i=0; i<n/2; i++) {
+			dpdown[Integer.parseInt(br.readLine())] ++;
+			dpup[Integer.parseInt(br.readLine())] ++;
+		}
+		
+		int[] dpupsum = new int[h+1];
+		int[] dpdownsum = new int[h+1];
+		
+		for(int i=1; i<=h; i++) {
+			dpupsum[i] = dpupsum[i-1] + dpup[i];
+			dpdownsum[i] = dpdownsum[i-1] + dpdown[i];
+		}
+		
+		int min = n;
+		int count = 0;
+		
+		for(int i=1; i<=h; i++) {
+			int a = 0;
+			a += dpdownsum[h] - dpdownsum[i-1];
+			a += dpupsum[h] - dpupsum[h-i];
+			
+			if(a < min) {
+				min = a;
+				count = 1;
+			}
+			else if(a == min)
+				count++;
+		}
+		
+		System.out.println(min + " " + count);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

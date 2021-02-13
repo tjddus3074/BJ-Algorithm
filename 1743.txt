@@ -1,0 +1,114 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static boolean[][] visit;
+	static int[] dx = {0, 1, 0, -1};
+	static int[] dy = {1, 0, -1, 0};
+	static int max = Integer.MIN_VALUE;
+	static int count = 0;
+
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		arr = new int[n][m];
+		visit = new boolean[n][m];
+		
+		while(k-->0) {
+			int a, b;
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			
+			arr[a-1][b-1] = 1;
+		}
+		
+		if(k == 1) {
+			System.out.println(1);
+			return;
+		}
+		
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				if(arr[i][j] == 0)
+					visit[i][j] = true;
+				else if(visit[i][j] == true)
+					continue;
+				else if(arr[i][j] == 1)
+					bfs(i, j);
+			}
+		}
+		
+		System.out.println(max);
+	}
+	
+	static void bfs(int x, int y) {
+		Queue<Node> q = new LinkedList<>();
+		visit[x][y] = true;
+		q.add(new Node(x, y));
+		int sum = 1;
+		while(!q.isEmpty()) {
+			Node t = q.poll();
+			for(int i=0; i<4; i++) {
+				int nx = t.x + dx[i];
+				int ny = t.y + dy[i];
+				
+				if(isrange(nx, ny) == false)
+					continue;
+				
+				if(visit[nx][ny] == true)
+					continue;
+				
+				if(arr[nx][ny] == 1) {
+					visit[nx][ny] = true;
+					sum++;
+					q.add(new Node(nx, ny));
+				}
+			}
+		}
+		
+		max = Math.max(max, sum);
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

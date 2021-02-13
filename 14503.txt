@@ -1,0 +1,128 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int x;
+	int y;
+	
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int rx, ry, rd;
+	static boolean visit[][];
+	static int[] dx = {-1, 0, 1, 0};
+	static int[] dy = {0, 1, 0, -1};			//북동남서
+	static int clean = 1;
+	static Node robot;
+	static boolean[] cleanup;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new int[n][m];
+		visit = new boolean[n][m];
+		
+		st = new StringTokenizer(br.readLine());
+		rx = Integer.parseInt(st.nextToken());
+		ry = Integer.parseInt(st.nextToken());
+		rd = Integer.parseInt(st.nextToken());
+		
+		robot = new Node(rx, ry);
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<m; j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		
+		arr[rx][ry] = 9;
+		visit[rx][ry] = true;
+		bfs();
+		
+		System.out.print(clean);
+	}
+	
+	static void bfs() {
+		
+		while(true) {
+			int flag = 0;
+			for (int i = 0; i < 4; i++) {
+				rd = rd - 1;
+				if (rd < 0)
+					rd = 3;
+				int nx = rx + dx[rd];
+				int ny = ry + dy[rd];
+				
+				if(!isrange(nx, ny))
+					continue;
+				
+				if(arr[nx][ny] == 0) {
+					arr[nx][ny] = 9;
+					clean++;
+					flag = 1;
+					rx = nx;
+					ry = ny;
+					break;
+				}
+			}
+			
+			if(flag == 0) {
+				int nx = rx - dx[rd];
+				int ny = ry - dy[rd];
+				
+				if(!isrange(nx,ny))
+					return;
+				if(arr[nx][ny] == 1)
+					return;
+				
+				
+				rx = nx;
+				ry = ny;
+			}
+		}
+		
+	}
+	
+	static boolean allclean() {		//네방향 모두 확인했으면 true
+		for(int i=0; i<4; i++) {
+			if(cleanup[i] == false)
+				return false;
+		}
+		return true;
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>= m)
+			return false;
+		return true;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

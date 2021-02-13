@@ -1,0 +1,156 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node {
+	int x;
+	int y;
+	int count = 0;
+
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int dp[][];
+	static char[][] arr;
+	static ArrayList<Node> water = new ArrayList<>();
+	static Node s;
+	static Node d;
+	static int min = Integer.MAX_VALUE;
+	static char[][] visit;
+	static int dx[] = { 0, 1, 0, -1 };
+	static int dy[] = { 1, 0, -1, 0 };
+
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+
+		arr = new char[n][m];
+		visit = new char[n][m];
+		for (int i = 0; i < n; i++)
+			arr[i] = br.readLine().toCharArray();
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (arr[i][j] == 'D') {
+					d = new Node(i, j);
+				}
+
+				if (arr[i][j] == 'S')
+					s = new Node(i, j);
+
+				if (arr[i][j] == '*') {
+					water.add(new Node(i, j));
+				}
+
+				visit[i][j] = arr[i][j];
+			}
+		}
+
+		bfs();
+
+		if (min == Integer.MAX_VALUE)
+			System.out.print("KAKTUS");
+		else
+			System.out.print(min);
+	}
+
+	static void bfs() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(s);
+		for (int i = 0; i < water.size(); i++)
+			q.add(water.get(i));
+
+		while (!q.isEmpty()) {
+			Node o = q.poll();
+			char a = visit[o.x][o.y];
+
+			if (a == 'S') {
+				for (int i = 0; i < 4; i++) {
+					int nx = o.x + dx[i];
+					int ny = o.y + dy[i];
+
+					if (!isrange(nx, ny))
+						continue;
+
+					if (visit[nx][ny] == '*' || visit[nx][ny] == 'X' || visit[nx][ny] == 'S')
+						continue;
+					
+					if(visit[nx][ny] == 'D') {
+						Node temp = new Node(nx, ny);
+						temp.count = o.count + 1;
+						q.add(temp);
+						continue;
+					}
+					
+					Node temp = new Node(nx, ny);
+					temp.count = o.count + 1;
+					visit[nx][ny] = 'S';
+					q.add(temp);
+				}
+			} 
+			else if (a == '*') {
+				for (int i = 0; i < 4; i++) {
+					int nx = o.x + dx[i];
+					int ny = o.y + dy[i];
+
+					if (!isrange(nx, ny))
+						continue;
+
+					if (visit[nx][ny] == 'X' || visit[nx][ny] == 'D' || visit[nx][ny] == '*')
+						continue;
+
+					if (visit[nx][ny] == '.' || visit[nx][ny] == 'S') {
+						visit[nx][ny] = '*';
+						q.add(new Node(nx, ny));
+					}
+				}
+			}
+			else if(a == 'D') {
+				min = Math.min(min, o.count);
+			}
+		}
+	}
+
+	static boolean isrange(int x, int y) {
+		if (x < 0 || x >= n || y < 0 || y >= m)
+			return false;
+		return true;
+	}
+
+	static void show() {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				System.out.print(visit[i][j]);
+			}
+			System.out.print("\n");
+		}
+		System.out.println("----------------------------------------");
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

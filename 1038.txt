@@ -1,0 +1,61 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		if(n > 1022) {
+			System.out.print(-1);
+			return;
+		}
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		for(int i=0; i<10; i++) {
+			getnum(i, 1, list);
+		}
+		
+		Collections.sort(list);
+		
+		System.out.print(list.get(n));
+	}
+	
+	static ArrayList getnum(long num, int temp, ArrayList list) {
+		if(temp > 10)
+			return list;
+		
+		list.add(num);
+		
+		for(int i=0; i<10; i++) {
+			if(num%10 > i) {
+				getnum((num*10) + i, temp + 1, list);
+			}
+		}
+		
+		return list;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

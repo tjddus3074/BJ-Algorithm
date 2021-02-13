@@ -1,0 +1,70 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int val;
+	int index;
+	
+	public Node(int val, int index) {
+		this.val = val;
+		this.index = index;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int l;
+	static int[] arr;
+	static int[] dp;
+
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		StringBuilder sb = new StringBuilder();
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		l = Integer.parseInt(st.nextToken());
+		arr = new int[n];
+		
+		Deque<Node> q = new LinkedList<>();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			int temp = Integer.parseInt(st.nextToken());
+			
+			while(!q.isEmpty() && q.getLast().val > temp) {
+				q.removeLast();
+			}
+			
+			q.addLast(new Node(temp, i));
+			
+			if(q.getFirst().index <= i-l) {
+				q.removeFirst();
+			}
+			
+			sb.append(q.getFirst().val + " ");
+		}
+		
+		System.out.print(sb);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

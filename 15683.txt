@@ -1,0 +1,154 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int num;
+	int[][] map;
+	
+	public Node(int num, int[][] map){
+		this.num = num;
+		this.map = map;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int map[][];
+	static int min = 0;
+	static ArrayList<int[]> list = new ArrayList<>();
+	static int dx[] = {-1, 0, 1, 0};
+	static int dy[] = {0, 1, 0, -1};
+	static int[][] stat = { 
+			{ 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 }, 
+			{ 1, 0, 1, 0 }, { 0, 1, 0, 1 }, { 1, 1, 0, 0 }, { 0, 1, 1, 0 }, 
+			{ 0, 0, 1, 1 }, { 1, 0, 0, 1 }, { 1, 1, 1, 0 }, { 0, 1, 1, 1 }, 
+			{ 1, 0, 1, 1 }, { 1, 1, 0, 1 }, { 1, 1, 1, 1 } 
+			};
+
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		map = new int[n][m];
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0; j<m; j++) {
+				map[i][j] = Integer.parseInt(st.nextToken());
+				if(map[i][j] == 0) 
+					min++;
+				
+				if(map[i][j] > 0 && map[i][j] <6)
+					list.add(new int[] {i, j});
+			}
+		}
+		
+		bfs(map, min);
+		System.out.print(min);
+	}
+	
+	static void bfs(int[][] map, int n) {
+		Queue<Node> q =new LinkedList<>();
+		q.add(new Node(n, map));
+		
+		for(int i=0; i<list.size(); i++) {
+			int len = q.size();
+			
+			for(int t = 0; t<len; t++) {
+				Node m = q.poll();
+				int num = m.num;
+				int x = list.get(i)[0];
+				int y = list.get(i)[1];
+				
+				if(map[x][y] == 1) {
+					q.add(cctv(m.map, x, y, num, stat[0]));
+					q.add(cctv(m.map, x, y, num, stat[1]));
+					q.add(cctv(m.map, x, y, num, stat[2]));
+					q.add(cctv(m.map, x, y, num, stat[3]));
+				}
+				
+				if(map[x][y] == 2) {
+					q.add(cctv(m.map, x, y, num, stat[4]));
+					q.add(cctv(m.map, x, y, num, stat[5]));
+				}
+				if(map[x][y] == 3) {
+					q.add(cctv(m.map, x, y, num, stat[6]));
+					q.add(cctv(m.map, x, y, num, stat[7]));
+					q.add(cctv(m.map, x, y, num, stat[8]));
+					q.add(cctv(m.map, x, y, num, stat[9]));
+				}
+				if(map[x][y] == 4) {
+					q.add(cctv(m.map, x, y, num, stat[10]));
+					q.add(cctv(m.map, x, y, num, stat[11]));
+					q.add(cctv(m.map, x, y, num, stat[12]));
+					q.add(cctv(m.map, x, y, num, stat[13]));
+				}
+				if(map[x][y] == 5)
+					q.add(cctv(m.map, x, y, num, stat[14]));
+			}
+		}
+	}
+	
+	static Node cctv(int[][] map, int x, int y, int num, int[] status) {
+		int[][] result = copy(map);
+		
+		for(int i=0; i<4; i++) {
+			if(status[i] == 0)
+				continue;
+			int nx = x;
+			int ny = y;
+			while(true) {
+				nx = nx + dx[i];
+				ny = ny + dy[i];
+				
+				if(!isrange(nx, ny))
+					break;
+				if(result[nx][ny] == 6)
+					break;
+				if(result[nx][ny] == 0) {
+					result[nx][ny] = 8;
+					num--;
+				}
+			}
+		}
+		
+		if(min > num)
+			min = num;
+		return new Node(num, result);
+	}
+	
+	static int[][] copy(int [][]map){
+		int[][] result = new int[n][m];
+		for(int i=0; i<n; i++) {
+			System.arraycopy(map[i], 0, result[i], 0, m);
+		}
+		return result;
+	}
+	
+	static boolean isrange(int x, int y) {
+		if(x<0 || y<0 || x>=n || y>=m)
+			return false;
+		return true;
+	}
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

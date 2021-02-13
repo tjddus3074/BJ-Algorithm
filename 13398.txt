@@ -1,0 +1,63 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static int[] arr;
+	static int[] dp1, dp2;
+	static int ans;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++)
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		dp1 = new int[n];
+		dp1[0] = arr[0];
+		ans = dp1[0];
+		
+		for(int i=1; i<n; i++) {
+			dp1[i] = Math.max(dp1[i-1] + arr[i], arr[i]);
+			ans = Math.max(ans, dp1[i]);
+		}
+		
+		dp2 = new int[n];
+		dp2[n-1] = arr[n-1];
+		
+		for(int i=n-2; i>=0; i--) {
+			dp2[i] = Math.max(dp2[i+1] + arr[i], arr[i]);
+		}
+		
+		for(int i=1; i<n-1; i++) {
+			int temp = dp1[i-1] + dp2[i+1];
+			ans = Math.max(ans, temp);
+		}
+		
+		System.out.print(ans);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

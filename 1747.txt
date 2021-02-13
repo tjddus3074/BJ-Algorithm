@@ -1,0 +1,74 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static boolean[] era = new boolean[1003002];		//false면 소수
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		eratos();
+		n = Integer.parseInt(br.readLine());
+		
+		for(int i=n; i<=1003001; i++) {
+			if(era[i] == true)
+				continue;
+			
+			if(felin(i)) {
+				System.out.print(i);
+				break;
+			}
+		}
+	}
+	
+	static boolean felin(int n) {
+		String t = Integer.toString(n);
+		boolean flag = true;
+		for(int i=0; i<t.length(); i++) {
+			int a = i;
+			int b = t.length() - 1 - i;
+			if(a>b)
+				break;
+			
+			if(t.charAt(a) != t.charAt(b)) {
+				flag = false;
+				break;
+			}
+		}
+		
+		return flag;
+	}
+	
+	static void eratos() {
+		era[1] = true;
+		for(int i=2; i<1003002; i++) {
+			if(era[i] == true)
+				continue;
+			
+			for(int j=2; i*j<1003002; j++) {
+				era[i*j] = true;
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

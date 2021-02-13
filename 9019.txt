@@ -1,0 +1,78 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		k = Integer.parseInt(br.readLine());
+		while(k-->0) {
+			st = new StringTokenizer(br.readLine());
+			n = Integer.parseInt(st.nextToken());
+			m = Integer.parseInt(st.nextToken());
+			
+			String ans[] = new String[10000];
+			boolean[] visit = new boolean[10000];
+			Queue<Integer> q = new LinkedList<>();
+			
+			visit[n] = true;
+			q.add(n);
+			Arrays.fill(ans, "");
+			while(!q.isEmpty() && !visit[m]) {
+				int now = q.poll();
+				int d = (now*2) % 10000;
+				int s = (now == 0) ? 9999 : now-1;
+				int l = (now % 1000) * 10 + now/1000;
+				int r = (now%10) * 1000 + now/10;
+				
+				if(!visit[d]) {
+					q.add(d);
+					visit[d] = true;
+					ans[d] = ans[now] + "D";
+				}
+				
+				if(!visit[s]) {
+					q.add(s);
+					visit[s] = true;
+					ans[s] = ans[now] + "S";
+				}
+				
+				if(!visit[l]) {
+					q.add(l);
+					visit[l] = true;
+					ans[l] = ans[now] + "L";
+				}
+				
+				if(!visit[r]) { 
+					q.add(r);
+					visit[r] = true;
+					ans[r] = ans[now] + "R";
+				}
+			}
+			
+			System.out.println(ans[m]);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

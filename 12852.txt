@@ -1,0 +1,63 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static ArrayList<Integer> list = new ArrayList<>();
+	static int[] dp;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st; 
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		
+		dp = new int[n+1];
+		dp[0] = dp[1] = 0;
+		for(int i=2; i<=n; i++) {
+			dp[i] = dp[i-1]+1;
+			if(i%3 == 0)
+				dp[i] = Math.min(dp[i], dp[i/3]+1);
+			if(i%2 == 0)
+				dp[i] = Math.min(dp[i], dp[i/2]+1);
+		}
+		
+		System.out.println(dp[n]);
+		print(n);
+	}
+	
+	public static void print(int num) {
+		if(num == 0)
+			return;
+		
+		System.out.print(num + " ");
+		
+		if(num-1 >= 0 && dp[num-1] == dp[num]-1)
+			print(num-1);
+		else if(num%3 == 0 && dp[num/3] == dp[num]-1)
+			print(num/3);
+		else if(num%2 == 0 && dp[num/2] == dp[num]-1)
+			print(num/2);
+		
+		return;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

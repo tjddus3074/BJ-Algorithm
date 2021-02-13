@@ -1,0 +1,92 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static char[] arr;
+	static boolean[] visit;
+	static StringBuilder sb = new StringBuilder();
+	static Set<Character> set = new HashSet<>();
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st; 
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		set.add('a');
+		set.add('e');
+		set.add('i');
+		set.add('o');
+		set.add('u');
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new char[m];
+		visit = new boolean[m];
+		String t = br.readLine();
+		int cnt = 0;
+		for(int i=0; i<t.length(); i++) {
+			if(t.charAt(i) == ' ')
+				continue;
+			
+			char a = t.charAt(i);
+			arr[cnt] = a;
+			cnt++;
+		}
+		
+		Arrays.sort(arr);
+		String temp = "";
+		dfs(temp, 0);
+		System.out.print(sb);
+	}
+	
+	static void dfs(String t, int count) {
+		if(t.length()!= n && count>=m)
+			return;
+		if(t.length() == n) {
+			int aei = 0;
+			int ou = 0;
+			for(int i=0; i<t.length(); i++) {
+				char a = t.charAt(i);
+				if(set.contains(a))
+					aei++;
+				else
+					ou++;
+			}
+			
+			if(aei >=1 && ou>=2)
+				sb.append(t + "\n");
+			
+			return;
+		}
+		
+		for(int i=count; i<m; i++) {
+			if(visit[i] == true)
+				continue;
+			
+			visit[i] = true;
+			String temp = t;
+			temp += arr[i];
+			dfs(temp, i+1);
+			visit[i] = false;
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

@@ -1,0 +1,76 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static boolean[][] visit = new boolean[201][201];
+	static boolean[] ans = new boolean[201];
+
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		dfs(0, 0, k);
+		for(int i=0; i<201; i++) {
+			if(ans[i])
+				System.out.print(i + " ");
+		}
+	}
+	
+	static void dfs(int a, int b, int c) {
+		if(visit[a][b])
+			return;
+		
+		if(a == 0)
+			ans[c] = true;
+		
+		visit[a][b] = true;
+		
+		if(a+b > m)
+			dfs((a+b) - m, m, c);
+		else
+			dfs(0, a+b, c);
+		
+		if(b+a > n)
+			dfs(n, (b+a)-n, c);
+		else
+			dfs(b+a, 0, c);
+		
+		if(c+a > n)
+			dfs(n, b, (c+a)-n);
+		else
+			dfs(c+a, b, 0);
+		
+		if(c+b >m) 
+			dfs(a, m, (c+b)-m);
+		else
+			dfs(a, c+b, 0);
+		
+		dfs(a, 0, b+c);
+		dfs(0, b, a+c);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

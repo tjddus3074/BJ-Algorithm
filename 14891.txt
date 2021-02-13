@@ -1,0 +1,110 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static ArrayList<Integer>[] list;
+	static int spin[];
+	static boolean visit[];
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st; 
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		list = new ArrayList[5];
+		for(int i=0; i<5; i++)
+			list[i] = new ArrayList<Integer>();
+		
+		for(int i=0; i<4; i++) {
+			String t = br.readLine();
+			for(int j=0; j<t.length(); j++) {
+				int a = t.charAt(j) - '0';
+				list[i].add(a);
+			}
+		}
+		
+		k = Integer.parseInt(br.readLine());
+		while(k-->0) {
+			st = new StringTokenizer(br.readLine());
+			n = Integer.parseInt(st.nextToken()) -1;
+			m = Integer.parseInt(st.nextToken());
+			
+			spin = new int[4];
+			visit = new boolean[4];
+			spin[n] = m;
+			visit[n] = true;
+			Queue<Integer> q = new LinkedList<>();
+			q.add(n);
+			while(!q.isEmpty()) {
+				int t = q.poll();
+				if(t+1 <4 && visit[t+1] == false) {
+					if(list[t].get(2) != list[t+1].get(6)) {
+						if(spin[t] == 1) spin[t+1] = -1;
+						else if(spin[t] == -1) spin[t+1] = 1;
+						else spin[t+1] = 0;
+					}
+					else
+						spin[t+1] = 0;
+					visit[t+1] = true;
+					q.add(t+1);
+				}
+				
+				if(t-1>=0 && visit[t-1] == false) {
+					if(list[t].get(6) != list[t-1].get(2)) {
+						if(spin[t] == 1) spin[t-1] = -1;
+						else if(spin[t] == -1) spin[t-1] = 1;
+						else spin[t-1] = 0;
+					}
+					else
+						spin[t-1] = 0;
+					visit[t-1] = true;
+					q.add(t-1);
+				}
+			}
+			
+			for(int i=0; i<4; i++) {
+				if(spin[i] == 0)
+					continue;
+				else if(spin[i] == 1) {
+					int a = list[i].remove(7);
+					list[i].add(0, a);
+				}
+				else if(spin[i] == -1) {
+					int a = list[i].remove(0);
+					list[i].add(a);
+				}
+			}
+		}
+		
+		int sum = 0;
+		if(list[0].get(0) == 1)
+			sum += 1;
+		if(list[1].get(0) == 1)
+			sum +=2;
+		if(list[2].get(0) == 1)
+			sum += 4;
+		if(list[3].get(0) == 1)
+			sum += 8;
+		
+		System.out.println(sum);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

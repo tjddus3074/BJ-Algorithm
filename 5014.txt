@@ -1,0 +1,96 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int stair;
+	int count;
+	
+	public Node(int stair, int count) {
+		this.stair = stair;
+		this.count = count;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int f, s, g, u, d;
+	static boolean visit[];
+	static int visitcount[];
+	static int cnt = Integer.MAX_VALUE;
+	static int[] dx;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		f = Integer.parseInt(st.nextToken());
+		s = Integer.parseInt(st.nextToken());
+		g = Integer.parseInt(st.nextToken());
+		u = Integer.parseInt(st.nextToken());
+		d = Integer.parseInt(st.nextToken());
+		dx = new int[2];
+		dx[0] = u;
+		dx[1] = d*(-1);
+		
+		visit = new boolean[f+1];
+		visitcount = new int[f+1];
+		bfs(s);
+		
+		if(cnt == Integer.MAX_VALUE) {
+			System.out.println("use the stairs");
+		}
+		else
+			System.out.println(cnt);
+	}
+	
+	static void bfs(int s) {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(s, 0));
+		visit[s] = true;
+		visitcount[s] = 0;
+		
+		while(!q.isEmpty()) {
+			Node o = q.poll();
+			if(o.stair == g) {
+				cnt = Math.min(cnt, o.count);
+				return;
+			}
+			
+			for(int i=0; i<2; i++) {
+				int nx = o.stair + dx[i];
+				
+				if(nx<1 || nx>f)
+					continue;
+				
+				if(visit[nx])
+					continue;
+
+				
+				visit[nx] = true;
+				visitcount[nx] = o.count+1;
+				Node temp = new Node(nx, o.count+1);
+				q.add(temp);
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

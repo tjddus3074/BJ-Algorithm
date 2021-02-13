@@ -1,0 +1,80 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		if(n>=k)
+			System.out.println(n-k);
+		else
+			System.out.println(bfs(n, k));
+	}
+	
+	static int bfs(int n, int k) {
+		Queue<Integer> q = new LinkedList<>();
+		int[] subin = new int[100001];
+		Arrays.fill(subin, -1);
+		
+		q.add(n);
+		subin[n] = 0;
+		
+		while(!q.isEmpty()) {
+			int now = q.poll();
+			
+			if(now == k)
+				return subin[now];
+			
+			int temp = now*2;
+			while(temp<=100000 && subin[temp] == -1) {
+				subin[temp] = subin[now];
+				q.add(temp);
+				temp *= 2;
+			}
+			
+			for(int i=0; i<2; i++) {
+				int next;
+				
+				if(i == 0)
+					next = now - 1;
+				else
+					next = now + 1;
+				
+				if(next >=0 && next<=100000) {
+					if(subin[next] == -1) {
+						q.add(next);
+						subin[next] = subin[now] + 1;
+					}
+				}
+			}
+		}
+		
+		return 0;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

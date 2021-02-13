@@ -1,0 +1,97 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static long[] arr;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st; 
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		String temp[] = br.readLine().split(" ");
+		arr = new long[n];
+		for(int i=1; i<temp.length; i++)
+			arr[i-1] = Long.parseLong(temp[i]);
+		
+		if(temp[0].contentEquals("1"))
+			System.out.print(solve1());
+		else
+			System.out.print(solve2());
+	}
+	
+	static long fac(int num) {
+		long f = 1;
+		for(; num>1; f*=(num--));
+		return f;
+	}
+	
+	static String solve1() {
+		int i, j;
+		long f, tmp, sum = 0;
+		long k = arr[0]-1;
+		
+		StringBuilder sb = new StringBuilder();
+		LinkedList<Integer> list = new LinkedList<>();
+		for(i=1; i<=n; i++)
+			list.add(i);
+		
+		for(i=1; i<n; i++) {
+			for(f = fac(n-i), j=0; ; j++) {
+				if((tmp = sum + j*f) >= k) {
+					if(tmp>k) {
+						tmp -= f;
+						j--;
+					}
+					
+					sb.append(list.remove(j) + " ");
+					sum = tmp;
+					break;
+				}
+			}
+		}
+			
+		while(!list.isEmpty())
+			sb.append(list.poll() + " ");
+		
+		return sb.toString().trim();
+	}
+	
+	static String solve2() {
+		int j;
+		long f, sum = 0;
+		
+		LinkedList<Integer> list = new LinkedList<>();
+		for(int i=1; i<=n; i++)
+			list.add(i);
+		
+		for(int i=0; i<n; i++) {
+			f = fac(n-i-1);
+			j = list.indexOf((int)arr[i]);
+			list.remove(j);
+			sum += j*f;
+		}
+		
+		return (sum+1) + "";
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

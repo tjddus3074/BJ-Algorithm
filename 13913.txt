@@ -1,0 +1,88 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static int arr[] = new int[100001];
+	static int brr[] = new int[100001];
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		StringBuilder sb = new StringBuilder();
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		bfs();
+		
+		Stack<Integer> stack = new Stack<>();
+		stack.push(k);
+		int a = k;
+		
+		while(a!= n) {
+			stack.push(brr[a]);
+			a = brr[a];
+		}
+		
+		sb.append(arr[k] - 1 + "\n");
+		while(!stack.isEmpty()) {
+			sb.append(stack.pop() + " ");
+		}
+		
+		System.out.println(sb);
+	}
+	
+	static void bfs() {
+		Queue<Integer> q = new LinkedList<>();
+		q.add(n);
+		arr[n] = 1;
+		
+		while(!q.isEmpty()) {
+			int now = q.poll();
+			
+			if(now == k)
+				return;
+			
+			for(int i=0; i<3; i++) {
+				int nx;
+				if(i == 0)
+					nx = now+1;
+				else if(i == 1)
+					nx = now-1;
+				else
+					nx = now*2;
+				
+				if(nx<0 || nx>100000)
+					continue;
+				
+				if(arr[nx] == 0) {
+					q.add(nx);
+					arr[nx] = arr[now] + 1;
+					brr[nx] = now;
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

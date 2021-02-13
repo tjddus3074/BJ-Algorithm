@@ -1,0 +1,84 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int stair;
+	int count;
+	
+	public Node(int stair, int count) {
+		this.stair = stair;
+		this.count = count;
+	}
+}
+
+public class Main {
+
+	static int n, m, k;
+	static int[][] arr;
+	static int max = 1;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		arr = new int[n+1][m+1];
+		for(int i=1; i<=n; i++) {
+			String[] t = br.readLine().split("");
+			for(int j=1; j<=m; j++)
+				arr[i][j] = Integer.parseInt(t[j-1]);
+		}
+		
+		int[][] psum = new int[n+1][m+1];
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=m; j++) {
+				psum[i][j] = psum[i-1][j] + psum[i][j-1] - psum[i-1][j-1] + arr[i][j];
+			}
+		}
+		
+		int ans = 0;
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=m; j++) {
+				if(arr[i][j] == 1) {
+					int res = 1;
+					int idx = 1;
+					while(i+idx <= n && j + idx <= m) {
+						int space = psum[i + idx][j + idx] - psum[i + idx][j - 1] - psum[i - 1][j + idx]
+								+ psum[i - 1][j - 1];
+						
+						idx ++;
+						if(space != idx * idx)
+							break;
+						
+						res = idx*idx;
+						
+					}
+					
+					ans = Math.max(ans, res);
+				}
+			}
+		}
+		
+		System.out.print(ans);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

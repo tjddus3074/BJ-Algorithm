@@ -1,0 +1,51 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int[] arr;
+	static int[] dp;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		dp = new int[n];
+		for(int i=0; i<n; i++)
+			arr[i] = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<n; i++) {
+			dp[i] = 1;
+			for(int j=0; j<i; j++) {
+				if(arr[j] < arr[i] && dp[j]+1 > dp[i])
+					dp[i] = dp[j]+1;
+			}
+		}
+		
+		int max = 0;
+		for(int i=0; i<n; i++)
+			max = Math.max(max, dp[i]);
+		System.out.print(n - max);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

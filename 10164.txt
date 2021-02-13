@@ -1,0 +1,99 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k;
+	static int count = 0;
+	static int[][] arr;
+	static int[] dx = {1, 0};
+	static int[] dy = {0, 1};
+	static int ox, oy;
+
+	static void Init() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		arr = new int[n][m];
+		int cnt = 1;
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				arr[i][j] = cnt;
+				if(k == arr[i][j]) {
+					ox = i;
+					oy = j;
+				}
+				cnt ++;
+			}
+		}
+		
+		if(k == 0) {
+			ox = n-1;
+			oy = m-1;
+			count = 0;
+			dfs(0, 0);
+			System.out.print(count);
+			return;
+		}
+		else {
+			count = 0;
+			dfs(0, 0);
+			int count1 = count;
+			
+			count = 0;
+			int x = ox;
+			int y = oy;
+			ox = n-1;
+			oy = m-1;
+			dfs(x, y);
+			int count2 = count;
+			System.out.print(count1*count2);
+		}
+	}
+	
+	static void dfs(int x, int y) {
+		if(x == ox && y == oy) {
+			count++;
+			return;
+		}
+		
+		for(int i=0; i<2; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+			
+			if(!isRange(nx, ny))
+				continue;
+			
+			dfs(nx, ny);
+		}
+	}
+	
+	static boolean isRange(int x, int y) {
+		if(x<0 || x>=n || y<0 || y>=m)
+			return false;
+		return true;
+	}
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}
