@@ -1,0 +1,61 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static StringBuilder sb = new StringBuilder();
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		dfs("", 0);
+		System.out.println(sb);
+	}
+	
+	static void dfs(String s, int len) {
+		if(n == len) {
+			sb.append(s + "\n");
+		}
+		else {
+			for(int i=1; i<=9; i++) {
+				if(isPrime(Integer.parseInt(s + i))) {
+					dfs(s+i, len+1);
+				}
+			}
+		}
+	}
+	
+	static boolean isPrime(int k) {
+		if(k == 1)
+			return false;
+		
+		int sqrt = (int) Math.sqrt(k);
+		for(int i=02; i<=sqrt; i++) {
+			if(k %i == 0)
+				return false;
+		}
+		
+		return true;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

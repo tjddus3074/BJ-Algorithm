@@ -1,0 +1,84 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node implements Comparable<Node>{
+	long x;
+	long y;
+	public Node(long x, long y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	@Override
+	public int compareTo(Node o) {
+		if(x > o.x) return 1;
+		else if(x == o.x) {
+			if(y > o.y)
+				return 1;
+		}
+		
+		return -1;
+	}
+}
+
+public class Main {
+
+	static int n, m, k, h;
+	static ArrayList<Node> list = new ArrayList<>();
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		for(int i=0; i<n; i++) {
+			long a, b;
+			st = new StringTokenizer(br.readLine());
+			a = Long.parseLong(st.nextToken());
+			b = Long.parseLong(st.nextToken());
+			
+			list.add(new Node(a, b));
+		}
+		
+		Collections.sort(list);
+		
+		long s = list.get(0).x;
+		long e = list.get(0).y;
+		long sum = e-s;
+		
+		for(int i=1; i<list.size(); i++) {
+			long ns = list.get(i).x;
+			long ne = list.get(i).y;
+			
+			if((s <= ns) && ne<= e)
+				continue;
+			else if(ns < e)
+				sum += -(e - ns) + (ne - ns);
+			else
+				sum += ne - ns;
+			
+			s = ns;
+			e = ne;
+		}
+		
+		System.out.print(sum);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

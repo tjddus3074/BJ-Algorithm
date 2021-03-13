@@ -1,0 +1,35 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	static String[] t;
+	static ArrayList<String> list = new ArrayList<>();
+	static boolean[] visit = new boolean[10];
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		System.out.println("10/14")
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

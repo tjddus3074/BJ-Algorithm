@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		StringBuilder sb = new StringBuilder();
+		
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(st.nextToken());// 종이컵의 수 N
+			int x = Integer.parseInt(st.nextToken());// 간식이 들어있는 종이컵이 왼쪽에서 몇 번째에 있는 종이컵인지 알려주는 X
+			int k = Integer.parseInt(st.nextToken());//컵의 위치를 맞바꾸는 횟수
+			
+			for(int i=0; i<k; i++) {//k개의 줄에 A,B를 받아준다.
+				st = new StringTokenizer(br.readLine());
+				int A = Integer.parseInt(st.nextToken());//A
+				int B = Integer.parseInt(st.nextToken());//B
+				
+				if(A == x) x = B;//A가 X가 같으면, x를 B로 바꾸는 것이므로 x = B
+				else if(B == x) x = A;//B가 X가 같으면, x를 A로 바꾸는 것이므로 x = A
+			}
+
+		System.out.println(x);
+	}
+}

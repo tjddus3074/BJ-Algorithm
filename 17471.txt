@@ -1,0 +1,143 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+class Node{
+	int x;
+	int num;
+	
+	public Node(int x, int num) {
+		this.x = x;
+		this.num = num;
+	}
+}
+
+public class Main {
+
+	static int n, m, k, h;
+	static Node[] node;
+	static ArrayList<ArrayList<Integer>> list;
+	static int ans = Integer.MAX_VALUE;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		n = Integer.parseInt(br.readLine());
+		node = new Node[n+1];
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=n; i++) {
+			int num = Integer.parseInt(st.nextToken());
+			node[i] = new Node(i, num);
+		}
+		
+		list = new ArrayList<>();
+		for(int i=0; i<=n; i++) {
+			list.add(new ArrayList<>());
+		}
+		
+		for(int i=1; i<=n; i++) {
+			st = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(st.nextToken());
+			for(int j=0; j<n; j++) {
+				int temp = Integer.parseInt(st.nextToken());
+				list.get(i).add(temp);
+			}
+		}
+		
+		ArrayList<Integer> a = new ArrayList<>();
+		for(int i=1; i<=n/2; i++)
+			comb(1, n, i, a);
+		
+		if(ans == Integer.MAX_VALUE)
+			ans = -1;
+		
+		System.out.print(ans + "\n");
+	}
+	
+	static void comb(int start, int n, int r, ArrayList<Integer> a) {
+		if(r == 0) {
+			gerrymendering(a);
+			return;
+		}
+		
+		for(int i=start; i<=n; i++) {
+			a.add(i);
+			comb(i+1, n, r-1, a);
+			a.remove(a.size()-1);
+		}
+	}
+	
+	static void gerrymendering(ArrayList<Integer> a) {
+		if(!isconnect(node[a.get(0)].x, a, a.size())) {
+			return;
+		}
+		
+		ArrayList<Integer> b = new ArrayList<>();
+		
+		for(int i=1; i<=n; i++) {
+			if(a.contains(i))
+				continue;
+			b.add(i);
+		}
+		
+		if(!isconnect(node[b.get(0)].x,b,b.size())) {
+			return;
+		}
+		
+		int resulta = 0;
+		
+		for(int i=0; i<a.size(); i++)
+			resulta += node[a.get(i)].num;
+		
+		int resultb = 0;
+		
+		for(int i=0; i<b.size(); i++)
+			resultb += node[b.get(i)].num;
+		
+		int result = Math.abs(resulta - resultb);
+		ans = Math.min(ans, result);
+	}
+	
+	static boolean isconnect(int num, ArrayList<Integer> arr, int size) {
+		boolean[] visit = new boolean[n+1];
+		visit[num] = true;
+		Queue<Integer> q = new LinkedList<>();
+		q.add(num);
+		
+		int count = 1;
+		while(!q.isEmpty()) {
+			int start = q.poll();
+			
+			for(int i : list.get(start)) {
+				if(!visit[i] && arr.contains(i)) {
+					visit[i] = true;
+					count++;
+					q.add(i);
+				}
+			}
+		}
+		
+		if(count == size)
+			return true;
+		
+		return false;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		int n = Integer.parseInt(st.nextToken());// N은 신청한 동아리의 수
+		int s = Integer.parseInt(st.nextToken());// S는 팀원 3명의 능력 합에 대한 스마트클럽 가입조건
+		int m = Integer.parseInt(st.nextToken());// M은 개인 능력치에 대한 스마트클럽 가입조건
+		int count = 0;
+		
+		for(int i=0; i<n; i++) {
+			st = new StringTokenizer(br.readLine());
+			int num1 = Integer.parseInt(st.nextToken());//동아리원1의 능력치
+			int num2 = Integer.parseInt(st.nextToken());//동아리원2의 능력치
+			int num3 = Integer.parseInt(st.nextToken());//동아리원3의 능력치
+			int total = num1 + num2 + num3;//총 동아리원의 능력치의 합
+			if(m<=num1 && m<=num2 && m<=num3 && s<=total) {//스마트클럽의 가입조건을 만족한다면
+				count++;//스마트 클럽 가입이 가능한 동아리 수
+				sb.append(num1 + " "+num2+" "+num3+" ");
+			}
+		}
+		System.out.println(count);
+		System.out.println(sb);
+	}
+}

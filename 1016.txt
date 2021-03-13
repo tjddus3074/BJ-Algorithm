@@ -1,0 +1,60 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+import java.util.Set;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+				st = new StringTokenizer(br.readLine());
+				
+				long min = Long.valueOf(st.nextToken());
+				long max = Long.valueOf(st.nextToken());
+				
+				int result = (int) (max - min + 1);
+				int sqrt = ((int) Math.sqrt(max));
+				
+				boolean[] checks = new boolean[result]; 
+				long[] num = new long[result];
+				 
+				
+				for(long i = 2; i <= sqrt; i++) { 
+						long squared = i * i;
+						long start = min % squared == 0 ? min / squared : (min / squared) + 1;
+						for(long j = start; j * squared <= max; j ++) {	
+							checks[(int) ( (j * squared) - min)] = true;
+						}
+				}
+				
+				int count = 0;
+				for(int i = 0; i < result; i++) {
+					if(!checks[i])
+						count++;
+				}
+				
+				System.out.println(count);
+			}
+
+
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}

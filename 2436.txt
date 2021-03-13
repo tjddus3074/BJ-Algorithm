@@ -1,0 +1,63 @@
+package studyjavapackage;
+
+import java.io.IOException; //백준
+import java.io.*;
+import java.util.*;
+
+import java.math.*;
+
+public class Main {
+
+	static int n, m, k, h;
+	
+	static void Init() throws IOException, NumberFormatException {
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+//		Scanner sc = new Scanner(System.in);
+//		st = new StringTokenizer(br.readLine());
+//		Integer.parseInt(st.nextToken());
+
+		// char a = 'a'; 97
+		// char A = 'A'; 65
+		// char z = 'z'; 122
+		
+		long a, b, c;
+		st = new StringTokenizer(br.readLine());
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		
+		c = a*b;
+		long t1 = a;
+		long t2 = b;
+		
+		for(long i = 2 * a; i*i <= c; i+= a) {
+			if(c%i == 0) {
+				long temp = c/i;
+				if(gcd(i, temp) == a) {
+					if(t1 + t2 > i + temp) {
+						t1 = i;
+						t2 = temp;
+					}
+				}
+			}
+		}
+		
+		System.out.print(t1 + " " + t2);
+	}
+	
+	static long gcd(long a, long b) {
+		while(a!=0) {
+			long r = b %a;
+			b = a;
+			a = r;
+		}
+		
+		return b;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Init();
+	}
+
+}
