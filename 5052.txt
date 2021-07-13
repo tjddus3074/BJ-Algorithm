@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main (String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int testcase = Integer.parseInt(br.readLine());
+        for(int tc = 0; tc < testcase; tc++){
+            int flag = 0;
+            int n = Integer.parseInt(br.readLine());
+            ArrayList<String> list = new ArrayList<>();
+            for(int i=0; i<n; i++){
+                list.add(br.readLine());
+            }
+
+            Collections.sort(list);
+
+            for(int i=0; i<n-1; i++){
+                if(list.get(i+1).startsWith(list.get(i))){
+                    flag = 1;
+                    break;
+                }
+            }
+
+
+            if(flag == 0){
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
+}
