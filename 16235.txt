@@ -1,0 +1,167 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.*;
+
+public class Main {
+
+    static class Land{
+        int food;
+        PriorityQueue<Integer> trees;
+
+        public Land(){
+            this.food = 5;
+            trees = new PriorityQueue<>();
+        }
+    }
+
+    static int N, M, K;
+    static int[][] A;
+    static Land[][] map;
+
+    static int[] dx = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    static int[] dy = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] info = br.readLine().split(" ");
+
+        N = Integer.valueOf(info[0]);
+        M = Integer.valueOf(info[1]);
+        K = Integer.valueOf(info[2]);
+        A = new int[N][N];
+        map = new Land[N][N];
+
+        for(int i=0; i<N; i++){
+            A[i] = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        }
+
+        for(int i=0; i<N; i++){
+            for(int j=0; j<N; j++){
+                map[i][j] = new Land();
+            }
+        }
+
+        for(int i=0; i<M; i++){
+            info = br.readLine().split(" ");
+
+            int x = Integer.valueOf(info[0]);
+            int y = Integer.valueOf(info[1]);
+            int value = Integer.valueOf(info[2]);
+
+            map[x-1][y-1].trees.add(value);
+        }
+
+        int treeCnt = 0;
+        for(int i=0; i<K; i++){
+            treeCnt = oneYearFlow();
+
+            if(treeCnt == 0)
+                break;
+        }
+
+        System.out.println(treeCnt);
+    }
+
+    static int oneYearFlow(){
+        int[][] breeding = springAndSummer();
+
+        fall(breeding);
+        winter();
+
+        return countAliveTree();
+    }
+
+    static int[][] springAndSummer() {
+        int[][] breeding = new int[N][N];
+
+        for(int i=0;i <N; i++){
+            for(int j=0; j<N; j++){
+                PriorityQueue<Integer> newTree = new PriorityQueue<>();
+                Land land = map[i][j];
+
+                int breedingCnt = 0;
+
+                while(!land.trees.isEmpty() && land.food - land.trees.peek() >= 0){
+                    int age = land.trees.poll();
+
+                    land.food -= age;
+
+                    newTree.add(age + 1);
+
+                    if((age + 1)% 5 == 0){
+                        breedingCnt += 1;
+                    }
+                }
+
+                int summerFood = 0;
+                while(!land.trees.isEmpty()){
+                    summerFood += (int)Math.floor(land.trees.poll() / 2);
+                }
+
+                land.trees = newTree;
+
+                land.food += summerFood;
+
+                breeding[i][j] = breedingCnt;
+            }
+        }
+        return breeding;
+    }
+
+    static void fall(int[][] breeding) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (breeding[i][j] == 0)
+                    continue;
+
+                // 번식 가능한 나무가 있으면
+                // 주위 8칸으로 나무 번식
+                for (int k = 0; k < 8; k++) {
+                    int nx = i + dx[k];
+                    int ny = j + dy[k];
+                    int newTreeCnt = breeding[i][j];
+
+                    // 주위의 칸이 범위 밖이면 넘김
+                    if (!isIn(nx, ny))
+                        continue;
+
+                    // 번식 가능한 나무의 개수대로 나이가 1인 나무 심음
+                    while (newTreeCnt-- > 0) {
+                        map[nx][ny].trees.add(1);
+                    }
+                }
+            }
+        }
+    }
+
+    static void winter() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                map[i][j].food += A[i][j];
+            }
+        }
+    }
+
+    static int countAliveTree() {
+        int alive = 0;
+
+        // 큐의 사이즈 = 살아남은 나무의 수
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                alive += map[i][j].trees.size();
+            }
+        }
+
+        return alive;
+    }
+
+    static boolean isIn(int x, int y) {
+        if (0 <= x && x < N && 0 <= y && y < N) {
+            return true;
+        }
+        return false;
+    }
+}
