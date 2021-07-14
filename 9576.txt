@@ -1,0 +1,63 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.*;
+
+class aaa implements Comparable<aaa>{
+    int a;
+    int b;
+
+    public aaa(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+
+    @Override
+    public int compareTo(aaa o){
+        if(this.b == o.b){
+            return this.a - o.a;
+        } else {
+            return this.b - o.b;
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        for(int i=0; i<t; i++){
+            int num = 0;
+            st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
+
+            aaa[] aa = new aaa[m];
+            boolean[] book = new boolean[n+1];
+
+            for(int j=0; j<m; j++){
+                st = new StringTokenizer(br.readLine());
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+                aa[j] = new aaa(a,b);
+            }
+
+            Arrays.sort(aa);
+
+            for(int j=0; j<m; j++){
+                for(int k=aa[j].a; k<=aa[j].b; k++){
+                    if(book[k] == false){
+                        num++;
+                        book[k] = true;
+                        break;
+                    }
+                }
+            }
+            System.out.println(num);
+        }
+    }
+}
