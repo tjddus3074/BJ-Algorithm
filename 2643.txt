@@ -1,0 +1,70 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.sql.Array;
+import java.util.*;
+
+class paper implements Comparable<paper>{
+    int x;
+    int y;
+
+    public paper(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public int compareTo(paper o){
+        if(this.x == o.x){
+            return this.y - o.y;
+        } else {
+            return this.x - o.x;
+        }
+    }
+}
+
+public class Main {
+
+    static int max = Integer.MIN_VALUE;
+    static ArrayList<paper> list = new ArrayList<>();
+    static int[] dp;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        dp = new int[t];
+
+        for(int i=0; i<t; i++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            if(a < b){
+                list.add(new paper(b, a));
+            } else {
+                list.add(new paper(a, b));
+            }
+        }
+
+        Collections.sort(list);
+
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).x <= 0 || list.get(i).y <= 0)
+                continue;
+
+            for(int j=0; j<i; j++){
+                if(list.get(i).x >= list.get(j).x && list.get(i).y >= list.get(j).y){
+                    dp[i] = Math.max(dp[i], dp[j]);
+                }
+            }
+
+            dp[i] ++;
+            max = Math.max(dp[i], max);
+        }
+
+        System.out.println(max);
+    }
+}
