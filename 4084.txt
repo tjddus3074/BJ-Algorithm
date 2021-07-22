@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            String[] t = br.readLine().split(" ");
+            if(t[0].equals("0") && t[1].equals("0") && t[2].equals("0") && t[3].equals("0"))
+                break;
+
+            int count = 0;
+            while(true) {
+                int a = Integer.parseInt(t[0]);
+                int b = Integer.parseInt(t[1]);
+                int c = Integer.parseInt(t[2]);
+                int d = Integer.parseInt(t[3]);
+
+                if(a == b && a==c && a==d)
+                    break;
+
+                t[0] = Integer.toString(Math.abs(a-b));
+                t[1] = Integer.toString(Math.abs(b-c));
+                t[2] = Integer.toString(Math.abs(c-d));
+                t[3] = Integer.toString(Math.abs(d-a));
+                count++;
+            }
+            System.out.println(count);
+        }
+    }
+}
