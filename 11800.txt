@@ -1,0 +1,46 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int num = sc.nextInt();
+		String[] dice = {"Yakk","Doh", "Seh","Ghar","Bang","Sheesh"};
+		for(int i=0;i<num;i++)
+		{
+			int x = sc.nextInt();
+			int y = sc.nextInt();
+			if(x == y)
+			{
+				switch(x)
+				{
+				case 1:
+					System.out.println("Case "+ (i+1)+ ": Habb Yakk");
+					break;
+				case 2:
+					System.out.println("Case "+ (i+1)+ ": Dobara");
+					break;
+				case 3:
+					System.out.println("Case "+ (i+1)+ ": Dousa");
+					break;
+				case 4:
+					System.out.println("Case "+ (i+1)+ ": Dorgy");
+					break;
+				case 5:
+					System.out.println("Case "+ (i+1)+ ": Dabash");
+					break;
+				case 6:
+					System.out.println("Case "+ (i+1)+ ": Dosh");
+					break;
+				}
+			}
+			else if((x == 6 && y == 5) || (x == 5 && y == 6))
+			{
+				System.out.println("Case "+ (i+1)+ ": Sheesh Beesh");
+			}
+			else {
+			System.out.print("Case "+ (i+1)+ ": ");
+			System.out.println(x<y?dice[y-1]+ " " +dice[x-1] : dice[x-1]+ " " +dice[y-1]);
+			}
+			}
+		sc.close();
+	}
+}
