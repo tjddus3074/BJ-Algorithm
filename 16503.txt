@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String[] t = br.readLine().split(" ");
+
+        int a= Integer.parseInt(t[0]);
+        int b = Integer.parseInt(t[2]);
+        int c = Integer.parseInt(t[4]);
+
+        int temp = aaa(a, b, t[1]);
+        int sum1 = aaa(temp, c, t[3]);
+
+        temp = aaa(b, c, t[3]);
+        int sum2 = aaa(a, temp, t[1]);
+
+        int min = Math.min(sum1, sum2);
+        int max = Math.max(sum1, sum2);
+        System.out.print(min + "\n" + max);
+    }
+
+    static int aaa(int a, int b, String c){
+        if(c.equals("+")){
+            return a+b;
+        } else if(c.equals("-")){
+            return a-b;
+        } else if(c.equals("*")){
+            return a*b;
+        } else {
+            return a/b;
+        }
+    }
+}
