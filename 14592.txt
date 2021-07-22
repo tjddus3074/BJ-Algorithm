@@ -1,0 +1,53 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class rank implements Comparable<rank>{
+    int num;
+    int score;
+    int pronum;
+    int time;
+
+    public rank(int num, int score, int pronum, int time){
+        this.num = num;
+        this.score = score;
+        this.pronum = pronum;
+        this.time = time;
+    }
+
+    @Override
+    public int compareTo(rank o){
+        if(this.score == o.score){
+            if(this.pronum == o.pronum){
+                return this.time - o.time;
+            } else {
+                return this.pronum - o.pronum;
+            }
+        } else {
+            return o.score - this.score;
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int t = Integer.parseInt(br.readLine());
+        ArrayList<rank> list = new ArrayList<>();
+        for(int i=0; i<t; i++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            rank temp = new rank(i+1, a, b,c);
+            list.add(temp);
+        }
+
+        Collections.sort(list);
+        System.out.println(list.get(0).num);
+    }
+}
