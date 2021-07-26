@@ -1,0 +1,34 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        int sx, sy, x, y, nx, ny;
+        st = new StringTokenizer(br.readLine());
+        sx = Integer.parseInt(st.nextToken());
+        sy = Integer.parseInt(st.nextToken());
+        x = sx;
+        y = sy;
+        int ans = 0;
+
+        for(int i=0; i<n-1; i++){
+            st = new StringTokenizer(br.readLine());
+            nx = Integer.parseInt(st.nextToken());
+            ny = Integer.parseInt(st.nextToken());
+            ans += Math.abs(nx+ny-x-y);
+            x = nx;
+            y = ny;
+        }
+
+        ans += Math.abs(x + y - sx - sy);
+        System.out.print(ans);
+    }
+}
