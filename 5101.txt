@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            int a, b, c;
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            c = Integer.parseInt(st.nextToken());
+
+            if(a == 0 && b== 0 && c == 0)
+                break;
+
+            if((b>0 && c<=a) || (b<0 && a>=c)){
+                System.out.println("X");
+                continue;
+            }
+
+            if((c-a) % b == 0){
+                System.out.println((c-a)/b +1);
+                continue;
+            }
+
+            System.out.println("X");
+        }
+    }
+}
