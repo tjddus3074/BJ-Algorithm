@@ -1,0 +1,31 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int[] arr = {100, 100, 200, 200, 300, 300, 400, 400, 500};
+        st = new StringTokenizer(br.readLine());
+        int sum = 0;
+        for(int i=0; i<9; i++){
+            int a = Integer.parseInt(st.nextToken());
+            if(a>arr[i]){
+                System.out.println("hacker");
+                return;
+            }
+
+            sum += a;
+        }
+
+        if(sum >= 100)
+            System.out.println("draw");
+        else
+            System.out.println("none");
+    }
+}
