@@ -1,0 +1,39 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            int b, n;
+            st = new StringTokenizer(br.readLine());
+            b = Integer.parseInt(st.nextToken());
+            n = Integer.parseInt(st.nextToken());
+            if(b == 0 && n == 0)
+                break;
+
+            int num = Integer.MAX_VALUE;
+            int count = 1;
+            int c = 0;
+            while(true){
+                c = (int)Math.pow(count, n);
+                int t = Math.abs(b - c);
+                if(t<=num)
+                    num = t;
+                else
+                    break;
+
+                count++;
+            }
+            System.out.println(count-1);
+
+        }
+    }
+}
