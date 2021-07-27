@@ -1,0 +1,27 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            int n = Integer.parseInt(br.readLine());
+            if(n == 0)
+                break;
+
+            if(n<=1000000){
+                System.out.println(n);
+            } else if(n<=5000000){
+                System.out.println(n/10 * 9);
+            } else {
+                System.out.println(n/10 * 8);
+            }
+        }
+    }
+}
