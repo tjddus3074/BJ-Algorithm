@@ -1,0 +1,25 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        for(int test = 0; test<t; test++){
+            st = new StringTokenizer(br.readLine());
+            long a = Integer.parseInt(st.nextToken());
+            long b = Integer.parseInt(st.nextToken());
+            long c = Integer.parseInt(st.nextToken());
+
+            long d = (a*a) + (b*b) + (c*c);
+            long min = Math.min(Math.min(a*b, a*c), b*c);
+            System.out.println(d + 2*min);
+        }
+    }
+}
