@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    static boolean[] sosu = new boolean[10000001];
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        sosu[0] = true;
+        sosu[1] = true;
+        for(int i=2; i<sosu.length; i++){
+            if(sosu[i] == false){
+                int count = 2;
+                while(true){
+                    if(i * count >= sosu.length)
+                        break;
+                    sosu[i*count] = true;
+                    count++;
+                }
+            }
+        }
+
+        String[] arr = br.readLine().split(" ");
+        String t = arr[1] + arr[0];
+        int a = Integer.parseInt(t);
+        int b = Integer.parseInt(arr[0]);
+        if(sosu[a]==false && sosu[b]==false)
+            System.out.print("Yes");
+        else
+            System.out.print("No");
+    }
+}
