@@ -1,0 +1,24 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n, o, p;
+        n = Integer.parseInt(br.readLine());
+        o = Integer.parseInt(br.readLine());
+
+         n--;
+         p = o/n;
+         if(o - p*n == 0)
+             System.out.println((o+p-1) + " " + (o+p));
+         else
+             System.out.println((o+p) + " " + (o+p));
+    }
+}
