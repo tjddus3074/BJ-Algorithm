@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        int num = 0;
+        for(int i=0; i<t; i++){
+            st = new StringTokenizer(br.readLine());
+            Double a, b, c, d;
+            a = Double.parseDouble(st.nextToken());
+            b = Double.parseDouble(st.nextToken());
+            c = Double.parseDouble(st.nextToken());
+            d = Double.parseDouble(st.nextToken());
+            double sum = a+b+c;
+            if(d <= 7){
+                if(sum <= 125){
+                    System.out.println(1);
+                    num++;
+                } else {
+                    if(a<=56 && b<=45 && c<=25){
+                        System.out.println(1);
+                        num++;
+                    } else {
+                        System.out.println(0);
+                    }
+                }
+            } else {
+                System.out.println(0);
+            }
+        }
+        System.out.println(num);
+    }
+}
