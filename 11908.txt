@@ -1,0 +1,28 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        int[]arr = new int[t];
+        st = new StringTokenizer(br.readLine());
+        int sum = 0;
+        for(int i=0; i<t; i++){
+            int a = Integer.parseInt(st.nextToken());
+            sum += a;
+            arr[i] = a;
+        }
+
+        Arrays.sort(arr);
+        sum -= arr[arr.length-1];
+        System.out.print(sum);
+    }
+}
