@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int max = 0;
+        String[] arr = br.readLine().split(" ");
+        for(int i=0; i<5; i++){
+            char a = arr[i].charAt(0);
+            int count = 1;
+            for(int j=0; j<5; j++){
+                if(i==j)
+                    continue;
+                if(a == arr[j].charAt(0))
+                    count++;
+            }
+
+            max = Math.max(count, max);
+        }
+        System.out.print(max);
+    }
+}
