@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            int a, b, c, d;
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            c = Integer.parseInt(st.nextToken());
+            d = Integer.parseInt(st.nextToken());
+            if(a == 0 && b == 0 && c == 0 && d == 0)
+                break;
+
+            int max1 =Math.max(a, b);
+            int min1 = Math.min(a, b);
+            int max2 = Math.max(c, d);
+            int min2 = Math.min(c, d);
+
+            double s = (double)min2 / (double)min1 * 100;
+            double s2 = (double)max2 / (double)max1 * 100;
+            double sum = Math.min(s, s2);
+            if(sum > 100)
+                System.out.println("100%");
+            else
+            System.out.println((int)sum + "%");
+        }
+    }
+}
