@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int a = Integer.parseInt(br.readLine());
+        int b = Integer.parseInt(br.readLine());
+
+        int suma = 0;
+        int sumb = 0;
+        if(a<b){
+            suma = b-a;
+            sumb = a + (360-b);
+        } else {
+            suma = 360-a + b;
+            sumb = a-b;
+        }
+
+        if(suma < sumb){
+            System.out.println(suma);
+        } else if(suma == sumb){
+            System.out.println(180);
+        }
+        else {
+            System.out.println(sumb * (-1));
+        }
+    }
+}
