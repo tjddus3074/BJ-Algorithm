@@ -1,0 +1,43 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int k = Integer.parseInt(br.readLine());
+        for(int test=1; test<=k; test++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            printresult(test, a, b);
+        }
+    }
+
+    static void printresult(int k, int e, int a){
+        System.out.print("Data Set " + k + ":\n");
+
+        int count = 0;
+
+        while(e > a){
+            a*=5;
+            count++;
+        }
+
+        if(count == 0){
+            System.out.print("no drought\n\n");
+            return;
+        }
+
+        for(int i=0; i<count-1; i++){
+            System.out.print("mega ");
+        }
+        System.out.print("drought\n\n");
+    }
+}
