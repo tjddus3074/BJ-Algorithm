@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        DecimalFormat df = new DecimalFormat("#.0000");
+        for(int test=0; test<t; test++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            double b = Double.parseDouble(st.nextToken());
+
+            double sum2 = (60*a) / b;
+            double c = sum2/(double)a;
+            double sum1 = sum2-c;
+            double sum3 = sum2+c;
+
+            System.out.println(df.format(sum1) + " " + df.format(sum2) + " " + df.format(sum3));
+        }
+    }
+}
