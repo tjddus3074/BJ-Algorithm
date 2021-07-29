@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        ArrayList<Integer> list = new ArrayList<>();
+        int n = 1;
+        while(true){
+            long count = n*n*n;
+            if(count > 2000000000)
+                break;
+
+            list.add((int)count);
+            n++;
+        }
+
+        int k = Integer.parseInt(br.readLine());
+        for(int test=1; test<=k; test++){
+            int a, b;
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            int count = 0;
+            for(int i=0; i<list.size(); i++){
+                int c = list.get(i);
+                if(c>=a && c<=b)
+                    count++;
+                if(c>b)
+                    break;
+            }
+            System.out.println("Case #" + test + ": " + count);
+        }
+    }
+}
