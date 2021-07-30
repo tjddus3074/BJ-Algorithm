@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+            if(a == 0 && b == 0 && c == 0)
+                break;
+
+            int moo = a - (b+c);
+            int flag = 0;
+            int min = Integer.MAX_VALUE;
+
+            for(int i=0; i<=moo; i++){
+                if(b+i > c+(moo-i)){
+                    System.out.println(i);
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag == 0)
+                System.out.println(-1);
+        }
+    }
+}
