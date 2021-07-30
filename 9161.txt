@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        for(int i=100; i<=999; i++){
+            for(int j=100; j<=999; j++){
+                if(i% 111 == 0 && j % 111 == 0)
+                    continue;
+
+                if(func(i, j))
+                    System.out.println(i + " / " + j + " = " + (i/10) + " / " + (j%100));
+            }
+        }
+    }
+
+    static boolean func(int i, int j){
+        return (i*(j%100) == (i/10)*j) && (i%10 == j/100);
+    }
+}
