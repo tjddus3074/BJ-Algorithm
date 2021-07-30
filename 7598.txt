@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int flag = 0;
+        String flight = "";
+        int sum = 0;
+        while(true){
+            String[] temp = br.readLine().split(" ");
+            if(temp[0].equals("#"))
+                break;
+
+            if(temp[0].charAt(0) == 'A'){
+                flight = temp[0];
+                flag = 1;
+                sum = Integer.parseInt(temp[1]);
+                continue;
+            }
+
+            if(temp[0].charAt(0) == 'X'){
+                System.out.println(flight + " " + sum);
+                continue;
+            }
+
+            if(temp[0].charAt(0) == 'B'){
+                int a = Integer.parseInt(temp[1]);
+                if(sum+a <= 68)
+                    sum += a;
+            }
+
+            if(temp[0].charAt(0) == 'C'){
+                int a = Integer.parseInt(temp[1]);
+                if(sum-a >= 0)
+                    sum -= a;
+            }
+        }
+    }
+}
