@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            int k = Integer.parseInt(br.readLine());
+            if(k == 0)
+                break;
+
+            int count = 0;
+            for(int test = 0; test<k; test++){
+                String t =  br.readLine();
+                if(t.length() < count)
+                    continue;
+
+                int flag = 0;
+                for(int i=count; i<t.length(); i++){
+                    if(t.charAt(i) == ' '){
+                        count = i;
+                        flag = 1;
+                        break;
+                    }
+                }
+
+                if(flag == 0)
+                    count = t.length();
+            }
+
+            System.out.println(count+1);
+        }
+    }
+}
