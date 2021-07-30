@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=1; i<=n; i++){
+            if(i%10 != k%10 && i%10 != (2*k)%10)
+                list.add(i);
+        }
+
+        System.out.println(list.size());
+        for(int i=0; i<list.size(); i++){
+            System.out.print(list.get(i) + " ");
+        }
+    }
+}
