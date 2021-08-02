@@ -1,0 +1,30 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int a, b, c;
+        st = new StringTokenizer(br.readLine());
+        a = Integer.parseInt(st.nextToken());
+        b = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+        for(int i=0; i<a; i++){
+            String t = br.readLine();
+
+            for(int l = 0; l<c; l++) {
+                for (int j = 0; j < t.length(); j++) {
+                    char d = t.charAt(j);
+                    for (int k = 0; k < c; k++)
+                        System.out.print(d);
+                }
+                System.out.print("\n");
+            }
+        }
+    }
+}
