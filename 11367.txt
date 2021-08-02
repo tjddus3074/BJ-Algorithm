@@ -1,0 +1,39 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int k = Integer.parseInt(br.readLine());
+        for(int test=0; test<k; test++){
+            String[] temp = br.readLine().split(" ");
+            int num = Integer.parseInt(temp[1]);
+            System.out.print(temp[0] + " ");
+            String a = "";
+            if(num >=97)
+                a = "A+";
+            else if(num >= 90)
+                a = "A";
+            else if(num>=87)
+                a = "B+";
+            else if(num>=80)
+                a = "B";
+            else if(num>=77)
+                a = "C+";
+            else if(num>=70)
+                a = "C";
+            else if(num>=67)
+                a = "D+";
+            else if(num>=60)
+                a = "D";
+            else
+                a = "F";
+            System.out.println(a);
+        }
+    }
+}
