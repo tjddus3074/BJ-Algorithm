@@ -1,0 +1,35 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int k = Integer.parseInt(br.readLine());
+        for(int test=0; test<k; test++){
+            int a = Integer.parseInt(br.readLine());
+            int b = a*a;
+
+            String ta = Integer.toString(a);
+            String tb = Integer.toString(b);
+
+            int num = tb.length()-1;
+            int flag = 0;
+            for(int i = ta.length()-1; i>=0; i--){
+                if(tb.charAt(num) != ta.charAt(i)){
+                    System.out.println("NO");
+                    flag = 1;
+                    break;
+                }
+
+                num--;
+            }
+            if(flag == 0)
+                System.out.println("YES");
+        }
+    }
+}
