@@ -1,0 +1,33 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int k = Integer.parseInt(br.readLine());
+        for(int test=0; test<k; test++){
+            String t= br.readLine();
+            if(t.length() != 7){
+                System.out.println(0);
+                continue;
+            }
+
+            char a = t.charAt(0);
+            char b = t.charAt(t.length()-1);
+            if(a == b){
+                System.out.println(0);
+                continue;
+            }
+            if(t.charAt(1) == a && t.charAt(2) == b && t.charAt(3) == b && t.charAt(4) == a && t.charAt(5) == b){
+                System.out.println(1);
+            } else {
+                System.out.println(0);
+            }
+        }
+    }
+}
