@@ -1,0 +1,27 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        String t = br.readLine();
+
+        char a = t.charAt(0);
+        for(int i=1; i<t.length(); i++){
+            if(t.charAt(i) == a){
+                System.out.println("No");
+                return;
+            } else {
+                a = t.charAt(i);
+            }
+        }
+
+        System.out.println("Yes");
+    }
+}
