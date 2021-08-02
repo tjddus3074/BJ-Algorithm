@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        char[] arr = br.readLine().toCharArray();
+        int t = Integer.parseInt(br.readLine());
+        for(int i=0 ;i<t; i++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            char aa = arr[a];
+            char bb = arr[b];
+            arr[a] = bb;
+            arr[b] = aa;
+        }
+
+        System.out.println(arr);
+    }
+}
