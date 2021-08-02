@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        for(int test =0 ; test<t; test++){
+            char[] arr = br.readLine().toCharArray();
+            int a =0;
+            int b = 0;
+            for(int i=0; i<arr.length; i++){
+                if(arr[i] == ' ')
+                    continue;
+                if(arr[i] == 'A' || arr[i] == 'E' || arr[i] == 'I' || arr[i] == 'O' || arr[i] == 'U' || arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u')
+                    b ++;
+                else
+                    a++;
+            }
+            System.out.println(a + " " + b);
+        }
+    }
+}
