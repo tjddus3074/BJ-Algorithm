@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int k = Integer.parseInt(br.readLine());
+        int maxteam = 0;
+        int max = 0;
+        for(int i=0; i<9; i++){
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<k; j++){
+                int a = Integer.parseInt(st.nextToken());
+                if(a>max){
+                    max = a;
+                    maxteam = i;
+                }
+            }
+        }
+
+        String[] team = {"PROBRAIN", "GROW", "ARGOS", "ADMIN", "ANT", "MOTION", "SPG", "COMON", "ALMIGHTY"};
+        System.out.println(team[maxteam]);
+    }
+}
