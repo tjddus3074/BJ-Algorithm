@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        HashSet<Character> set = new HashSet<>();
+        set.add('a');
+        set.add('e');
+        set.add('i');
+        set.add('o');
+        set.add('u');
+
+        while(true){
+            char[] arr = br.readLine().toCharArray();
+            if(arr[0] == '#')
+                break;
+
+            String t = "";
+            int count = 0;
+            int flag = 0;
+            for(int i=0; i<arr.length; i++){
+                if(!set.contains(arr[i]))
+                    t += arr[i];
+                else {
+                    count = i;
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0){
+                System.out.print(arr);
+                System.out.println("ay");
+            } else {
+                for (int i = count; i < arr.length; i++)
+                    System.out.print(arr[i]);
+                System.out.print(t);
+                System.out.println("ay");
+            }
+        }
+    }
+}
