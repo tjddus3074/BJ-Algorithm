@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int t = Integer.parseInt(br.readLine());
+        String temp = br.readLine();
+        String a = "pPAp";
+        int count = 0;
+        int n = 0;
+        while(true){
+            if(count >= temp.length())
+                break;
+
+            if(temp.charAt(count) == 'p'){
+                if(count + 4 > temp.length())
+                    break;
+
+                String b = temp.substring(count, count+4);
+                if(b.equals(a)){
+                    n++;
+                    count += 4;
+                    continue;
+                }
+            }
+
+            count++;
+        }
+        System.out.println(n);
+    }
+}
