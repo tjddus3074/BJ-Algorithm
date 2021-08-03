@@ -1,0 +1,43 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    static class Node implements Comparable<Node>{
+        String name;
+        int score;
+
+        public Node(String name, int score){
+            this.name = name;
+            this.score = score;
+        }
+
+        @Override
+        public int compareTo(Node o){
+            if(this.score == o.score){
+                return this.name.compareTo(o.name);
+            } else {
+                return o.score - this.score;
+            }
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        ArrayList<Node> list = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            String[] temp = br.readLine().split(" ");
+            int a = Integer.parseInt(temp[1]);
+            list.add(new Node(temp[0], a));
+        }
+
+        Collections.sort(list);
+        System.out.println(list.get(0).name);
+    }
+}
