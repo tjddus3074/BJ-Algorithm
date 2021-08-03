@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int[] arr = {3, 2, 1, 2, 3, 3, 2, 3, 3, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 1};
+        String a = br.readLine();
+        String b = br.readLine();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=0; i<a.length(); i++){
+            int c = (int)a.charAt(i)-65;
+            int d = (int)b.charAt(i)-65;
+            list.add(arr[c]);
+            list.add(arr[d]);
+        }
+
+        while(true){
+            if(list.size() == 2){
+                System.out.println(list.get(0) + "" + list.get(1));
+                break;
+            }
+
+            ArrayList<Integer> temp = new ArrayList<>();
+            for(int i=0; i<list.size()-1; i++){
+                int e = list.get(i) + list.get(i+1);
+                temp.add(e%10);
+            }
+            list = temp;
+        }
+    }
+}
