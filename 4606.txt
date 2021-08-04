@@ -1,0 +1,39 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String[] temp = {" ", "!", "$", "%", "(", ")", "*"};
+        String[] enco = {"%20", "%21", "%24", "%25", "%28", "%29", "%2a"};
+
+        while(true){
+            String t = br.readLine();
+            if(t.equals("#"))
+                break;
+
+            String ans = "";
+            for(int i=0; i<t.length(); i++){
+                char a = t.charAt(i);
+                if(a == ' ' || a == '!' || a == '$' || a == '%' || a== '(' || a== ')' || a== '*'){
+                    for(int j=0; j<temp.length; j++){
+                        if(a == temp[j].charAt(0)){
+                            ans += enco[j];
+                            break;
+                        }
+                    }
+                } else {
+                    ans += a;
+                }
+            }
+
+            System.out.println(ans);
+        }
+    }
+}
