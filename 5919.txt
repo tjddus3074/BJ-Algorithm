@@ -1,0 +1,31 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        int sum = 0;
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            int a = Integer.parseInt(br.readLine());
+            sum += a;
+            list.add(a);
+        }
+        sum /= n;
+
+        int count = 0;
+        for(int i=0; i<list.size(); i++){
+            if(sum - list.get(i) > 0)
+                count += sum - list.get(i);
+        }
+
+        System.out.println(count);
+    }
+}
