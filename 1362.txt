@@ -1,0 +1,52 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int deadflag = 0;
+        int count = 1;
+
+        while(true) {
+            int o, w;
+            deadflag = 0;
+            st = new StringTokenizer(br.readLine());
+            o = Integer.parseInt(st.nextToken());
+            w = Integer.parseInt(st.nextToken());
+            if(o == 0 && w == 0)
+                break;
+
+            while(true){
+                String[] temp = br.readLine().split(" ");
+                char a = temp[0].charAt(0);
+                int b = Integer.parseInt(temp[1]);
+
+                if(a == 'F'){
+                    w += b;
+                } else if(a == 'E'){
+                    w -= b;
+                    if(w <= 0)
+                        deadflag = 1;
+                } else if(a == '#'){
+                    if(deadflag == 1){
+                        System.out.println(count + " RIP");
+                    } else {
+                        if(w > o/2 && w< o*2)
+                            System.out.println(count + " :-)");
+                        else
+                            System.out.println(count + " :-(");
+                    }
+                    break;
+                }
+            }
+
+            count++;
+        }
+    }
+}
