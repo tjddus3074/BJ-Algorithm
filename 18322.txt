@@ -1,0 +1,33 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+
+        String[] t = br.readLine().split(" ");
+
+        int cnt = 0;
+        for(int i=0; i<n; i++){
+            cnt += t[i].length();
+            if(!(cnt>k)){
+                if(i == 0)
+                    System.out.print(t[i]);
+                else
+                    System.out.print(" "  + t[i]);
+            } else {
+                System.out.print("\n" + t[i]);
+                cnt = t[i].length();
+            }
+        }
+    }
+}
