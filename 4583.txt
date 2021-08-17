@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        while(true){
+            String t = br.readLine();
+            if(t.equals("#"))
+                break;
+
+            String temp = "";
+            for(int i=t.length()-1; i>=0; i--){
+                if(t.charAt(i) == 'b')
+                    temp += 'd';
+                else if(t.charAt(i) == 'd')
+                    temp += 'b';
+                else if(t.charAt(i) == 'p')
+                    temp += 'q';
+                else if(t.charAt(i) == 'q')
+                    temp += 'p';
+                else if(t.charAt(i) == 'i' || t.charAt(i) == 'o' || t.charAt(i) == 'v' || t.charAt(i) == 'x' || t.charAt(i) == 'w')
+                    temp += t.charAt(i);
+                else{
+                    temp = "INVALID";
+                    break;
+                }
+            }
+            System.out.println(temp);
+        }
+    }
+}
