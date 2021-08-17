@@ -1,0 +1,25 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int a = Integer.parseInt(br.readLine());
+        while(true){
+            a += 1;
+            String t = Integer.toString(a);
+            if(t.contains("0")){
+                continue;
+            } else {
+                System.out.println(t);
+                break;
+            }
+        }
+    }
+}
