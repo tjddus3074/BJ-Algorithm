@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int[] arr = new int[b];
+        st = new StringTokenizer(br.readLine());
+        for(int i=0; i<b; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        boolean[] temp = new boolean[a+1];
+        temp[a] = true;
+        for(int i=0; i<b; i++){
+            temp[arr[i]] = true;
+            temp[a - arr[i]] = true;
+            for(int j=0; j<b; j++){
+                if(i==j)
+                    continue;
+
+                temp[Math.abs(arr[i] - arr[j])] = true;
+            }
+        }
+        int c = 0;
+        for(int i=1; i<=a; i++){
+            if(temp[i])
+                System.out.print(i + " ");
+        }
+    }
+}
