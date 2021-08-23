@@ -1,0 +1,24 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int a = Integer.parseInt(br.readLine());
+        String t1 = br.readLine();
+        String t2 = br.readLine();
+
+        int count = 0;
+        for(int i=0; i<a; i++){
+            if(t1.charAt(i) == 'C' && t2.charAt(i) == 'C')
+                count++;
+        }
+        System.out.println(count);
+    }
+}
