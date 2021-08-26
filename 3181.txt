@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        HashSet<String> set = new HashSet<>();
+        set.add("i");
+        set.add("pa");
+        set.add("te");
+        set.add("ni");
+        set.add("niti");
+        set.add("a");
+        set.add("ali");
+        set.add("nego");
+        set.add("no");
+        set.add("ili");
+
+        String[] temp = br.readLine().split(" ");
+        String t = "";
+        for(int i=0; i<temp.length; i++){
+            if(set.contains(temp[i]) && i!=0)
+                continue;
+
+            char a = temp[i].charAt(0);
+            a -= 32;
+            t += a;
+        }
+        System.out.println(t);
+    }
+}
