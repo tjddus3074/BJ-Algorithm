@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+
+        int count = k;
+
+        for(int i=1; i<=k; i++){
+            n -= i;
+            if(n < 0){
+                System.out.println(-1);
+                return;
+            }
+        }
+
+        if(n%k == 0)
+            System.out.println(k-1);
+        else
+            System.out.println(k);
+    }
+}
