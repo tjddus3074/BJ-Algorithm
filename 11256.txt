@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int tc = Integer.parseInt(br.readLine());
+
+        for(int testcase = 0; testcase < tc; testcase++) {
+            st = new StringTokenizer(br.readLine());
+            int m = Integer.parseInt(st.nextToken());
+            int n = Integer.parseInt(st.nextToken());
+
+            Integer[] arr = new Integer[n];
+
+            for(int i=0; i<n; i++){
+                st = new StringTokenizer(br.readLine());
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+                arr[i] = a*b;
+            }
+
+            Arrays.sort(arr,Collections.reverseOrder());
+            int sum = 0;
+            int count = 0;
+            for(int i=0; i<n; i++){
+                sum += arr[i];
+                count++;
+                if(sum >= m)
+                    break;
+            }
+            System.out.println(count);
+        }
+    }
+}
