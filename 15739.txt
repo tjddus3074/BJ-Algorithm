@@ -1,0 +1,70 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        int[][] arr = new int[n][n];
+        for(int i=0; i<n; i++){
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<n; j++){
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        boolean[] visit = new boolean[n*n+1];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(visit[arr[i][j]] == false)
+                    visit[arr[i][j]] = true;
+                else{
+                    System.out.println("FALSE");
+                    return;
+                }
+            }
+        }
+
+        int sum = (n * (n*n + 1)) / 2;
+
+        for(int i=0; i<n; i++){
+            int count1 = 0;
+            int count2 = 0;
+            for(int j=0; j<n; j++) {
+                count1 += arr[i][j];
+                count2 += arr[j][i];
+            }
+
+            if(sum != count1 || sum != count2){
+                System.out.println("FALSE");
+                return;
+            }
+        }
+
+        int count = 0;
+        for(int i=0; i<n; i++){
+            count += arr[i][i];
+        }
+        if(sum != count){
+            System.out.println("FALSE");
+            return;
+        }
+
+        count = 0;
+        for(int i=0; i<n; i++){
+            count += arr[n-i-1][i];
+        }
+        if(sum != count){
+            System.out.println("FALSE");
+            return;
+        }
+
+        System.out.println("TRUE");
+    }
+}
