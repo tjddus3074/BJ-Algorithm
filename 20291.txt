@@ -1,0 +1,74 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    static class Node implements Comparable<Node>{
+        String a;
+        String b;
+
+        public Node(String a, String b){
+            this.a = a;
+            this.b = b;
+        }
+
+        @Override
+        public int compareTo(Node o){
+            return this.b.compareTo(o.b);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        PriorityQueue<Node> q = new PriorityQueue<>();
+
+        for(int i=0; i<n; i++){
+            String t = br.readLine();
+            String a = "";
+            String b = "";
+            int flag = 1;
+            for(int j=0; j<t.length(); j++){
+                if(t.charAt(j) == '.'){
+                    flag = 2;
+                    continue;
+                } else {
+                    if(flag == 1)
+                        a += t.charAt(j);
+                    else
+                        b += t.charAt(j);
+                }
+            }
+            q.add(new Node(a, b));
+        }
+
+        int size = q.size();
+        String txt = "";
+        int count = 0;
+        for(int i=0; i<size; i++){
+            Node t = q.poll();
+            if(!t.b.equals(txt)){
+                if(txt.equals("")){
+                    txt = t.b;
+                    count++;
+                    continue;
+                }
+
+                System.out.println(txt + " " + count);
+                txt = t.b;
+                count = 1;
+            } else {
+                count++;
+            }
+
+            if(i == size-1){
+                System.out.println(txt + " " + count);
+            }
+        }
+    }
+}
