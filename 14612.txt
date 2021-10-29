@@ -1,0 +1,66 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        String[] order = new String[n];
+
+        for(int i=0; i<n; i++){
+            order[i] = br.readLine();
+        }
+
+        solution(order, m);
+    }
+
+    static void solution(String[] order, int m){
+        ArrayList<int[]> tableList = new ArrayList<>();
+        for(String od : order){
+            String[] cmd = od.split(" ");
+            if(cmd[0].equals("order")){
+                tableList.add(new int[] {Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2])});
+            } else if(cmd[0].equals("sort")){
+                Collections.sort(tableList, new Comparator<int[]>() {
+                    @Override
+                    public int compare(int[] o1, int[] o2) {
+                        if(o1[1] > o2[1]){
+                            return 1;
+                        } else if(o1[1] == o2[1]){
+                            return o1[0] > o2[0] ? 1 : -1;
+                        }
+                        return -1;
+                    }
+                });
+            } else {
+                for(int i=0; i< tableList.size(); i++){
+                    if(tableList.get(i)[0] == Integer.parseInt(cmd[1])){
+                        tableList.remove(i);
+                        break;
+                    }
+                }
+            }
+
+            if(tableList.size() > 0){
+                StringBuffer sb = new StringBuffer();
+                for(int i=0; i< tableList.size(); i++){
+                    sb.append(tableList.get(i)[0]);
+                    if(i < tableList.size() - 1){
+                        sb.append(" ");
+                    }
+                }
+                System.out.println(sb.toString());
+            } else {
+                System.out.println("sleep");
+            }
+        }
+    }
+}
