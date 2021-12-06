@@ -1,0 +1,34 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String t = "9780921418";
+        for(int i=0; i<3; i++){
+            String a = br.readLine();
+            t += a;
+        }
+
+        int flag = 1;
+        int sum = 0;
+        for(int i=0; i<t.length(); i++){
+            char a = t.charAt(i);
+            int b = a - '0';
+            sum += b* flag;
+            if(flag == 1)
+                flag = 3;
+            else
+                flag = 1;
+        }
+
+        System.out.print("The 1-3-sum is ");
+        System.out.println(sum);
+    }
+}
