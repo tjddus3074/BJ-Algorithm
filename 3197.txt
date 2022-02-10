@@ -1,0 +1,133 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+
+    static class Point{
+        int r, c;
+        public Point(int r, int c){
+            this.r = r;
+            this.c = c;
+        }
+    }
+
+    static int R, C, idx, cur = 0, nxt = 1;
+    static char map[][];
+    static boolean[][] vstdIn, vstdOut;
+    static int[] dr = {-1, 0, 1, 0};
+    static int[] dc = {0, -1, 0, 1};
+    static Queue<Point>[] water, swan;
+    static Point swans[];
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        R = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+
+        map = new char[R][C];
+        swans = new Point[2];
+
+        //물과 빙판 위치를 저장하는 Queue
+        water = new LinkedList[2];
+        water[0] = new LinkedList<>();
+        water[1] = new LinkedList<>();
+
+        //백조가 현재와 다음 날 탐색할 위치를 저장하는 Queue
+        swan = new LinkedList[2];
+        swan[0] = new LinkedList<>();
+        swan[1] = new LinkedList<>();
+
+        for(int i=0; i<R; i++){
+            map[i] = br.readLine().toCharArray();
+            for(int j=0; j<C; j++){
+                if(map[i][j] == 'L'){
+                    swans[idx++] = new Point(i, j);
+                    map[i][j] = '.';
+                }
+                //물의 위치를 저장
+                if(map[i][j] == '.'){
+                    water[cur].add(new Point(i, j));
+                }
+            }
+        }
+
+        System.out.println(process());
+    }
+
+    private static int process(){
+        int time = 0;
+        vstdIn = new boolean[R][C];
+        vstdOut = new boolean[R][C];
+        swan[cur].add(swans[0]);
+        vstdIn[swans[0].r][swans[0].c] = true;
+
+        while(true){
+            if(isMeet())
+                return time;
+
+            melt();
+
+            cur ^= 1;
+            nxt ^= 1;
+
+            time++;
+        }
+    }
+
+    private static boolean isMeet() {
+        //현재 백조가 갈 수 있는 구간을 모두 탐색
+        while(!swan[cur].isEmpty()){
+            Point now = swan[cur].poll();
+
+            //4방 탐색
+            for(int d = 0; d<4; d++){
+                int rr = now.r + dr[d];
+                int cc = now.c + dc[d];
+                //범위를 초과하거나 이미 방문했을 경우 pass
+                if(rr < 0  || cc < 0 || rr >= R || cc >= C || vstdIn[rr][cc]) continue;
+
+                //상대 백조를 만났을 경우 return
+                if(rr == swans[1].r && cc == swans[1].c) return true;
+
+                vstdIn[rr][cc] =  true;
+
+                //빙하일 경우 다음 날 탐색을 위해 Queue에 추가
+                if(map[rr][cc] == 'X'){
+                    swan[nxt].add(new Point(rr, cc));
+                    map[rr][cc] = '.';
+                } else {
+                    swan[cur].add(new Point(rr, cc));
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static void melt() {
+        //물이 있는 구간을 모두 탐색
+        while (!water[cur].isEmpty()) {
+            Point now = water[cur].poll();
+
+            //4방 탐색
+            for (int d = 0; d < 4; d++) {
+                int rr = now.r + dr[d];
+                int cc = now.c + dc[d];
+
+                if (rr < 0 || cc < 0 || rr >= R || cc >= C || vstdIn[rr][cc] || vstdOut[rr][cc]) continue;
+                vstdOut[rr][cc] = true;
+
+                if (map[rr][cc] == 'X') {
+                    map[rr][cc] = '.';
+                    water[nxt].add(new Point(rr, cc));
+                }
+            }
+        }
+    }
+}
