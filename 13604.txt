@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        int[] arr = new int[n*m];
+        for(int i=0; i<n*m; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int[] score = new int[n];
+
+        for(int i=0; i<m; i++){
+            int count = 0;
+            for(int j = i*n; j < i*n + n; j++){
+                score[count] += arr[j];
+                count++;
+            }
+        }
+
+        int max = 0;
+        int maxnum = 0;
+        for(int i=0; i<n; i++){
+            if(score[i] >= max){
+                max = score[i];
+                maxnum = i;
+            }
+        }
+        System.out.println(maxnum+1);
+    }
+}
