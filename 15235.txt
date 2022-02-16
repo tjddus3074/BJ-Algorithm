@@ -1,0 +1,49 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
+import java.util.*;
+
+public class Main {
+
+    static class Node{
+        int num;
+        int eat;
+
+        public Node(int num, int eat){
+            this.num = num;
+            this.eat = eat;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        Queue<Node> q = new LinkedList<>();
+        for(int i=1; i<=n; i++){
+            int a = Integer.parseInt(st.nextToken());
+            q.add(new Node(i, a));
+        }
+
+        int[] arr = new int[n+1];
+        int count = 1;
+        while(!q.isEmpty()){
+            Node t = q.poll();
+            t.eat--;
+            if(t.eat == 0){
+                arr[t.num] = count;
+            } else {
+                q.add(t);
+            }
+
+            count++;
+        }
+
+        for(int i=1; i<=n; i++)
+            System.out.print(arr[i] + " ");
+    }
+}
